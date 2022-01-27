@@ -2,6 +2,7 @@ const express = require('express')
 const request = require('superagent')
 const router = express.Router()
 require('dotenv').config()
+const db = require('../db/input')
 
 const apiKey = process.env.API_KEY
 
@@ -17,8 +18,19 @@ router.post('/outputtext', (req, res) => {
       return null
     })
     .catch(err => {
-      res.sendStatus(500)
-      console.error(err)
+      res.sendStatus(500).send('POST REQUEST FAILED: ', err.message)
+    })
+})
+
+router.post('/input', (req, res) => {
+  const input = req.body
+  db.addInput(input)
+    .then(() => {
+      res.sendStatus(201)
+      return null
+    })
+    .catch((err) => {
+      res.status(500).send('POST REQUEST FAILED: ', err.message)
     })
 })
 
