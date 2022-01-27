@@ -27,7 +27,6 @@ router.post('/input', (req, res) => {
   db.addInput(input)
     .then(() => {
       res.sendStatus(201)
-      console.log(new Date(1643258893595.0))
       return null
     })
     .catch((err) => {
