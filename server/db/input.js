@@ -1,3 +1,4 @@
+const moment = require('moment')
 const connection = require('./connection')
 
 function addInput (input, db = connection) {
@@ -7,7 +8,7 @@ function addInput (input, db = connection) {
       truth1: input.truth1,
       truth2: input.truth2,
       lie: input.lie,
-      timestamp: new Date(Date.now())
+      timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')
     })
 }
 
