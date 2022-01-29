@@ -12,6 +12,12 @@ function addInput (input, db = connection) {
     })
 }
 
+function getData (db = connection) {
+  return db('user_input')
+    .select()
+}
+
 module.exports = {
-  addInput
+  addInput,
+  getData
 }
