@@ -26,6 +26,11 @@ function Form () {
     return num
   }
 
+  function handleClickDB () {
+    postDbForm(input)
+    console.log('input submitted', input)
+  }
+
   function handleClick () {
     console.log('input data: ', input)
 
@@ -34,8 +39,6 @@ function Form () {
     const genNum = randomGenerator(0, 2)
 
     console.log('selected input: ', inputArr[genNum])
-
-    postDbForm(input)
 
     getTextOutput(inputArr[genNum])
       .then(output => {
@@ -55,6 +58,7 @@ function Form () {
         <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
       </form>
       <button onClick={handleClick}>submit</button>
+      <button onClick={handleClickDB}>add to database</button>
       <p>{generatedText}</p>
 
     </div>
