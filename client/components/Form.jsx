@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { getTextOutput, postDbForm } from '../api'
+import ArticleList from './ArticleList'
 
 function Form () {
   const [input, setInput] = useState({
     name: '',
     truth1: '',
     truth2: '',
-    lie: ''
+    lie: '',
+    article: ''
   })
   const [generatedText, setGeneratedText] = useState('')
+  const [toggle, setToggle] = useState(true)
 
   function handleChange (e) {
     // console.log(e.target.value)
@@ -31,6 +34,10 @@ function Form () {
     console.log('input submitted', input)
   }
 
+  function handleRender () {
+    setToggle(!toggle)
+  }
+
   function handleClick () {
     console.log('input data: ', input)
 
@@ -43,6 +50,18 @@ function Form () {
     getTextOutput(inputArr[genNum])
       .then(output => {
         setGeneratedText(output)
+        return output
+      })
+      .then(genText => {
+        console.log(genText)
+        const dataToDB = { ...input, article: genText }
+        setInput(dataToDB)
+        console.log('input for db', input)
+        return dataToDB
+      })
+      .then((data) => {
+        postDbForm(data)
+        console.log('data sent to db: ', data)
         return null
       })
       .catch(err => { console.error(err) })
@@ -59,7 +78,9 @@ function Form () {
       </form>
       <button onClick={handleClick}>submit</button>
       <button onClick={handleClickDB}>add to database</button>
-      <p>{generatedText}</p>
+      <button onClick={handleRender}>render articles</button>
+      {/* <p>{generatedText}</p> */}
+      <ArticleList toggle={toggle} />
 
     </div>
 

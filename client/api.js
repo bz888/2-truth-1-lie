@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const dbData = '/text/input'
+const dbData = '/text/'
 
 export function getTextOutput (input) {
   return request
@@ -15,7 +15,7 @@ export function getTextOutput (input) {
 
 export function postDbForm (inputObj) {
   return request
-    .post(dbData)
+    .post(dbData + 'input')
     .send(inputObj)
     .then(res => {
       return res.body
@@ -23,4 +23,10 @@ export function postDbForm (inputObj) {
     .catch(err => {
       console.log('oops you dumb and messed up', err.message)
     })
+}
+
+export function getDataDB () {
+  return request
+    .get(dbData + 'data')
+    .then(res => res.body)
 }
