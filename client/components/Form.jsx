@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { getTextOutput, postDbForm } from '../api'
 import ArticleList from './ArticleList'
 
-function Form () {
+function Form (props) {
+  const { history } = props
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -27,11 +28,6 @@ function Form () {
   function randomGenerator (min, max) {
     const num = Math.floor(Math.random() * (max - min) + min)
     return num
-  }
-
-  function handleClickDB () {
-    postDbForm(input)
-    console.log('input submitted', input)
   }
 
   function handleRender () {
@@ -64,6 +60,10 @@ function Form () {
         console.log('data sent to db: ', data)
         return null
       })
+      .then(() => {
+        history.push('/results')
+        return null
+      })
       .catch(err => { console.error(err) })
   }
   return (
@@ -77,7 +77,6 @@ function Form () {
         <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
       </form>
       <button onClick={handleClick}>submit</button>
-      <button onClick={handleClickDB}>add to database</button>
       <button onClick={handleRender}>render articles</button>
       {/* <p>{generatedText}</p> */}
       <ArticleList toggle={toggle} />
