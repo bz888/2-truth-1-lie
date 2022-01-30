@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-import { getTextOutput, postDbForm } from '../api'
-import ArticleList from './ArticleList'
+import React, { useEffect, useState } from 'react'
+// import ArticleList from './ArticleList'
+import { useDispatch, useSelector } from 'react-redux'
+import { generateText, postDataDB } from '../actions/text'
 
 function Form (props) {
-  const { history, toggle, setToggle } = props
+  const dispatch = useDispatch()
+  const { history } = props
+  const apiOutputText = useSelector(state => state.apiOutput)
 
   const [input, setInput] = useState({
     name: '',
@@ -12,7 +15,26 @@ function Form (props) {
     lie: '',
     article: ''
   })
-  const [generatedText, setGeneratedText] = useState('')
+  useEffect(() => {
+    dbPost()
+    // expect to write into db
+    console.log('output received, writing to db')
+  }, [apiOutputText])
+
+  function dbPost () {
+    const dataObj = { ...input, article: apiOutputText }
+    console.log('dataObj: ', dataObj)
+    if (apiOutputText === '') {
+      console.log('dbpost dispatch: null hit')
+      return null
+    } else {
+      dispatch(postDataDB(dataObj))
+      console.log('db post dispatch hit')
+    }
+
+    // simplified line
+    // apiOutputText === '' ? null : dispatch(postDataDB(dataObj))
+  }
 
   function handleChange (e) {
     // console.log(e.target.value)
@@ -30,43 +52,11 @@ function Form (props) {
     return num
   }
 
-  // function handleRender () {
-  //   setToggle(!toggle)
-  // }
-
   function handleClick () {
-    console.log('input data: ', input)
-
     const inputArr = [input.truth1, input.truth2, input.lie]
-
     const genNum = randomGenerator(0, 2)
-
     console.log('selected input: ', inputArr[genNum])
-
-    getTextOutput(inputArr[genNum])
-      .then(output => {
-        setGeneratedText(output)
-        return output
-      })
-      .then(genText => {
-        console.log(genText)
-        const dataToDB = { ...input, article: genText }
-        setInput(dataToDB)
-        console.log('input for db', input)
-        return dataToDB
-      })
-      .then((data) => {
-        postDbForm(data)
-        console.log('data sent to db: ', data)
-        return null
-      })
-      .then(() => {
-        history.push('/confirm')
-        setToggle(!toggle)
-        console.log('form toggle: ', toggle)
-        return null
-      })
-      .catch(err => { console.error(err) })
+    dispatch(generateText(inputArr[genNum]))
   }
   return (
     <div>
