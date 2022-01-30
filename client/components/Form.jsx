@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { getTextOutput, postDbForm } from '../api'
 import ArticleList from './ArticleList'
 
-function Form () {
+function Form (props) {
+  const { history, toggle, setToggle } = props
+
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -11,7 +13,6 @@ function Form () {
     article: ''
   })
   const [generatedText, setGeneratedText] = useState('')
-  const [toggle, setToggle] = useState(true)
 
   function handleChange (e) {
     // console.log(e.target.value)
@@ -29,14 +30,9 @@ function Form () {
     return num
   }
 
-  function handleClickDB () {
-    postDbForm(input)
-    console.log('input submitted', input)
-  }
-
-  function handleRender () {
-    setToggle(!toggle)
-  }
+  // function handleRender () {
+  //   setToggle(!toggle)
+  // }
 
   function handleClick () {
     console.log('input data: ', input)
@@ -64,6 +60,12 @@ function Form () {
         console.log('data sent to db: ', data)
         return null
       })
+      .then(() => {
+        history.push('/confirm')
+        setToggle(!toggle)
+        console.log('form toggle: ', toggle)
+        return null
+      })
       .catch(err => { console.error(err) })
   }
   return (
@@ -77,10 +79,9 @@ function Form () {
         <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
       </form>
       <button onClick={handleClick}>submit</button>
-      <button onClick={handleClickDB}>add to database</button>
-      <button onClick={handleRender}>render articles</button>
+      {/* <button onClick={handleRender}>render articles</button> */}
       {/* <p>{generatedText}</p> */}
-      <ArticleList toggle={toggle} />
+      {/* <ArticleList toggle={toggle} /> */}
 
     </div>
 

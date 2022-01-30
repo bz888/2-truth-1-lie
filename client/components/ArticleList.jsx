@@ -29,6 +29,7 @@ function ArticleList ({ toggle }) {
               key={dataDB.id}
               name={dataDB.name}
               article={dataDB.article}
+              time={dataDB.timestamp}
             />
           )
         })}
