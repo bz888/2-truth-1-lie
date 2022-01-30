@@ -5,6 +5,7 @@ exports.up = knex => {
     table.string('truth1')
     table.string('truth2')
     table.string('lie')
+    table.string('article')
     table.string('timestamp')
   })
 }

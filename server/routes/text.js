@@ -22,6 +22,17 @@ router.post('/outputtext', (req, res) => {
     })
 })
 
+router.get('/data', (req, res) => {
+  db.getData()
+    .then(data => {
+      res.json(data)
+      return null
+    })
+    .catch(err => {
+      res.status(500).send('Could not get list: ' + err.message)
+    })
+})
+
 router.post('/input', (req, res) => {
   const input = req.body
   db.addInput(input)

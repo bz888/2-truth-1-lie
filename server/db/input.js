@@ -8,10 +8,17 @@ function addInput (input, db = connection) {
       truth1: input.truth1,
       truth2: input.truth2,
       lie: input.lie,
+      article: input.article,
       timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')
     })
 }
 
+function getData (db = connection) {
+  return db('user_input')
+    .select()
+}
+
 module.exports = {
-  addInput
+  addInput,
+  getData
 }
