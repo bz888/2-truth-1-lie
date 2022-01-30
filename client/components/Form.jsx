@@ -61,7 +61,7 @@ function Form (props) {
         return null
       })
       .then(() => {
-        history.push('/results')
+        history.push('/confirm')
         return null
       })
       .catch(err => { console.error(err) })
