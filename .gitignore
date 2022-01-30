@@ -103,6 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
+dev.sqlite3
 static
 npm-debug.log
 bundle.*
