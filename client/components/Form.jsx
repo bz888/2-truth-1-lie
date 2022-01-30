@@ -3,7 +3,8 @@ import { getTextOutput, postDbForm } from '../api'
 import ArticleList from './ArticleList'
 
 function Form (props) {
-  const { history } = props
+  const { history, toggle, setToggle } = props
+
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -12,7 +13,6 @@ function Form (props) {
     article: ''
   })
   const [generatedText, setGeneratedText] = useState('')
-  const [toggle, setToggle] = useState(true)
 
   function handleChange (e) {
     // console.log(e.target.value)
@@ -30,9 +30,9 @@ function Form (props) {
     return num
   }
 
-  function handleRender () {
-    setToggle(!toggle)
-  }
+  // function handleRender () {
+  //   setToggle(!toggle)
+  // }
 
   function handleClick () {
     console.log('input data: ', input)
@@ -62,6 +62,8 @@ function Form (props) {
       })
       .then(() => {
         history.push('/confirm')
+        setToggle(!toggle)
+        console.log('form toggle: ', toggle)
         return null
       })
       .catch(err => { console.error(err) })
@@ -77,9 +79,9 @@ function Form (props) {
         <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
       </form>
       <button onClick={handleClick}>submit</button>
-      <button onClick={handleRender}>render articles</button>
+      {/* <button onClick={handleRender}>render articles</button> */}
       {/* <p>{generatedText}</p> */}
-      <ArticleList toggle={toggle} />
+      {/* <ArticleList toggle={toggle} /> */}
 
     </div>
 
