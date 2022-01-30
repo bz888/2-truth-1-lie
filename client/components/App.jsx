@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom'
 
 function App () {
   const [toggle, setToggle] = useState(true)
-  console.log('initial toggle val: ', toggle)
+  // console.log('initial toggle val: ', toggle)
   return (
     <>
       <h1>Hello world</h1>

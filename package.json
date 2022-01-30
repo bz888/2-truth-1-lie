@@ -56,7 +56,10 @@
     "react-router-dom": "^5.2.0",
     "webpack": "^5.12.1",
     "webpack-cli": "^4.3.1",
-    "knex": "^0.95.4"
+    "knex": "^0.95.4",
+    "react-redux": "^7.2.3",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "dependencies": {
     "dotenv": "^11.0.0",

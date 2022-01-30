@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { getTextOutput, postDbForm } from '../api'
-import ArticleList from './ArticleList'
+// import { getTextOutput, postDbForm } from '../api/api'
+// import ArticleList from './ArticleList'
+import { useDispatch, useSelector } from 'react-redux'
+import { generateText } from '../actions/text'
 
 function Form (props) {
-  const { history, toggle, setToggle } = props
+  const { history } = props
+  const apiOutputText = useSelector(state => state.apiOutput)
+  const dispatch = useDispatch()
 
   const [input, setInput] = useState({
     name: '',
@@ -12,7 +16,8 @@ function Form (props) {
     lie: '',
     article: ''
   })
-  const [generatedText, setGeneratedText] = useState('')
+
+  // const [generatedText, setGeneratedText] = useState('')
 
   function handleChange (e) {
     // console.log(e.target.value)
@@ -30,10 +35,6 @@ function Form (props) {
     return num
   }
 
-  // function handleRender () {
-  //   setToggle(!toggle)
-  // }
-
   function handleClick () {
     console.log('input data: ', input)
 
@@ -43,30 +44,9 @@ function Form (props) {
 
     console.log('selected input: ', inputArr[genNum])
 
-    getTextOutput(inputArr[genNum])
-      .then(output => {
-        setGeneratedText(output)
-        return output
-      })
-      .then(genText => {
-        console.log(genText)
-        const dataToDB = { ...input, article: genText }
-        setInput(dataToDB)
-        console.log('input for db', input)
-        return dataToDB
-      })
-      .then((data) => {
-        postDbForm(data)
-        console.log('data sent to db: ', data)
-        return null
-      })
-      .then(() => {
-        history.push('/confirm')
-        setToggle(!toggle)
-        console.log('form toggle: ', toggle)
-        return null
-      })
-      .catch(err => { console.error(err) })
+    const apiDATA = dispatch(generateText(inputArr[genNum]))
+
+    console.log('apiDATA: ', apiDATA)
   }
   return (
     <div>

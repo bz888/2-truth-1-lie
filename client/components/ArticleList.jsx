@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getDataDB } from '../api'
+import { getDataDB } from '../api/api'
 import Article from './Article'
 
 function ArticleList ({ toggle }) {
