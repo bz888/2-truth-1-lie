@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-const dbData = '/text/'
+const dbData = 'text/'
 
 export function getTextOutput (input) {
   return request
@@ -18,7 +18,8 @@ export function postDbForm (inputObj) {
     .post(dbData + 'input')
     .send(inputObj)
     .then(res => {
-      return res.body
+      console.log('api postdb: ', res.statusText)
+      return res.statusCode
     })
     .catch(err => {
       console.log('oops you dumb and messed up', err.message)

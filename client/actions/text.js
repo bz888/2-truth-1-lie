@@ -93,6 +93,7 @@ export function postDataDB (dataObj) {
     dispatch(postDataPending())
     return postDbForm(dataObj)
       .then((dataObj) => {
+        console.log('actions postdb: ', dataObj)
         dispatch(postDataSuccess(dataObj))
         return null
       })

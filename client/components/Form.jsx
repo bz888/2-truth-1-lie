@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { getTextOutput, postDbForm } from '../api/api'
 // import ArticleList from './ArticleList'
 import { useDispatch, useSelector } from 'react-redux'
-import { generateText } from '../actions/text'
+import { generateText, postDataDB } from '../actions/text'
 
 function Form (props) {
+  const dispatch = useDispatch()
   const { history } = props
   const apiOutputText = useSelector(state => state.apiOutput)
-  const dispatch = useDispatch()
 
   const [input, setInput] = useState({
     name: '',
@@ -16,7 +16,26 @@ function Form (props) {
     lie: '',
     article: ''
   })
+  useEffect(() => {
+    dbPost()
+    // expect to write into db
+    console.log('output received, writing to db')
+  }, [apiOutputText])
 
+  function dbPost () {
+    const dataObj = { ...input, article: apiOutputText }
+    console.log('dataObj: ', dataObj)
+    if (apiOutputText === '') {
+      console.log('dbpost dispatch: null hit')
+      return null
+    } else {
+      dispatch(postDataDB(dataObj))
+      console.log('db post dispatch hit')
+    }
+
+    // simplified line
+    // apiOutputText === '' ? null : dispatch(postDataDB(dataObj))
+  }
   // const [generatedText, setGeneratedText] = useState('')
 
   function handleChange (e) {
@@ -36,17 +55,10 @@ function Form (props) {
   }
 
   function handleClick () {
-    console.log('input data: ', input)
-
     const inputArr = [input.truth1, input.truth2, input.lie]
-
     const genNum = randomGenerator(0, 2)
-
     console.log('selected input: ', inputArr[genNum])
-
-    const apiDATA = dispatch(generateText(inputArr[genNum]))
-
-    console.log('apiDATA: ', apiDATA)
+    dispatch(generateText(inputArr[genNum]))
   }
   return (
     <div>
