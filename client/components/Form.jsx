@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { getTextOutput, postDbForm } from '../api/api'
 // import ArticleList from './ArticleList'
 import { useDispatch, useSelector } from 'react-redux'
 import { generateText, postDataDB } from '../actions/text'
@@ -36,7 +35,6 @@ function Form (props) {
     // simplified line
     // apiOutputText === '' ? null : dispatch(postDataDB(dataObj))
   }
-  // const [generatedText, setGeneratedText] = useState('')
 
   function handleChange (e) {
     // console.log(e.target.value)

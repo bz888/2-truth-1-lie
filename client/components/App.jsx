@@ -8,7 +8,6 @@ function App () {
   // console.log('initial toggle val: ', toggle)
   return (
     <>
-      <h1>Hello world</h1>
       <Route exact path= '/' render= {({ history }) => {
         return <Form history= {history} />
       }} />
