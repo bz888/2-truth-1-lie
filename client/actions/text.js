@@ -46,16 +46,16 @@ async function postToFirebase (userInfo) {
 
 // firebase GET function
 
-function getFromFirebase () {
-  const recentPostQuery = query((collection(getFirestore(), 'user_input'), orderBy('timestamp', 'desc'), limit(5)))
-  onSnapshot(recentPostQuery, function (snapshot) {
-    snapshot.docChanges().forEach(function(change) {
-      if (change.type === 'removed') {
-        delete
-      }
-    })
-  })
-}
+// function getFromFirebase () {
+//   const recentPostQuery = query((collection(getFirestore(), 'user_input'), orderBy('timestamp', 'desc'), limit(5)))
+//   onSnapshot(recentPostQuery, function (snapshot) {
+//     snapshot.docChanges().forEach(function(change) {
+//       if (change.type === 'removed') {
+//         delete
+//       }
+//     })
+//   })
+// }
 
 
 // deep api
