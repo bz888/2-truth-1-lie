@@ -1,12 +1,6 @@
 import { FETCH_DATA_DB_SUCCESS } from '../actions/text'
 
-function dbGet (state = [{
-  name: '',
-  truth1: '',
-  truth2: '',
-  lie: '',
-  article: ''
-}], action) {
+function dbGet (state = [[]], action) {
   switch (action.type) {
     // expect array of objects from db
     case FETCH_DATA_DB_SUCCESS:

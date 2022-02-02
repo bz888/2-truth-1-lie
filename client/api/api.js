@@ -2,8 +2,18 @@ import request from 'superagent'
 import {
   getFirestore,
   collection,
-  addDoc
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+  doc,
+  serverTimestamp,
+  getDocs
 } from 'firebase/firestore'
+import { getFirebaseConfig } from '../src/firebase-config'
 const moment = require('moment')
 
 // const dbData = 'text/'
@@ -33,6 +43,35 @@ export async function postToFirebase (userInfo) {
     console.error('Error writing new message to Firebase Database', error)
   }
 }
+
+export async function getFirebase () {
+  try {
+    const arrData = []
+    const querySnapshot = await getDocs(collection(getFirestore(), 'user_input'))
+    // console.log('arr', querySnapshot)
+    querySnapshot.forEach((doc) => {
+      // console.log(doc.data())
+      arrData.push(doc.data())
+    })
+    return arrData
+  } catch (error) {
+    console.error('Error getting message from Firebase Database', error)
+  }
+}
+
+// export function getFirebase () {
+//   const dataRef = query(
+//     collection(getFirestore(), 'user_input'),
+//     orderBy('timestamp', 'desc'),
+//     limit(30))
+
+//   onSnapshot(dataRef, function (snapshot) {
+//     snapshot.docChanges()
+//   })
+//   // const query = dataRef.
+//   console.log('query from getFirebase: ', dataRef)
+//   // return dataRef
+// }
 
 // async function postToFirebase (userInfo) {
 //   try {

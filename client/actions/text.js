@@ -1,4 +1,4 @@
-import { getTextOutput, postToFirebase } from '../api/api'
+import { getTextOutput, postToFirebase, getFirebase } from '../api/api'
 import { showError } from '../actions/error'
 // import {
 //   getFirestore,
@@ -74,21 +74,22 @@ export function fetchDataSuccess (data) {
   }
 }
 
-// export function fetchDataDB () {
-//   return (dispatch) => {
-//     dispatch(fetchDataPending())
-//     return getDataDB()
-//       .then(dataDB => {
-//         dispatch(fetchDataSuccess(dataDB))
-//         return null
-//       })
-//       .catch(err => {
-//         console.error(err)
-//         const errMessage = err.response?.text || err.message
-//         dispatch(showError(errMessage))
-//       })
-//   }
-// }
+export function fetchDataDB () {
+  return (dispatch) => {
+    dispatch(fetchDataPending())
+    return getFirebase()
+      .then(dataDB => {
+        console.log(dataDB)
+        dispatch(fetchDataSuccess(dataDB))
+        return null
+      })
+      .catch(err => {
+        console.error(err)
+        const errMessage = err.response?.text || err.message
+        dispatch(showError(errMessage))
+      })
+  }
+}
 
 // POST to db
 export function postDataPending () {
