@@ -37,6 +37,7 @@ function Form (props) {
 
   function handleChange (e) {
     // console.log(e.target.value)
+    e.preventDefault()
     const value = e.target.value
     const name = e.target.name
 

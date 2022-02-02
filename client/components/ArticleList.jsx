@@ -15,8 +15,8 @@ function ArticleList () {
   // }, [articleData.slice(-1)[0].id])
 
   useEffect(() => {
-    getArticles()
-    refresher()
+    // getArticles()
+    // refresher()
   }, [toggle])
 
   function getArticles () {
