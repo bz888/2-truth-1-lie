@@ -59,6 +59,14 @@ export async function getFirebase () {
   }
 }
 
+export function liveGetFirebase () {
+  const dataQuery = query(collection(getFirebase(), 'user_input'), orderBy('timestamp', 'desc'))
+  onSnapshot(dataQuery, function (snapshot) {
+    console.log('liveGet: ', snapshot.docChanges())
+    snapshot.docChanges()
+  })
+}
+
 // export function getFirebase () {
 //   const dataRef = query(
 //     collection(getFirestore(), 'user_input'),
