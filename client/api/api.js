@@ -51,34 +51,34 @@ export async function postToFirebase (userInfo) {
   }
 }
 
-export async function getFirebase () {
-  const querySnapshot = getDocs(collection(getFirestore(), 'user_input'), orderBy('timestamp', 'desc'))
-  try {
-    const arrData = []
-    // console.log('arr', querySnapshot)
-    querySnapshot.forEach((doc) => {
-      arrData.push({ ...doc.data() })
-    })
-    console.log('arrData: ', arrData)
-    return arrData
-  } catch (error) {
-    console.error('Error getting message from Firebase Database', error)
-  }
-}
+// export async function getFirebase () {
+//   const querySnapshot = getDocs(collection(getFirestore(), 'user_input'), orderBy('timestamp', 'desc'))
+//   try {
+//     const arrData = []
+//     // console.log('arr', querySnapshot)
+//     querySnapshot.forEach((doc) => {
+//       arrData.push({ ...doc.data() })
+//     })
+//     console.log('arrData: ', arrData)
+//     return arrData
+//   } catch (error) {
+//     console.error('Error getting message from Firebase Database', error)
+//   }
+// }
 
-export async function liveGetFirebase () {
-  try {
-    const ref = query(collection(getFirestore(), 'test_input'), orderBy('timestamp', 'desc'))
-    const arrData = []
-    onSnapshot(ref, function (snapshot) {
-      snapshot.docChanges().forEach(function (change) {
-        console.log('live data: ', change.doc.data())
-        arrData.push({ ...change.doc.data() })
-      })
-    })
-    console.log('arrData feedback: ', arrData)
-    return arrData
-  } catch (error) {
-    console.error('Error getting live data from Firebase Database', error)
-  }
-}
+// export async function liveGetFirebase () {
+//   try {
+//     const ref = query(collection(getFirestore(), 'test_input'), orderBy('timestamp', 'desc'))
+//     const arrData = []
+//     onSnapshot(ref, function (snapshot) {
+//       snapshot.docChanges().forEach(function (change) {
+//         console.log('live data: ', change.doc.data())
+//         arrData.push({ ...change.doc.data() })
+//       })
+//     })
+//     console.log('arrData feedback: ', arrData)
+//     return arrData
+//   } catch (error) {
+//     console.error('Error getting live data from Firebase Database', error)
+//   }
+// }
