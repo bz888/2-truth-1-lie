@@ -12,21 +12,18 @@ import {
 import Article from './Article'
 
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import LoadAnim from './LoadAnim'
 
 function ArticleList () {
-  // const dispatch = useDispatch()
-  // const [dataArr, setDataArr] = useState([])
-
-  // const articleData = useSelector(state => state.dbGet)
-  // console.log('articleData', articleData)
-
   const tempRef = query(collection(getFirestore(), 'test_input'), orderBy('timestamp', 'desc'))
-  const [userArticles] = useCollectionData(tempRef)
+  const [userArticles, loading, error] = useCollectionData(tempRef)
 
   return (
     <>
       <h1>News</h1>
       <div>
+        {error && <strong>Error: {JSON.stringify(error)}</strong>}
+        {loading && <LoadAnim/>}
         {userArticles && userArticles.map((dataObj, idx) => {
           return (
             <Article

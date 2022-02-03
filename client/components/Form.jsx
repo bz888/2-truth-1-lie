@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 // import ArticleList from './ArticleList'
 import { useDispatch, useSelector } from 'react-redux'
 import { generateText, postDataDB } from '../actions/text'
+
 function Form (props) {
   const dispatch = useDispatch()
   // const { history } = props
   const apiOutputText = useSelector(state => state.apiOutput)
+  const apiOutputIMG = useSelector(state => state.imgOutput)
 
   const [input, setInput] = useState({
     name: '',
@@ -23,7 +25,7 @@ function Form (props) {
   function dbPost () {
     const dataObj = { ...input, article: apiOutputText }
     // console.log('dataObj: ', dataObj)
-    if (apiOutputText === '') {
+    if (apiOutputText === '' || apiOutputIMG === '') {
       console.log('dbpost dispatch: null hit')
       return null
     } else {
@@ -64,6 +66,7 @@ function Form (props) {
     const genNum = semiRandomGenerator(0, 2)
 
     console.log('selected input: ', inputArr[genNum])
+
     dispatch(generateText(inputArr[genNum]))
   }
   return (

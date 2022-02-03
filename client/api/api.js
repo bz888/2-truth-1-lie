@@ -23,6 +23,17 @@ export function getTextOutput (input) {
     })
 }
 
+export function getImageOutput (input) {
+  return request
+  // whatever the route is set to be in routes
+    .post('http://localhost:8000/text/outputimage/')
+    .send({ input })
+    .then(res => {
+      console.log('image ping: ', res.body)
+      return res.body.output
+    })
+}
+
 export async function postToFirebase (userInfo) {
   try {
     await addDoc(collection(getFirestore(), 'test_input'), {
