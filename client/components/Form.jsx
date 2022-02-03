@@ -24,8 +24,8 @@ function Form (props) {
   // }, [apiOutputText])
 
   function dbPost () {
-    const dataObj = { ...input, article: apiOutputText, profileImg: apiOutputIMG }
-    console.log('dataObj: ', dataObj)
+    const dataObj = { ...input, profileImg: apiOutputIMG, article: apiOutputText }
+    console.log('sending dataObj: ', dataObj)
     if (apiOutputText === '' || apiOutputIMG === '') {
       console.log('dbpost dispatch: null hit')
       return null
@@ -70,6 +70,7 @@ function Form (props) {
   }
 
   function handleRender (e) {
+    console.log('current input val: ', input)
     e.preventDefault()
     dbPost()
   }

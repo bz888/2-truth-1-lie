@@ -15,7 +15,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 
 function ArticleList () {
-  const tempRef = query(collection(getFirestore(), 'test_input'), orderBy('timestamp', 'desc'))
+  const tempRef = query(collection(getFirestore(), 'test_db'), orderBy('timestamp', 'desc'))
   const [userArticles, loading, error] = useCollectionData(tempRef)
 
   return (
