@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Article ({ name, article, time }) {
+function Article ({ name, article, timestamp }) {
   return (
     <div>
       <h1>{name}</h1>
-      <p>{time}</p>
+      <p>{timestamp}</p>
       <p>{article}</p>
     </div>
   )

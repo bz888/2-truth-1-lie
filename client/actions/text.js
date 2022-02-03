@@ -1,19 +1,19 @@
-import { getTextOutput, postDbForm, getDataDB } from '../api/api'
+import { getTextOutput, postToFirebase, getFirebase, liveGetFirebase } from '../api/api'
 import { showError } from '../actions/error'
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  limit,
-  onSnapshot,
-  setDoc,
-  updateDoc,
-  doc,
-  serverTimestamp
-} from 'firebase/firestore'
-const moment = require('moment')
+// import {
+//   getFirestore,
+//   collection,
+//   addDoc,
+//   query,
+//   orderBy,
+//   limit,
+//   onSnapshot,
+//   setDoc,
+//   updateDoc,
+//   doc,
+//   serverTimestamp
+// } from 'firebase/firestore'
+// const moment = require('moment')
 
 // deep api ping
 export const TEXT_API_PENDING = 'TEXT_API_PENDING'
@@ -28,35 +28,6 @@ export const POST_DATA_DB_PENDING = 'POST_DATA_DB_PENDING'
 export const POST_DATA_DB_SUCCESS = 'POST_DATA_DB_SUCCESS'
 
 // firebase POST function (can't figure out how to export async func from module.exports??)
-
-async function postToFirebase (userInfo) {
-  try {
-    await addDoc(collection(getFirestore(), 'user_input'), {
-      name: userInfo.name,
-      truth1: userInfo.truth1,
-      truth2: userInfo.truth2,
-      lie: userInfo.lie,
-      article: userInfo.article,
-      timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')
-    })
-  } catch (error) {
-    console.error('Error writing new message to Firebase Database', error)
-  }
-}
-
-// firebase GET function
-
-// function getFromFirebase () {
-//   const recentPostQuery = query((collection(getFirestore(), 'user_input'), orderBy('timestamp', 'desc'), limit(5)))
-//   onSnapshot(recentPostQuery, function (snapshot) {
-//     snapshot.docChanges().forEach(function(change) {
-//       if (change.type === 'removed') {
-//         delete
-//       }
-//     })
-//   })
-// }
-
 
 // deep api
 export function textPending () {
@@ -103,11 +74,28 @@ export function fetchDataSuccess (data) {
   }
 }
 
+// export function fetchDataDB () {
+//   return (dispatch) => {
+//     dispatch(fetchDataPending())
+//     return getFirebase()
+//       .then(dataDB => {
+//         console.log(dataDB)
+//         dispatch(fetchDataSuccess(dataDB))
+//         return null
+//       })
+//       .catch(err => {
+//         console.error(err)
+//         const errMessage = err.response?.text || err.message
+//         dispatch(showError(errMessage))
+//       })
+//   }
+// }
 export function fetchDataDB () {
   return (dispatch) => {
     dispatch(fetchDataPending())
-    return getDataDB()
+    return liveGetFirebase()
       .then(dataDB => {
+        console.log(dataDB)
         dispatch(fetchDataSuccess(dataDB))
         return null
       })
@@ -126,10 +114,10 @@ export function postDataPending () {
   }
 }
 
-export function postDataSuccess (dataObj) {
+export function postDataSuccess (msg) {
   return {
     type: POST_DATA_DB_SUCCESS,
-    dataObj
+    postFunc: msg
   }
 }
 
@@ -137,9 +125,10 @@ export function postDataDB (dataObj) {
   return (dispatch) => {
     dispatch(postDataPending())
     return postToFirebase(dataObj)
-      .then((dataObj) => {
-        console.log('actions postdb: ', dataObj)
-        dispatch(postDataSuccess(dataObj))
+      .then(() => {
+        // console.log('actions postdb: ', dataObj)
+        const timePost = new Date()
+        dispatch(postDataSuccess('success posting to db: ' + timePost))
         return null
       })
       .catch(err => {
