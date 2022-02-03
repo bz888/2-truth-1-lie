@@ -95,35 +95,35 @@ export function generateImage (inputImage) {
 }
 
 // GET from db
-export function fetchDataPending () {
-  return {
-    type: FETCH_DATA_DB_PENDING
-  }
-}
+// export function fetchDataPending () {
+//   return {
+//     type: FETCH_DATA_DB_PENDING
+//   }
+// }
 
-export function fetchDataSuccess (data) {
-  return {
-    type: FETCH_DATA_DB_SUCCESS,
-    data
-  }
-}
+// export function fetchDataSuccess (data) {
+//   return {
+//     type: FETCH_DATA_DB_SUCCESS,
+//     data
+//   }
+// }
 
-export function fetchDataDB () {
-  return (dispatch) => {
-    dispatch(fetchDataPending())
-    return getFirebase() // liveGetFirebase()
-      .then(dataDB => {
-        console.log('action: ', dataDB)
-        dispatch(fetchDataSuccess(dataDB))
-        return null
-      })
-      .catch(err => {
-        console.error(err)
-        const errMessage = err.response?.text || err.message
-        dispatch(showError(errMessage))
-      })
-  }
-}
+// export function fetchDataDB () {
+//   return (dispatch) => {
+//     dispatch(fetchDataPending())
+//     return getFirebase() // liveGetFirebase()
+//       .then(dataDB => {
+//         console.log('action: ', dataDB)
+//         dispatch(fetchDataSuccess(dataDB))
+//         return null
+//       })
+//       .catch(err => {
+//         console.error(err)
+//         const errMessage = err.response?.text || err.message
+//         dispatch(showError(errMessage))
+//       })
+//   }
+// }
 
 // POST to db
 export function postDataPending () {

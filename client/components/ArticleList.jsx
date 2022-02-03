@@ -31,6 +31,7 @@ function ArticleList () {
               name={dataObj.name}
               article={dataObj.article}
               time={dataObj.timestamp}
+              profileImg={dataObj.profileImg}
             />
           )
         })}
