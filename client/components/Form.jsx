@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { generateText, postDataDB } from '../actions/text'
 function Form (props) {
   const dispatch = useDispatch()
-  const { history } = props
+  // const { history } = props
   const apiOutputText = useSelector(state => state.apiOutput)
 
   const [input, setInput] = useState({
@@ -22,7 +22,7 @@ function Form (props) {
 
   function dbPost () {
     const dataObj = { ...input, article: apiOutputText }
-    console.log('dataObj: ', dataObj)
+    // console.log('dataObj: ', dataObj)
     if (apiOutputText === '') {
       console.log('dbpost dispatch: null hit')
       return null
