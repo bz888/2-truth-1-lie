@@ -81,8 +81,9 @@ export function generateImage (inputImage) {
   return (dispatch) => {
     dispatch(imagePending())
     return getImageOutput(inputImage)
-      .then((APIoutputIMG) => {
-        dispatch(imageSuccess(APIoutputIMG))
+      .then((imgData) => {
+        console.log('actions: ', imgData)
+        dispatch(imageSuccess(imgData))
         return null
       })
       .catch(err => {

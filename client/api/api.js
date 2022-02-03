@@ -16,21 +16,22 @@ export function getTextOutput (input) {
   return request
   // whatever the route is set to be in routes
     .post('http://localhost:8000/text/outputtext/')
-  // what is the data shape?
     .send({ input })
     .then(res => {
+      console.log('text output api: ', res.body)
       return res.body.output
     })
 }
 
-export function getImageOutput (input) {
+export function getImageOutput (val) {
+  console.log('api input image: ', val)
   return request
   // whatever the route is set to be in routes
     .post('http://localhost:8000/text/outputimage/')
-    .send({ input })
+    .send({ val })
     .then(res => {
       console.log('image ping: ', res.body)
-      return res.body.output
+      return res.body.output_url
     })
 }
 
@@ -42,6 +43,7 @@ export async function postToFirebase (userInfo) {
       truth2: userInfo.truth2,
       lie: userInfo.lie,
       article: userInfo.article,
+      profileImg: userInfo.profileIMG,
       timestamp: serverTimestamp()
     })
   } catch (error) {
