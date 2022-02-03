@@ -1,4 +1,4 @@
-import { getTextOutput, postToFirebase, getFirebase, liveGetFirebase } from '../api/api'
+import { getTextOutput, postToFirebase, getFirebase, liveGetFirebase, getImageOutput } from '../api/api'
 import { showError } from '../actions/error'
 // import {
 //   getFirestore,
@@ -18,6 +18,9 @@ import { showError } from '../actions/error'
 // deep api ping
 export const TEXT_API_PENDING = 'TEXT_API_PENDING'
 export const TEXT_API_SUCCESS = 'TEXT_API_SUCCESS'
+
+export const IMG_API_PENDING = 'IMG_API_PENDING'
+export const IMG_API_SUCCESS = 'IMG_API_SUCCESS'
 
 // get data (objs) from DB
 export const FETCH_DATA_DB_PENDING = 'FETCH_DATA_DB_PENDING'
@@ -60,6 +63,37 @@ export function generateText (inputText) {
   }
 }
 
+export function imagePending () {
+  return {
+    type: IMG_API_PENDING
+  }
+}
+
+export function imageSuccess (outputimage) {
+  return {
+    type: IMG_API_SUCCESS,
+    outputimage
+  }
+}
+
+// Should output generateAPIText
+export function generateImage (inputImage) {
+  return (dispatch) => {
+    dispatch(imagePending())
+    return getImageOutput(inputImage)
+      .then((imgData) => {
+        console.log('actions: ', imgData)
+        dispatch(imageSuccess(imgData))
+        return null
+      })
+      .catch(err => {
+        console.error(err)
+        const errMessage = err.response?.text || err.message
+        dispatch(showError(errMessage))
+      })
+  }
+}
+
 // GET from db
 export function fetchDataPending () {
   return {
@@ -74,28 +108,12 @@ export function fetchDataSuccess (data) {
   }
 }
 
-// export function fetchDataDB () {
-//   return (dispatch) => {
-//     dispatch(fetchDataPending())
-//     return getFirebase()
-//       .then(dataDB => {
-//         console.log(dataDB)
-//         dispatch(fetchDataSuccess(dataDB))
-//         return null
-//       })
-//       .catch(err => {
-//         console.error(err)
-//         const errMessage = err.response?.text || err.message
-//         dispatch(showError(errMessage))
-//       })
-//   }
-// }
 export function fetchDataDB () {
   return (dispatch) => {
     dispatch(fetchDataPending())
-    return liveGetFirebase()
+    return getFirebase() // liveGetFirebase()
       .then(dataDB => {
-        console.log(dataDB)
+        console.log('action: ', dataDB)
         dispatch(fetchDataSuccess(dataDB))
         return null
       })

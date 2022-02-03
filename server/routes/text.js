@@ -13,8 +13,25 @@ router.post('/outputtext', (req, res) => {
     .type('form')
     .send({ text: input })
     .then(response => {
-      console.log(response.body)
+      // console.log(response.body)
       res.json({ output: response.body.output })
+      return null
+    })
+    .catch(err => {
+      res.sendStatus(500).send('POST REQUEST FAILED: ', err.message)
+    })
+})
+
+router.post('/outputimage', (req, res) => {
+  const input = req.body.val
+  console.log('image input: ', req.body)
+  request.post('https://api.deepai.org/api/text2img')
+    .set('api-key', apiKey)
+    .type('form')
+    .send({ text: input })
+    .then(response => {
+      console.log('image output: ', response.body)
+      res.json(response.body)
       return null
     })
     .catch(err => {

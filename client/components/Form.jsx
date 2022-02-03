@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from 'react'
 // import ArticleList from './ArticleList'
 import { useDispatch, useSelector } from 'react-redux'
-import { generateText, postDataDB } from '../actions/text'
+import { generateImage, generateText, postDataDB } from '../actions/text'
+
 function Form (props) {
   const dispatch = useDispatch()
-  const { history } = props
+  // const { history } = props
   const apiOutputText = useSelector(state => state.apiOutput)
+  const apiOutputIMG = useSelector(state => state.imgOutput)
 
   const [input, setInput] = useState({
     name: '',
     truth1: '',
     truth2: '',
     lie: '',
-    article: ''
+    article: '',
+    profileImg: ''
   })
-  useEffect(() => {
-    dbPost()
-    // expect to write into db
-    console.log('output received, writing to db')
-  }, [apiOutputText])
+  // useEffect(() => {
+
+  //   // expect to write into db
+  //   console.log('output received, writing to db')
+  // }, [apiOutputText])
 
   function dbPost () {
-    const dataObj = { ...input, article: apiOutputText }
-    console.log('dataObj: ', dataObj)
-    if (apiOutputText === '') {
+    const dataObj = { ...input, article: apiOutputText, profileImg: apiOutputIMG }
+    // console.log('dataObj: ', dataObj)
+    if (apiOutputText === '' || apiOutputIMG === '') {
       console.log('dbpost dispatch: null hit')
       return null
     } else {
@@ -36,11 +39,9 @@ function Form (props) {
   }
 
   function handleChange (e) {
-    // console.log(e.target.value)
     e.preventDefault()
     const value = e.target.value
     const name = e.target.name
-
     setInput({
       ...input,
       [name]: value
@@ -64,7 +65,13 @@ function Form (props) {
     const genNum = semiRandomGenerator(0, 2)
 
     console.log('selected input: ', inputArr[genNum])
+
     dispatch(generateText(inputArr[genNum]))
+    dispatch(generateImage(input.name))
+  }
+  function handleRender (e) {
+    e.preventDefault()
+    dbPost()
   }
   return (
     <div>
@@ -77,7 +84,7 @@ function Form (props) {
         <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
       </form>
       <button onClick={handleClick}>submit</button>
-      {/* <button onClick={handleRender}>render articles</button> */}
+      <button onClick={handleRender}>render articles</button>
       {/* <p>{generatedText}</p> */}
       {/* <ArticleList toggle={toggle} /> */}
 
