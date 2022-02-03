@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import LoadAnim from './LoadingAnim'
+import LoadAnim from './LoadAnim'
 
 function LoadIndicator (props) {
   return props.waiting

@@ -1,16 +1,11 @@
 import React from 'react'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { fetchDataDB } from '../actions/text'
-
 import {
   getFirestore,
   collection,
   query,
   orderBy
 } from 'firebase/firestore'
-
 import Article from './Article'
-
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 
