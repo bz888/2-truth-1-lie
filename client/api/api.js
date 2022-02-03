@@ -44,28 +44,45 @@ export async function postToFirebase (userInfo) {
   }
 }
 
-export async function getFirebase () {
+// export async function getFirebase () {
+//   const querySnapshot = await getDocs(collection(getFirestore(), 'user_input'), orderBy('timestamp', 'desc'))
+//   try {
+//     const arrData = []
+//     // console.log('arr', querySnapshot)
+//     querySnapshot.forEach((doc) => {
+//       arrData.push({ ...doc.data() })
+//     })
+//     console.log('arrData: ', arrData)
+//     return arrData
+//   } catch (error) {
+//     console.error('Error getting message from Firebase Database', error)
+//   }
+// }
+
+export async function liveGetFirebase () {
   try {
+    const ref = query(collection(getFirestore(), 'user_input'), orderBy('timestamp', 'desc'))
     const arrData = []
-    const querySnapshot = await getDocs(collection(getFirestore(), 'user_input'))
-    // console.log('arr', querySnapshot)
-    querySnapshot.forEach((doc) => {
-      // console.log(doc.data())
-      arrData.push(doc.data())
+    onSnapshot(ref, function (snapshot) {
+      snapshot.docChanges().forEach(function (change) {
+        // console.log('live data: ', change.doc.data())
+        arrData.push({ ...change.doc.data() })
+      })
     })
+    console.log('arrData feedback: ', arrData)
     return arrData
   } catch (error) {
-    console.error('Error getting message from Firebase Database', error)
+    console.error('Error getting live data from Firebase Database', error)
   }
 }
 
-export function liveGetFirebase () {
-  const dataQuery = query(collection(getFirebase(), 'user_input'), orderBy('timestamp', 'desc'))
-  onSnapshot(dataQuery, function (snapshot) {
-    console.log('liveGet: ', snapshot.docChanges())
-    snapshot.docChanges()
-  })
-}
+// export function liveGetFirebase () {
+//   const dataQuery = query(collection(getFirebase(), 'user_input'), orderBy('timestamp', 'desc'))
+//   onSnapshot(dataQuery, function (snapshot) {
+//     console.log('liveGet: ', snapshot.docChanges())
+//     snapshot.docChanges()
+//   })
+// }
 
 // export function getFirebase () {
 //   const dataRef = query(
