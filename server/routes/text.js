@@ -2,7 +2,6 @@ const express = require('express')
 const request = require('superagent')
 const router = express.Router()
 require('dotenv').config()
-// const db = require('../db/input')
 
 const apiKey = process.env.API_KEY
 
@@ -13,7 +12,6 @@ router.post('/outputtext', (req, res) => {
     .type('form')
     .send({ text: input })
     .then(response => {
-      // console.log(response.body)
       res.json({ output: response.body.output })
       return null
     })

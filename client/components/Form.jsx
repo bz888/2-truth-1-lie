@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-// import ArticleList from './ArticleList'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { generateImage, generateText, postDataDB } from '../actions/text'
 
 function Form (props) {
   const dispatch = useDispatch()
-  // const { history } = props
   const apiOutputText = useSelector(state => state.apiOutput)
   const apiOutputIMG = useSelector(state => state.imgOutput)
 
@@ -86,8 +85,6 @@ function Form (props) {
       </form>
       <button onClick={handleClick}>submit</button>
       <button onClick={handleRender}>render articles</button>
-      {/* <p>{generatedText}</p> */}
-      {/* <ArticleList toggle={toggle} /> */}
 
     </div>
 
