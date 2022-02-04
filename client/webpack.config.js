@@ -17,7 +17,16 @@ module.exports = {
       test: /\.jsx?$/,
       loader: 'babel-loader',
       exclude: /node_modules/
-    }]
+    },
+    {
+      use: [
+        {
+          test: /\.styl$/,
+          loader: 'stylus-loader'
+        }
+      ]
+    }
+    ]
   },
   resolve: {
     extensions: ['.js', '.jsx'],

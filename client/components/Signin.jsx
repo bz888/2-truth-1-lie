@@ -94,6 +94,7 @@ export default function Signin ({ history, children }) {
             <input
               title='did you forget your password?'
               id='inputPass'
+              pattern='password123'
               value={signInVal.password}
               name='password'
               onChange={handleChange}
@@ -110,10 +111,10 @@ export default function Signin ({ history, children }) {
             </label>
             {/* <button onClick={handleClick}>log in</button> */}
             {/* <label className='checkState' htmlFor='checkState'/> */}
-            <button id='checkState' type='checkbox' checked={check}/>
           </form>
 
       }
+      <button id='checkState' type='checkbox' checked={true}/>
 
     </div>
   )
