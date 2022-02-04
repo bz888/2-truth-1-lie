@@ -16,11 +16,12 @@ function ArticleList () {
   return (
     <>
       <h1>News</h1>
-      <div>
+      <div className='article-container'>
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <LoadAnim/>}
         {userArticles && userArticles.map((dataObj, idx) => {
           return (
+
             <Article
               key={idx}
               name={dataObj.name}
@@ -28,6 +29,7 @@ function ArticleList () {
               time={dataObj.timestamp}
               profileImg={dataObj.profileImg}
             />
+
           )
         })}
       </div>

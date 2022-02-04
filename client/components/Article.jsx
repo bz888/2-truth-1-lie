@@ -8,7 +8,7 @@ function Article ({ name, article, timestamp, profileImg }) {
   }
   console.log(profileImg)
   return (
-    <div>
+    <div className='article-div'>
       <h1>{name}</h1>
       <img style={imgSize} src={profileImg} alt='profile-img'/>
       <p>{timestamp}</p>
