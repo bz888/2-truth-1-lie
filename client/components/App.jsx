@@ -8,6 +8,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import Signin from './Signin'
 
 import { getAuth } from 'firebase/auth'
+import LoadIndicator from './LoadIndicator'
+import { AnimatePresence } from 'framer-motion'
 
 function App () {
   // console.log('initial toggle val: ', toggle)
@@ -18,17 +20,33 @@ function App () {
     <>
       {user
         ? <Route exact path= '/' render= {({ history }) => {
-          return <Form history= {history} />
+          return <Form history= {history}>
+            <AnimatePresence
+              initial={true}
+              exitBeforeEnter={true}
+            >
+              <LoadIndicator/>
+            </AnimatePresence>
+          </Form>
         }} />
         : <Route exact path= '/' render= {({ history }) => {
-          return <Signin history= {history} />
+          return <Signin history= {history}>
+            <AnimatePresence
+              initial={true}
+              exitBeforeEnter={true}
+            >
+              <LoadIndicator/>
+            </AnimatePresence>
+          </Signin>
         }} />
       }
       <Route exact path='/confirm' render={() => {
         return <SubmissionFeedback/>
       }} />
       <Route exact path='/results' render={() => {
-        return <ArticleList />
+        return <ArticleList>
+          {/* <LoadIndicator/> */}
+        </ArticleList>
       }} />
     </>
   )

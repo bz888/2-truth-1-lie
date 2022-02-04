@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword
 } from 'firebase/auth'
 
-export default function Signin ({ history }) {
+export default function Signin ({ history, children }) {
   const auth = getAuth()
 
   const [user] = useAuthState(auth)
@@ -47,6 +47,7 @@ export default function Signin ({ history }) {
   return (
     <div>
       <h1>Sign In</h1>
+      {children}
       <input value={signInVal.email} name='email' onChange={handleChange} placeholder='email'/>
       <input value={signInVal.password} name='password' onChange={handleChange} placeholder='password' type='password'/>
       <button onClick={handleClick}>log in</button>

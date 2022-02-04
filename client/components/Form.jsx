@@ -5,16 +5,10 @@ import { generateImage, generateText, postDataDB } from '../actions/text'
 import { getAuth, signOut } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
-function Form ({ history }) {
+function Form ({ history, children }) {
   const dispatch = useDispatch()
-  // const apiOutputText = useSelector(state => state.apiOutput)
-  // const apiOutputIMG = useSelector(state => state.imgOutput)
 
   const reduxState = useSelector(state => state)
-
-  // const postStatus = useSelector(state => state.dbPost)
-
-  // const [postTrack, setPostTrack] = useState(false)
 
   const auth = getAuth()
   const [user] = useAuthState(auth)
@@ -35,6 +29,12 @@ function Form ({ history }) {
     }
     console.log('logout useEffect toggled', reduxState.dbPost)
   }, [reduxState.dbPost])
+
+  useEffect(() => {
+    if (reduxState.apiOutput !== '' && reduxState.imgOutput !== '') {
+      dbPost()
+    }
+  }, [reduxState.apiOutput, reduxState.imgOutput])
 
   const [input, setInput] = useState({
     name: '',
@@ -90,16 +90,20 @@ function Form ({ history }) {
     dispatch(generateImage(input.name))
   }
 
-  function handleRender (e) {
-    console.log('current input val: ', input)
-    e.preventDefault()
-    dbPost()
-  }
+  // function handleRender (e) {
+  //   console.log('current input val: ', input)
+  //   e.preventDefault()
+  //   dbPost()
+  // }
+  // function handleLogOut () {
+  //   signOut(auth)
+  //   history.push('/')
+  // }
 
   return (
     <div>
       <h1>Two Truths and One Lie</h1>
-
+      {children}
       <form>
         <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
         <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth'/>
@@ -107,7 +111,8 @@ function Form ({ history }) {
         <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
       </form>
       <button onClick={handleClick}>submit</button>
-      <button onClick={handleRender}>render articles</button>
+      {/* <button onClick={handleRender}>render articles</button> */}
+      {/* <button onClick={handleLogOut}>Logout</button> */}
 
     </div>
 
