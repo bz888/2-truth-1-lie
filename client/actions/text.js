@@ -97,8 +97,7 @@ export function postDataDB (dataObj) {
     dispatch(postDataPending())
     return postToFirebase(dataObj)
       .then(() => {
-        const timePost = new Date()
-        dispatch(postDataSuccess('success posting to db: ' + timePost))
+        dispatch(postDataSuccess('success!'))
         return null
       })
       .catch(err => {
