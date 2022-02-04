@@ -18,28 +18,34 @@ function App () {
 
   return (
     <>
-      {user
-        ? <Route exact path= '/' render= {({ history }) => {
-          return <Form history= {history}>
-            <AnimatePresence
-              initial={true}
-              exitBeforeEnter={true}
-            >
-              <LoadIndicator/>
-            </AnimatePresence>
-          </Form>
-        }} />
-        : <Route exact path= '/' render= {({ history }) => {
-          return <Signin history= {history}>
-            <AnimatePresence
-              initial={true}
-              exitBeforeEnter={true}
-            >
-              <LoadIndicator/>
-            </AnimatePresence>
-          </Signin>
-        }} />
-      }
+      <Route exact path= '/submissionpage' render= {({ history }) => {
+        return user ? <Form history= {history}>
+          <AnimatePresence
+            initial={true}
+            exitBeforeEnter={true}
+          >
+            <LoadIndicator/>
+          </AnimatePresence>
+        </Form> : <Signin history= {history}>
+          <AnimatePresence
+            initial={true}
+            exitBeforeEnter={true}
+          >
+            <LoadIndicator/>
+          </AnimatePresence>
+        </Signin>
+      }} />
+      <Route exact path= '/' render= {({ history }) => {
+        return <Signin history= {history}>
+          <AnimatePresence
+            initial={true}
+            exitBeforeEnter={true}
+          >
+            <LoadIndicator/>
+          </AnimatePresence>
+        </Signin>
+      }} />
+
       <Route exact path='/confirm' render={() => {
         return <SubmissionFeedback/>
       }} />
