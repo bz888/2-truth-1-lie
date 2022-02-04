@@ -5,22 +5,29 @@
 }
 :root {
   --transition: 0.2;
-  --bg-one: #0f0514;
-  --bg-two: #320449;
+  --bg-one: #b4b4b4;
+  --bg-two: #cfcfcf;
+  /* --bg-one: #0f0514;
+  --bg-two: #320449; */
   --stop: 40;
   --angle: 45;
   --border-width: 5;
   --padlock-size: 300;
   --border-radius: 6;
 }
-body {
+
+body{
+  padding:0;
+  margin: 0;
+}
+.signIn-body {
   align-items: center;
   display: flex;
   justify-content: center;
   min-height: 100vh;
   font-family: sans-serif;
-  /* background: white; */
-  background: linear-gradient(calc(var(--angle) * 1deg), var(--bg-one) calc(var(--stop) * 1%), var(--bg-two) calc(var(--stop) * 1%));
+  background: rgb(98, 79, 107);
+  /* background: linear-gradient(calc(var(--angle) * 1deg), var(--bg-one) calc(var(--stop) * 1%), var(--bg-two) calc(var(--stop) * 1%)); */
   overflow: hidden;
 }
 .signIn-form {
@@ -55,20 +62,7 @@ body {
 #inputEmail:placeholder-shown, #inputPass:placeholder-shown {
   --accent: #fff;
 }
-.app {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  background: #f2f2f2;
-  transform: scale(var(--scale));
-  transition: transform calc(var(--transition, 0.2) * 1s) ease;
-}
+
 [for='password'],
 #login {
   height: 0;

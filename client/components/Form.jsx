@@ -101,21 +101,31 @@ function Form ({ history, children }) {
   // }
 
   return (
-    <div>
-      <h1>Two Truths and One Lie</h1>
-      {children}
-      <form>
-        <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
-        <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth'/>
-        <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth'/>
-        <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-      </form>
-      <button onClick={handleClick}>submit</button>
-      {/* <button onClick={handleRender}>render articles</button> */}
-      {/* <button onClick={handleLogOut}>Logout</button> */}
+    <>
+      <div className='form-title'>
+        <h1>2 Truths 1 Lie</h1>
+      </div>
+      <div className='form-div'>
+        {children}
+        <form id='form'>
+          <label htmlFor='form' className='form-label'>
+            <span className='disclaimer'>
+          Disclaimer: Article generator may contain explicit language and controversial material.
+              <br></br>
+          Play at your own risk
+            </span>
+          </label>
+          <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
+          <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth'/>
+          <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth'/>
+          <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
+          <button className='button-31' onClick={handleClick}>submit</button>
+        </form>
+        {/* <button onClick={handleRender}>render articles</button> */}
+        {/* <button onClick={handleLogOut}>Logout</button> */}
 
-    </div>
-
+      </div>
+    </>
   )
 }
 
