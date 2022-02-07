@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth'
 import LoadAnim from './LoadAnim'
 
-export default function Signin ({ history, children }) {
+export default function Signin () {
   const auth = getAuth()
 
   const [user, loading] = useAuthState(auth)
@@ -41,7 +41,7 @@ export default function Signin ({ history, children }) {
   function handleClick () {
     // e.prevenDefault()
     logInwithEmailAndPassword(signInVal.email, signInVal.password)
-    history.push('/submissionpage')
+    // history.push('/submissionpage')
   }
 
   function handleChange (e) {
@@ -53,7 +53,7 @@ export default function Signin ({ history, children }) {
     })
   }
   return (
-    <body className='signIn-body'>
+    <div className='signIn-body'>
 
       <div className='signIn-div'>
         {/* <h1>Sign In</h1> */}
@@ -92,7 +92,7 @@ export default function Signin ({ history, children }) {
                 type='email'
                 required="required"/>
 
-              <label htmlFor='password'>Password</label>
+              {/* <label htmlFor='password'>Password</label> */}
               <input
                 title='did you forget your password?'
                 id='inputPass'
@@ -119,6 +119,6 @@ export default function Signin ({ history, children }) {
         <button id='checkState' type='checkbox' checked={true}/>
 
       </div>
-    </body>
+    </div>
   )
 }

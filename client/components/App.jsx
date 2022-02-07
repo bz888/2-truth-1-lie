@@ -1,7 +1,7 @@
 import React from 'react'
 import ArticleList from './ArticleList'
 import Form from './Form'
-import SubmissionFeedback from './SubmissionFeedback'
+// import SubmissionFeedback from './SubmissionFeedback'
 import { Route } from 'react-router-dom'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -18,24 +18,20 @@ function App () {
 
   return (
     <>
-      <Route exact path= '/submissionpage' render= {({ history }) => {
-        return user ? <Form history= {history}>
-          <AnimatePresence
-            initial={true}
-            exitBeforeEnter={true}
-          >
-            <LoadIndicator/>
-          </AnimatePresence>
-        </Form> : <Signin history= {history}>
-          <AnimatePresence
-            initial={true}
-            exitBeforeEnter={true}
-          >
-            <LoadIndicator/>
-          </AnimatePresence>
-        </Signin>
+      <Route exact path= '/' render= {() => {
+        return user
+          ? <Form>
+
+            <AnimatePresence
+              initial={true}
+              exitBeforeEnter={true}>
+              <LoadIndicator/>
+            </AnimatePresence>
+
+          </Form>
+          : <Signin/>
       }} />
-      <Route exact path= '/' render= {({ history }) => {
+      {/* <Route exact path= '/' render= {({ history }) => {
         return <Signin history= {history}>
           <AnimatePresence
             initial={true}
@@ -48,11 +44,9 @@ function App () {
 
       <Route exact path='/confirm' render={() => {
         return <SubmissionFeedback/>
-      }} />
+      }} /> */}
       <Route exact path='/results' render={() => {
-        return <ArticleList>
-          {/* <LoadIndicator/> */}
-        </ArticleList>
+        return <ArticleList/>
       }} />
     </>
   )

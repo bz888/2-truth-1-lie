@@ -13,12 +13,12 @@ function Form ({ history, children }) {
   const auth = getAuth()
   const [user] = useAuthState(auth)
 
-  useEffect(() => {
-    if (!user) {
-      console.log('user not found')
-      return history.push('/login')
-    }
-  }, [user])
+  // useEffect(() => {
+  //   if (!user) {
+  //     console.log('user not found')
+  //     // return history.push('/login')
+  //   }
+  // }, [user])
 
   useEffect(() => {
     // expect to log out
@@ -80,7 +80,8 @@ function Form ({ history, children }) {
     }
   }
 
-  function handleClick () {
+  function handleClick (e) {
+    e.preventDefault()
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
 
@@ -89,16 +90,6 @@ function Form ({ history, children }) {
     dispatch(generateText(inputArr[genNum]))
     dispatch(generateImage(input.name))
   }
-
-  // function handleRender (e) {
-  //   console.log('current input val: ', input)
-  //   e.preventDefault()
-  //   dbPost()
-  // }
-  // function handleLogOut () {
-  //   signOut(auth)
-  //   history.push('/')
-  // }
 
   return (
     <>
@@ -115,9 +106,9 @@ function Form ({ history, children }) {
           Play at your own risk
           </span>
           {/* </label> */}
-          <input value={input.name} name='name' onChange={handleChange} placeholder='name'required="required"/>
-          <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' required="required"/>
-          <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' required="required"/>
+          <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
+          <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
+          <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
           <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
           <button className='button-31' onClick={handleClick}>submit</button>
         </form>
