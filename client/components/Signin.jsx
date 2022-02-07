@@ -41,7 +41,7 @@ export default function Signin ({ history, children }) {
   function handleClick () {
     // e.prevenDefault()
     logInwithEmailAndPassword(signInVal.email, signInVal.password)
-    // history.push('/')
+    history.push('/submissionpage')
   }
 
   function handleChange (e) {
