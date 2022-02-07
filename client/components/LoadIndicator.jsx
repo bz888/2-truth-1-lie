@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import LoadAnim from './LoadAnim'
 
 function LoadIndicator (props) {
-  return props.waiting
+  console.log('load indicator', props)
+  return props.loading
     ? <LoadAnim/>
     : null
 }
 
 function mapStateToProps (state) {
   return {
-    waiting: state.waiting
+    loading: state.loading
   }
 }
 

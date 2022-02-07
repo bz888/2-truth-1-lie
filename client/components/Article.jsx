@@ -2,8 +2,8 @@ import React from 'react'
 
 function Article ({ name, article, timestamp, profileImg }) {
   const imgSize = {
-    width: '150px',
-    height: '150px',
+    width: '300px',
+    height: '300px',
     display: 'inline-flex'
   }
   console.log(profileImg)
