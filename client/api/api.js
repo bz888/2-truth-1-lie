@@ -33,7 +33,7 @@ export function getImageOutput (val) {
 export async function postToFirebase (userInfo) {
   console.log('api userInfo: ', userInfo)
   try {
-    await addDoc(collection(getFirestore(), 'test_db'), {
+    await addDoc(collection(getFirestore(), 'test_read'), {
       name: userInfo.name,
       truth1: userInfo.truth1,
       truth2: userInfo.truth2,

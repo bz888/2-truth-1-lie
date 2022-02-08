@@ -41,12 +41,9 @@ function Form ({ history, children }) {
     truth1: '',
     truth2: '',
     lie: '',
-    article: ''
+    article: '',
+    profileImg: ''
   })
-  const [generatedText, setGeneratedText] = useState('')
-  const [toggle, setToggle] = useState(true)
-
-
   function dbPost () {
     const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput }
     console.log('sending dataObj: ', dataObj)
@@ -55,7 +52,6 @@ function Form ({ history, children }) {
       return null
     } else {
       dispatch(postDataDB(dataObj))
-      // console.log('postStatus', postStatus)
       console.log(reduxState)
       console.log('db post dispatch hit')
     }
@@ -82,7 +78,8 @@ function Form ({ history, children }) {
     }
   }
 
-  function handleClick () {
+  function handleClick (e) {
+    e.preventDefault()
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
 
@@ -92,32 +89,30 @@ function Form ({ history, children }) {
     dispatch(generateImage(input.name))
   }
 
-  // function handleRender (e) {
-  //   console.log('current input val: ', input)
-  //   e.preventDefault()
-  //   dbPost()
-  // }
-  // function handleLogOut () {
-  //   signOut(auth)
-  //   history.push('/')
-  // }
-
   return (
-    <div>
-      <h1>Two Truths and One Lie</h1>
-      {children}
-      <form>
-        <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
-        <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth'/>
-        <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth'/>
-        <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-      </form>
-      <button onClick={handleClick}>submit</button>
-      {/* <button onClick={handleRender}>render articles</button> */}
-      {/* <button onClick={handleLogOut}>Logout</button> */}
+    <>
+      <div className='form-title'>
+        <h1>2 Truths 1 Lie</h1>
+      </div>
+      <div className='form-div'>
+        {children}
+        <form id='form'>
+          <label htmlFor='form' className='form-label'>
+            <span className='disclaimer'>
+          Disclaimer: Article generator may contain explicit language and controversial material.
+              <br></br>
+          Play at your own risk
+            </span>
+          </label>
+          <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
+          <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
+          <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
+          <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
+          <button className='button-31' onClick={handleClick}>submit</button>
+        </form>
 
-    </div>
-
+      </div>
+    </>
   )
 }
 

@@ -1,18 +1,20 @@
 import React from 'react'
 
-function Article ({ name, article, timestamp, profileImg }) {
+function Article ({ name, article, timestamp, profileImg, colorProfile }) {
   const imgSize = {
     width: '300px',
     height: '300px',
     display: 'inline-flex'
   }
-  console.log(profileImg)
+  console.log(colorProfile % 2)
   return (
-    <div>
-      <h1>{name}</h1>
-      <img style={imgSize} src={profileImg} alt='profile-img'/>
-      <p>{timestamp}</p>
-      <p>{article}</p>
+    <div className='article-div' style={{ backgroundColor: colorProfile % 2 === 0 ? 'black' : 'white' }}>
+      <div>
+        <img style={imgSize} src={profileImg} alt='profile-img'/>
+        <h1 style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{name}</h1>
+        <p style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{timestamp}</p>
+        <p style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{article}</p>
+      </div>
     </div>
   )
 }
