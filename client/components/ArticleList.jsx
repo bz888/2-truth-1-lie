@@ -15,7 +15,6 @@ function ArticleList () {
   console.log(userArticles)
   return (
     <>
-      {/* <h1>News</h1> */}
       <div className='article-container'>
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <LoadAnim/>}
