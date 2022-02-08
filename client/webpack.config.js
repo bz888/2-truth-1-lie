@@ -1,6 +1,11 @@
 const path = require('path')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
+  // target: 'node',
+  plugins: [
+    new Dotenv()
+  ],
   entry: path.join(__dirname, './index.js'),
   output: {
     path: path.join(__dirname, '../server/public'),
@@ -15,7 +20,10 @@ module.exports = {
     }]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      fs: false
+    }
   },
   devtool: 'source-map'
 }
