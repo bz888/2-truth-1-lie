@@ -108,12 +108,28 @@ export function postDataDB (dataObj) {
   }
 }
 
-export function postAction (dataObj) {
-  return (dispatch) => {
-    return dispatch(generateImage(dataObj.name))
-      .then((outputImgData) => {
-        const newObj = { ...dataObj, profileImg: outputImgData }
-        return dispatch(generateText(dataObj.article))
-      })
-  }
-}
+// export function postAction (dataObj) {
+//   return (dispatch) => {
+//     return dispatch(generateImage(dataObj.name))
+//       .then((outputImgData) => {
+//         const newObj = { ...dataObj, profileImg: outputImgData }
+//         return newObj
+//       })
+//       .then((imgPrepData) => {
+//         return dispatch(generateText(imgPrepData.lie))
+//       })
+//       .then((newDataObj) => {
+//         const newCombinedObj = { ...newDataObj, article: newDataObj }
+//         return newCombinedObj
+//       })
+//       .then((data) => {
+//         dispatch(postDataDB(data))
+//         return null
+//       })
+//       .catch(err => {
+//         console.error(err)
+//         const errMessage = err.response?.text || err.message
+//         dispatch(showError(errMessage))
+//       })
+//   }
+// }

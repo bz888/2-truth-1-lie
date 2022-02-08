@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { generateImage, generateText, postDataDB } from '../actions/text'
+import { generateImage, generateText, postAction, postDataDB } from '../actions/text'
 import { getAuth, signOut } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -87,6 +87,7 @@ function Form ({ history, children }) {
 
     console.log('selected input: ', inputArr[genNum])
 
+    // dispatch(postAction(input))
     dispatch(generateText(inputArr[genNum]))
     dispatch(generateImage(input.name))
   }
