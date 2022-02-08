@@ -26,7 +26,7 @@ router.post('/outputimage', (req, res) => {
   request.post('https://api.deepai.org/api/text2img')
     .set('api-key', apiKey)
     .type('form')
-    .send({ text: input })
+    .send({ text: req.body.val })
     .then(response => {
       console.log('image output: ', response.body)
       res.json(response.body)
