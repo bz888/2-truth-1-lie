@@ -11,7 +11,7 @@ import LoadAnim from './LoadAnim'
 
 function ArticleList () {
   const tempRef = query(collection(getFirestore(), 'test_db_2'), orderBy('timestamp', 'desc'))
-  const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
+  const [userArticles, loading, error] = useCollectionData(tempRef)
   console.log(userArticles)
   return (
     <>

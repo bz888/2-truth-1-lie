@@ -45,6 +45,8 @@ function Form ({ history, children }) {
     profileImg: '',
     colorID: 0
   })
+  const [generatedText, setGeneratedText] = useState('')
+  const [toggle, setToggle] = useState(true)
 
   function dbPost () {
     const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput, colorID: input.colorID++ }
