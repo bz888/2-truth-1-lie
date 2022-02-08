@@ -278,7 +278,7 @@ body{
   clip-path: inset(0 0 30% 0);
   transition: transform calc(var(--transition, 0.2) * 1s) calc(((var(--transition, 0.2) * 1.5) * var(--delay, 0)) * 1s) cubic-bezier(0.78, 0.16, 0.64, 1.8);
 }
-.padlock__hook:after {
+/* .padlock__hook:after {
   content: '';
   position: absolute;
   top: 50%;
@@ -290,7 +290,7 @@ body{
   box-shadow: 5px 0 0 0 #fff inset, -10px 0 0 0 #666 inset;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% calc(var(--clip) * 1%), 50% calc(var(--clip) * 1%), 50% 100%, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% calc(var(--clip) * 1%), 50% calc(var(--clip) * 1%), 50% 100%, 0 100%);
-}
+} */
 .padlock__hook > div {
   position: absolute;
   top: 50%;
@@ -322,13 +322,13 @@ body{
   text-align: center;
   font-weight: bold;
 }
-#login:checked ~ .app {
+/* #login:checked ~ .app {
   --scale: 1;
-}
-[type='password']:valid ~ #login,
+} */
+/* [type='password']:valid ~ #login,
 [type='password']:valid ~ [for='login'] {
   visibility: visible;
-}
+} */
 /* #checkState:checked ~ #login:hover ~ .padlock .padlock__mouth--one,
 #checkState:checked ~ [for='login']:hover ~ .padlock .padlock__mouth--one,
 #checkState:checked ~ #login:hover ~ .padlock .padlock__mouth--two,
@@ -339,17 +339,17 @@ body{
 #checkState:checked ~ [for='login']:hover ~ .padlock .padlock__mouth--three {
   display: block;
 } */
-[type='password']:valid ~ .padlock .padlock__mouth--one {
+/* [type='password']:valid ~ .padlock .padlock__mouth--one {
   display: none;
 }
 [type='password']:valid ~ .padlock .padlock__mouth--two {
   display: block;
-}
+} */
 /* [type='password']:valid ~ .padlock  */
-[type='password']:valid.padlock__hook {
+/* [type='password']:valid.padlock__hook {
   --pos: 60;
   --delay: 0;
-}
+} */
 /* [type='password']:placeholder-shown ~ .app {
   transition: transform 0s 0s ease;
 } */
