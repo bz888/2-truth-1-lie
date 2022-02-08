@@ -45,9 +45,6 @@ function Form ({ history, children }) {
     profileImg: '',
     colorID: 0
   })
-  const [generatedText, setGeneratedText] = useState('')
-  const [toggle, setToggle] = useState(true)
-
   function dbPost () {
     const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput, colorID: input.colorID++ }
     console.log('sending dataObj: ', dataObj)
@@ -56,7 +53,6 @@ function Form ({ history, children }) {
       return null
     } else {
       dispatch(postDataDB(dataObj))
-      // console.log('postStatus', postStatus)
       console.log(reduxState)
       console.log('db post dispatch hit')
     }
@@ -90,7 +86,6 @@ function Form ({ history, children }) {
 
     console.log('selected input: ', inputArr[genNum])
 
-    // dispatch(postAction(input))
     dispatch(generateText(inputArr[genNum]))
     dispatch(generateImage(input.name))
   }
