@@ -1,34 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import { getDataDB } from '../api'
+import React from 'react'
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy
+} from 'firebase/firestore'
 import Article from './Article'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+import LoadAnim from './LoadAnim'
 
-function ArticleList ({ toggle }) {
-  const [articleData, setArticleData] = useState([])
-  useEffect(() => {
-    getArticles()
-  }, [toggle])
-
-  function getArticles () {
-    getDataDB()
-      .then(data => {
-        setArticleData(data)
-        return null
-      })
-      .catch(err => {
-        console.log('oh no error' + err.message)
-      })
-  }
+function ArticleList () {
+  const tempRef = query(collection(getFirestore(), 'test_db'), orderBy('timestamp', 'desc'))
+  const [userArticles, loading, error] = useCollectionData(tempRef)
 
   return (
     <>
-      <h1>test</h1>
+      <h1>News</h1>
       <div>
-        {articleData.map(dataDB => {
+        {error && <strong>Error: {JSON.stringify(error)}</strong>}
+        {loading && <LoadAnim/>}
+        {userArticles && userArticles.map((dataObj, idx) => {
           return (
             <Article
-              key={dataDB.id}
-              name={dataDB.name}
-              article={dataDB.article}
+              key={idx}
+              name={dataObj.name}
+              article={dataObj.article}
+              time={dataObj.timestamp}
+              profileImg={dataObj.profileImg}
             />
           )
         })}

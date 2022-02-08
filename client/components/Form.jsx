@@ -1,8 +1,41 @@
-import React, { useState } from 'react'
-import { getTextOutput, postDbForm } from '../api'
-import ArticleList from './ArticleList'
+import React, { useEffect, useState } from 'react'
 
-function Form () {
+import { useDispatch, useSelector } from 'react-redux'
+import { generateImage, generateText, postDataDB } from '../actions/text'
+import { getAuth, signOut } from 'firebase/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
+function Form ({ history, children }) {
+  const dispatch = useDispatch()
+
+  const reduxState = useSelector(state => state)
+
+  const auth = getAuth()
+  const [user] = useAuthState(auth)
+
+  useEffect(() => {
+    if (!user) {
+      console.log('user not found')
+      return history.push('/login')
+    }
+  }, [user])
+
+  useEffect(() => {
+    // expect to log out
+    if (reduxState.dbPost === 'success!') {
+      signOut(auth)
+      console.log('logging out')
+      // history.push('/login')
+    }
+    console.log('logout useEffect toggled', reduxState.dbPost)
+  }, [reduxState.dbPost])
+
+  useEffect(() => {
+    if (reduxState.apiOutput !== '' && reduxState.imgOutput !== '') {
+      dbPost()
+    }
+  }, [reduxState.apiOutput, reduxState.imgOutput])
+
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -13,63 +46,66 @@ function Form () {
   const [generatedText, setGeneratedText] = useState('')
   const [toggle, setToggle] = useState(true)
 
+
+  function dbPost () {
+    const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput }
+    console.log('sending dataObj: ', dataObj)
+    if (reduxState.apiOutput === '' || reduxState.imgOutput === '') {
+      console.log('dbpost dispatch: null hit')
+      return null
+    } else {
+      dispatch(postDataDB(dataObj))
+      // console.log('postStatus', postStatus)
+      console.log(reduxState)
+      console.log('db post dispatch hit')
+    }
+  }
+
   function handleChange (e) {
-    // console.log(e.target.value)
+    e.preventDefault()
     const value = e.target.value
     const name = e.target.name
-
     setInput({
       ...input,
       [name]: value
     })
   }
 
-  function randomGenerator (min, max) {
-    const num = Math.floor(Math.random() * (max - min) + min)
-    return num
-  }
-
-  function handleClickDB () {
-    postDbForm(input)
-    console.log('input submitted', input)
-  }
-
-  function handleRender () {
-    setToggle(!toggle)
+  function semiRandomGenerator (min, max) {
+    const num = Math.random() * (max - min) + min
+    if (num <= 0.3333333) {
+      return 0
+    } else if (num <= 0.6666666) {
+      return 1
+    } else {
+      return 2
+    }
   }
 
   function handleClick () {
-    console.log('input data: ', input)
-
     const inputArr = [input.truth1, input.truth2, input.lie]
-
-    const genNum = randomGenerator(0, 2)
+    const genNum = semiRandomGenerator(0, 2)
 
     console.log('selected input: ', inputArr[genNum])
 
-    getTextOutput(inputArr[genNum])
-      .then(output => {
-        setGeneratedText(output)
-        return output
-      })
-      .then(genText => {
-        console.log(genText)
-        const dataToDB = { ...input, article: genText }
-        setInput(dataToDB)
-        console.log('input for db', input)
-        return dataToDB
-      })
-      .then((data) => {
-        postDbForm(data)
-        console.log('data sent to db: ', data)
-        return null
-      })
-      .catch(err => { console.error(err) })
+    dispatch(generateText(inputArr[genNum]))
+    dispatch(generateImage(input.name))
   }
+
+  // function handleRender (e) {
+  //   console.log('current input val: ', input)
+  //   e.preventDefault()
+  //   dbPost()
+  // }
+  // function handleLogOut () {
+  //   signOut(auth)
+  //   history.push('/')
+  // }
+
   return (
     <div>
       <h1>Two Truths and One Lie</h1>
-
+      {children}
       <form>
         <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
         <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth'/>
@@ -77,10 +113,8 @@ function Form () {
         <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
       </form>
       <button onClick={handleClick}>submit</button>
-      <button onClick={handleClickDB}>add to database</button>
-      <button onClick={handleRender}>render articles</button>
-      {/* <p>{generatedText}</p> */}
-      <ArticleList toggle={toggle} />
+      {/* <button onClick={handleRender}>render articles</button> */}
+      {/* <button onClick={handleLogOut}>Logout</button> */}
 
     </div>
 

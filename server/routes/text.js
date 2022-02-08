@@ -2,7 +2,6 @@ const express = require('express')
 const request = require('superagent')
 const router = express.Router()
 require('dotenv').config()
-const db = require('../db/input')
 
 const apiKey = process.env.API_KEY
 
@@ -13,7 +12,6 @@ router.post('/outputtext', (req, res) => {
     .type('form')
     .send({ text: input })
     .then(response => {
-      console.log(response.body)
       res.json({ output: response.body.output })
       return null
     })
@@ -22,26 +20,20 @@ router.post('/outputtext', (req, res) => {
     })
 })
 
-router.get('/data', (req, res) => {
-  db.getData()
-    .then(data => {
-      res.json(data)
+router.post('/outputimage', (req, res) => {
+  const input = req.body.val
+  console.log('image input: ', req.body)
+  request.post('https://api.deepai.org/api/text2img')
+    .set('api-key', apiKey)
+    .type('form')
+    .send({ text: input })
+    .then(response => {
+      console.log('image output: ', response.body)
+      res.json(response.body)
       return null
     })
     .catch(err => {
-      res.status(500).send('Could not get list: ' + err.message)
-    })
-})
-
-router.post('/input', (req, res) => {
-  const input = req.body
-  db.addInput(input)
-    .then(() => {
-      res.sendStatus(201)
-      return null
-    })
-    .catch((err) => {
-      res.status(500).send('POST REQUEST FAILED: ', err.message)
+      res.sendStatus(500).send('POST REQUEST FAILED: ', err.message)
     })
 })
 
