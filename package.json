@@ -75,6 +75,7 @@
     "react-moment": "^1.1.1",
     "react-redux-firebase": "^3.11.0",
     "regenerator-runtime": "^0.13.9",
+    "stylus-loader": "^6.2.0",
     "superagent": "^7.0.2"
   }
 }

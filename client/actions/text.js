@@ -107,3 +107,44 @@ export function postDataDB (dataObj) {
       })
   }
 }
+
+// export function postAction (dataObj) {
+//   return (dispatch) => {
+//     return generateText(dataObj.lie)
+//       .then((outputData) => {
+//         console.log('image/text output', outputData)
+//         // const newObj = { ...dataObj, profileImg: outputImgData }
+//         // console.log('image/text obj', newObj)
+//         return outputData
+//       })
+//       .then((data) => {
+//         dispatch(generateImage(dataObj.name))
+//         console.log(data)
+//         return null
+//       })
+//       .catch(err => {
+//         console.error(err)
+//         const errMessage = err.response?.text || err.message
+//         dispatch(showError(errMessage))
+//       })
+//   }
+// }
+
+// export function getAPIcalls (inputObj) {
+//   return (dispatch) => {
+//     dispatch(textPending())
+//     dispatch(imagePending())
+//     return getTextOutput(inputObj.text)
+//       .then(outputText => {
+//         const textIncObj = { text: outputText }
+//         console.log('textOuput: ', outputText)
+//         console.log('textGenerated: ', textIncObj)
+//         return dispatch(textSuccess(outputText))
+//       })
+//       .catch(err => {
+//         console.error(err)
+//         const errMessage = err.response?.text || err.message
+//         dispatch(showError(errMessage))
+//       })
+//   }
+// }
