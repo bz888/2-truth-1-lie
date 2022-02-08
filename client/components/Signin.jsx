@@ -38,7 +38,7 @@ export default function Signin () {
     }
   }
 
-  function handleClick () {
+  function handleClick (e) {
     // e.prevenDefault()
     logInwithEmailAndPassword(signInVal.email, signInVal.password)
     // history.push('/submissionpage')
@@ -81,7 +81,7 @@ export default function Signin () {
               <button className="enter-form-button" type="reset" onClick={handleClick}>Enter Site</button>
             </div>
             : <form className='signIn-form'>
-              {/* <label htmlFor='email'>Email</label> */}
+              <label htmlFor='email'>Email</label>
 
               <input
                 id='inputEmail'
@@ -92,7 +92,7 @@ export default function Signin () {
                 type='email'
                 required="required"/>
 
-              {/* <label htmlFor='password'>Password</label> */}
+              <label htmlFor='password'>Password</label>
               <input
                 title='did you forget your password?'
                 id='inputPass'

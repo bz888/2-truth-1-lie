@@ -40,7 +40,7 @@ function LoadAnim () {
   }
   const loadingCircleTransition = {
     duration: 0.4,
-    repeat: Infinity,
+    yoyo: Infinity,
     ease: 'easeInOut'
   }
 

@@ -12,15 +12,14 @@ import LoadIndicator from './LoadIndicator'
 import { AnimatePresence } from 'framer-motion'
 
 function App () {
-  // console.log('initial toggle val: ', toggle)
   const auth = getAuth()
   const [user] = useAuthState(auth)
 
   return (
     <>
-      <Route exact path= '/' render= {() => {
+      <Route exact path= '/' render= {({ history }) => {
         return user
-          ? <Form>
+          ? <Form history={history}>
 
             <AnimatePresence
               initial={true}

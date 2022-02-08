@@ -107,3 +107,13 @@ export function postDataDB (dataObj) {
       })
   }
 }
+
+export function postAction (dataObj) {
+  return (dispatch) => {
+    return dispatch(generateImage(dataObj.name))
+      .then((outputImgData) => {
+        const newObj = { ...dataObj, profileImg: outputImgData }
+        return dispatch(generateText(dataObj.article))
+      })
+  }
+}

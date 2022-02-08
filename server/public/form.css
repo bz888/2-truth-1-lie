@@ -66,11 +66,8 @@ body{
   position: relative;
   text-align: center;
   text-transform: none;
-
-
   touch-action: manipulation;
   width: 100%;
-
 }
 
 .button-31:hover,
