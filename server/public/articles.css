@@ -1,9 +1,21 @@
 .article-div{
-  background-color: bisque;
+  width: 50vw;
+  height: 100vh;
+  padding: 3rem;
 }
-
+.article-div h1 {
+  font-size: 4rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.article-div p {
+  font-size: 1rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 .article-container{
+  overflow: hidden;
   display: grid;
   grid-template-columns: 50vw 50vw;
-  /* grid-gap: 1rem; */
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }

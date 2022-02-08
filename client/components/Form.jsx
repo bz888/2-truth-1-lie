@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { generateImage, generateText, postAction, postDataDB } from '../actions/text'
+import { generateImage, generateText, postDataDB } from '../actions/text'
 import { getAuth, signOut } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
@@ -42,11 +42,12 @@ function Form ({ history, children }) {
     truth2: '',
     lie: '',
     article: '',
-    profileImg: ''
+    profileImg: '',
+    colorID: 0
   })
 
   function dbPost () {
-    const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput }
+    const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput, colorID: input.colorID++ }
     console.log('sending dataObj: ', dataObj)
     if (reduxState.apiOutput === '' || reduxState.imgOutput === '') {
       console.log('dbpost dispatch: null hit')
