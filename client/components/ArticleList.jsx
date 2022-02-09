@@ -12,7 +12,7 @@ import LoadAnim from './LoadAnim'
 
 function ArticleList () {
   const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(2))
-  const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
+  const [userArticles, loading, error] = useCollectionData(tempRef)
   console.log(userArticles)
   return (
     <>
@@ -23,7 +23,7 @@ function ArticleList () {
           return (
 
             <Article
-              key={idx + 1}
+              key={dataObj.id}
               name={dataObj.name}
               article={dataObj.article}
               time={dataObj.timestamp}
