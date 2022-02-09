@@ -5,6 +5,8 @@ import { generateImage, generateText, postDataDB } from '../actions/text'
 import { getAuth, signOut } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
+const { isBanned } = require('../src/helperFunc')
+
 function Form ({ history, children }) {
   const dispatch = useDispatch()
   const [checkInput, setCheckInput] = useState(false)
@@ -60,11 +62,17 @@ function Form ({ history, children }) {
   // Checking if all the inputs are blank, will only render the submit button when the fields have text in them
   // Perhaps use find array method here to search through array of banned words to filter on the user end
   useEffect(() => {
-    if (input.name !== '' && input.truth1 !== '' && input.truth2 !== '' && input.lie !== '') {
-      return setCheckInput(() => (!checkInput))
-    } else {
-      setCheckInput(() => (false))
-    }
+    Object.keys(input).map((key, index) => {
+      if (isBanned(input[key]) === false) {
+        if (input.name !== '' && input.truth1 !== '' && input.truth2 !== '' && input.lie !== '') {
+          console.log('this is if checkInput: ', checkInput)
+          return setCheckInput(() => (!checkInput))
+        } else {
+          console.log('this is else checkInput: ', checkInput)
+          return setCheckInput(() => (false))
+        }
+      }
+    })
   }, [input])
 
   function handleChange (e) {
