@@ -31,11 +31,14 @@ export function textSuccess (outputText) {
 }
 
 // Should output generateAPIText
+// apioutputText - can try a .match finding strings that match the output if it contains a banned word
+// perhaps use the catch block? Conditional on the error if the error is specifically a banned word - trigger a re-render
 export function generateText (inputText) {
   return (dispatch) => {
     dispatch(textPending())
     return getTextOutput(inputText)
       .then((APIoutput) => {
+        // add filtering here (conditional - if banned word is present, send )
         dispatch(textSuccess(APIoutput))
         return null
       })
