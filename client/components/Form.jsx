@@ -42,11 +42,10 @@ function Form ({ history, children }) {
     truth2: '',
     lie: '',
     article: '',
-    profileImg: '',
-    colorID: 0
+    profileImg: ''
   })
   function dbPost () {
-    const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput, colorID: input.colorID++ }
+    const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput }
     console.log('sending dataObj: ', dataObj)
     if (reduxState.apiOutput === '' || reduxState.imgOutput === '') {
       console.log('dbpost dispatch: null hit')

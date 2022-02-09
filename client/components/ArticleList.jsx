@@ -3,14 +3,15 @@ import {
   getFirestore,
   collection,
   query,
-  orderBy
+  orderBy,
+  limit
 } from 'firebase/firestore'
 import Article from './Article'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 
 function ArticleList () {
-  const tempRef = query(collection(getFirestore(), 'test_db_2'), orderBy('timestamp', 'desc'))
+  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(2))
   const [userArticles, loading, error] = useCollectionData(tempRef)
   console.log(userArticles)
   return (
@@ -27,7 +28,7 @@ function ArticleList () {
               article={dataObj.article}
               time={dataObj.timestamp}
               profileImg={dataObj.profileImg}
-              colorID={idx}
+              colorProfile={idx}
             />
 
           )
