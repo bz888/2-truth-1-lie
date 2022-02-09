@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 function Form ({ history, children }) {
   const dispatch = useDispatch()
-
+  const [checkInput, setCheckInput] = useState(false)
   const reduxState = useSelector(state => state)
 
   const auth = getAuth()
@@ -56,6 +56,14 @@ function Form ({ history, children }) {
       console.log('db post dispatch hit')
     }
   }
+
+  useEffect(() => {
+    if (input.name !== '' && input.truth1 !== '' && input.truth2 !== '' && input.lie !== '') {
+      return setCheckInput(() => (!checkInput))
+    } else {
+      setCheckInput(() => (false))
+    }
+  }, [input])
 
   function handleChange (e) {
     e.preventDefault()
@@ -108,7 +116,7 @@ function Form ({ history, children }) {
           <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
           <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
           <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-          <button className='button-31' onClick={handleClick}>submit</button>
+          {checkInput && <button className='button-31' onClick={handleClick}>submit</button>}
         </form>
 
       </div>
