@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { generateImage, generateText, postDataDB } from '../actions/text'
 import { getAuth, signOut } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { truncate } from 'fs/promises'
 
 const { isBanned } = require('../src/helperFunc')
 
