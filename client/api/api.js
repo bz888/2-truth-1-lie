@@ -7,6 +7,7 @@ import {
 } from 'firebase/firestore'
 
 // deep ai text
+// .retry() after send- whatever is passed is how many times it tries again.
 export function getTextOutput (input) {
   return request
     .post('http://localhost:8000/text/outputtext/')
