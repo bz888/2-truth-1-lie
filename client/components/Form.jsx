@@ -59,8 +59,9 @@ function Form ({ history, children }) {
     }
   }
 
-  let bannedWordsPresent = Object.keys(input).map((key, index) => (isBanned(input[key])))
+  let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
   bannedWordsPresent = bannedWordsPresent.some(element => element === true)
+  // const checkVal = bannedWordsPresent.find(ele => ele === 'lmao')
   // Checking if all the inputs are blank, will only render the submit button when the fields have text in them
   // Perhaps use find array method here to search through array of banned words to filter on the user end
   useEffect(() => {
@@ -68,6 +69,7 @@ function Form ({ history, children }) {
     if (input.name === '' || input.truth1 === '' || input.truth2 === '' || input.lie === '') {
       return setCheckInput(() => (false))
     } else if (bannedWordsPresent === true) {
+      // setBannedstate
       return setCheckInput(() => (false))
     } else {
       return setCheckInput(() => (true))
@@ -121,10 +123,14 @@ function Form ({ history, children }) {
           Play at your own risk
             </span>
           </label>
-          <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
+          <input value={input.name} name='name' onChange={handleChange} placeholder='name' />
           <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
           <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
           <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
+          {/* add conditonal
+          render submit only if !== bannedstate && checkinput
+          if checkinput true && bannedstate is true render red button
+          */}
           {checkInput && <button className='button-31' onClick={handleClick}>submit</button>}
         </form>
 

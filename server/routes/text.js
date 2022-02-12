@@ -12,6 +12,13 @@ router.post('/outputtext', (req, res) => {
     .type('form')
     .send({ text: input })
     .then(response => {
+      // const bannedCheck = isBanned('repsonse.body.output')
+      // proccess the req.body
+      // if (bannedCheck === true) {
+      //  throw 'oh No youve said bad things ahh'
+      // } else {
+      //   res.json({ output: response.body.output })
+      // }
       res.json({ output: response.body.output })
       return null
     })
