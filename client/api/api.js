@@ -43,7 +43,7 @@ export async function postToFirebase (userInfo, auth) {
       article: userInfo.article,
       profileImg: userInfo.profileImg,
       timestamp: serverTimestamp()
-    }).then(()=>{
+    }).then(() => {
       signOut(auth)
       return null
     })

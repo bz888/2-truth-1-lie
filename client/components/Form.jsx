@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
-import { useAuthState } from 'react-firebase-hooks/auth'
+// import { useAuthState } from 'react-firebase-hooks/auth'
 import { getImageOutput, getTextOutput, postToFirebase } from '../api/api'
-
+import LoadAnim from './LoadAnim'
+import { AnimatePresence } from 'framer-motion'
 const { isBanned } = require('../src/helperFunc')
 
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
 
   const auth = getAuth()
-  const [user] = useAuthState(auth)
+  // const [user] = useAuthState(auth)
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -18,6 +19,7 @@ function Form () {
     article: '',
     profileImg: ''
   })
+  const [loadingState, setLoadingState] = useState(false)
 
   let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
   bannedWordsPresent = bannedWordsPresent.some(element => element === true)
@@ -48,14 +50,16 @@ function Form () {
 
   async function apiCallsFunc (imgText, txtText) {
     try {
+      setLoadingState(true)
       const imgResult = await getImageOutput(imgText)
       const txtResult = await getTextOutput(txtText)
       const newInputObj = { ...input, article: txtResult, profileImg: imgResult }
-      postToFirebase({ ...input, article: txtResult, profileImg: imgResult }, auth)
       console.log('new input', newInputObj)
-    }
-    catch (error){
+      postToFirebase({ ...input, article: txtResult, profileImg: imgResult }, auth)
+    } catch (error) {
       console.error('Error in apiCallsFunc', error)
+    } finally {
+      setLoadingState(false)
     }
   }
 
@@ -93,15 +97,25 @@ function Form () {
           Play at your own risk
             </span>
           </label>
-          <input value={input.name} name='name' onChange={handleChange} placeholder='name' />
-          <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
-          <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
-          <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-          {/* add conditonal
-          render submit only if !== bannedstate && checkinput
-          if checkinput true && bannedstate is true render red button
-          */}
-          {checkInput && <button className='button-31' onClick={handleClick}>submit</button>}
+
+          {
+            loadingState
+              ? <AnimatePresence>
+                <LoadAnim/>
+              </AnimatePresence>
+              : <>
+                <input value={input.name} name='name' onChange={handleChange} placeholder='name' />
+                <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
+                <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
+                <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
+                {/* add conditonal
+                   render submit only if !== bannedstate && checkinput
+                    if checkinput true && bannedstate is true render red button
+                */}
+                {checkInput && <button className='button-31' onClick={handleClick}>submit</button>}
+              </>
+          }
+
         </form>
 
       </div>
