@@ -10,7 +10,6 @@ export default function Signin () {
   const auth = getAuth()
 
   const [user, loading] = useAuthState(auth)
-  // const [validState, setValidState] = useState({ accent-color: 'rgba(255,43,0,0.5)' })
   const [check, setCheck] = useState(false)
 
   const [signInVal, setSignInVal] = useState({
@@ -19,11 +18,6 @@ export default function Signin () {
   })
 
   useEffect(() => {
-    // if (user !== null) {
-    //   // history.push('/')
-    //   setCheck(true)
-    // }
-    // user == null ? setCheck(false) : setCheck(true)
     console.log('check state: ', check)
   }, [user])
 
@@ -39,9 +33,7 @@ export default function Signin () {
   }
 
   function handleClick (e) {
-    // e.prevenDefault()
     logInwithEmailAndPassword(signInVal.email, signInVal.password)
-    // history.push('/submissionpage')
   }
 
   function handleChange (e) {
@@ -56,7 +48,6 @@ export default function Signin () {
     <div className='signIn-body'>
 
       <div className='signIn-div'>
-        {/* <h1>Sign In</h1> */}
         {loading && <LoadAnim/>}
 
         <div className="padlock">
@@ -96,7 +87,6 @@ export default function Signin () {
               <input
                 title='did you forget your password?'
                 id='inputPass'
-                pattern='password123'
                 value={signInVal.password}
                 name='password'
                 onChange={handleChange}
@@ -111,10 +101,7 @@ export default function Signin () {
                   <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
                 </svg>
               </label>
-              {/* <button onClick={handleClick}>log in</button> */}
-              {/* <label className='checkState' htmlFor='checkState'/> */}
             </form>
-
         }
         <button id='checkState' type='checkbox' checked={true}/>
 

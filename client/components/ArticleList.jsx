@@ -23,7 +23,7 @@ function ArticleList () {
           return (
 
             <Article
-              key={dataObj.id}
+              key={idx + 1}
               name={dataObj.name}
               article={dataObj.article}
               time={dataObj.timestamp}
