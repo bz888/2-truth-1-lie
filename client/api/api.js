@@ -5,6 +5,7 @@ import {
   addDoc,
   serverTimestamp
 } from 'firebase/firestore'
+import { signOut } from 'firebase/auth'
 
 // deep ai text
 // .retry() after send- whatever is passed is how many times it tries again.
@@ -31,7 +32,7 @@ export function getImageOutput (val) {
 }
 
 // posting to firebase
-export async function postToFirebase (userInfo) {
+export async function postToFirebase (userInfo, auth) {
   console.log('api userInfo: ', userInfo)
   try {
     await addDoc(collection(getFirestore(), 'test_read'), {
@@ -42,6 +43,9 @@ export async function postToFirebase (userInfo) {
       article: userInfo.article,
       profileImg: userInfo.profileImg,
       timestamp: serverTimestamp()
+    }).then(()=>{
+      signOut(auth)
+      return null
     })
   } catch (error) {
     console.error('Error writing new message to Firebase Database', error)
