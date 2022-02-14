@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react'
-
-// import { useDispatch, useSelector } from 'react-redux'
-// import { generateImage, generateText, postDataDB } from '../actions/text'
-import { getAuth, signOut } from 'firebase/auth'
+import { getAuth } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { getImageOutput, getTextOutput, postToFirebase } from '../api/api'
 
 const { isBanned } = require('../src/helperFunc')
 
 function Form () {
-  // const dispatch = useDispatch()
   const [checkInput, setCheckInput] = useState(false)
 
   const auth = getAuth()
@@ -22,13 +18,6 @@ function Form () {
     article: '',
     profileImg: ''
   })
-
-  // useEffect(() => {
-  //   if (!user) {
-  //     console.log('user not found')
-  //     // return history.push('/login')
-  //   }
-  // }, [user])
 
   let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
   bannedWordsPresent = bannedWordsPresent.some(element => element === true)
@@ -58,11 +47,16 @@ function Form () {
   }
 
   async function apiCallsFunc (imgText, txtText) {
-    const imgResult = await getImageOutput(imgText)
-    const txtResult = await getTextOutput(txtText)
-    const newInputObj = { ...input, article: txtResult, profileImg: imgResult }
-    postToFirebase({ ...input, article: txtResult, profileImg: imgResult }, auth)
-    console.log('new input', newInputObj)
+    try {
+      const imgResult = await getImageOutput(imgText)
+      const txtResult = await getTextOutput(txtText)
+      const newInputObj = { ...input, article: txtResult, profileImg: imgResult }
+      postToFirebase({ ...input, article: txtResult, profileImg: imgResult }, auth)
+      console.log('new input', newInputObj)
+    }
+    catch (error){
+      console.error('Error in apiCallsFunc', error)
+    }
   }
 
   function semiRandomGenerator (min, max) {
