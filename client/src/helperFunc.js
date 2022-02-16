@@ -82,7 +82,7 @@ function isBanned (value) {
   ]
 
   if (bannedWords.some(element => element === value)) {
-    console.log('this is a banned word')
+    // console.log('this is a banned word')
     return true
   } else {
     return false

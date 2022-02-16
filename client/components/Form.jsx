@@ -4,10 +4,12 @@ import { getAuth } from 'firebase/auth'
 import { getImageOutput, getTextOutput, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
+import Button from './Button'
 const { isBanned } = require('../src/helperFunc')
 
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
+  const [bannedState, setBannedState] = useState(false)
 
   const auth = getAuth()
   // const [user] = useAuthState(auth)
@@ -21,20 +23,28 @@ function Form () {
   })
   const [loadingState, setLoadingState] = useState(false)
 
-  let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-  bannedWordsPresent = bannedWordsPresent.some(element => element === true)
+  // let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+  // bannedWordsPresent = bannedWordsPresent.some(element => element === true)
   // const checkVal = bannedWordsPresent.find(ele => ele === 'lmao')
   // Checking if all the inputs are blank, will only render the submit button when the fields have text in them
   // Perhaps use find array method here to search through array of banned words to filter on the user end
   useEffect(() => {
-    console.log('this is bannedWordsPresent: ', bannedWordsPresent)
+    // console.log('this is bannedWordsPresent: ', bannedWordsPresent)
+    const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+    const foundBannedWord = bannedWordsPresent.find(ele => ele === true)
+    console.log(foundBannedWord)
+
+    if (foundBannedWord === true) {
+      setBannedState(() => (true))
+      setCheckInput(() => (false))
+    } else if (foundBannedWord === undefined) {
+      setBannedState(() => (false))
+    }
+
     if (input.name === '' || input.truth1 === '' || input.truth2 === '' || input.lie === '') {
       return setCheckInput(() => (false))
-    } else if (bannedWordsPresent === true) {
-      // setBannedstate
-      return setCheckInput(() => (false))
     } else {
-      return setCheckInput(() => (true))
+      setCheckInput(() => (true))
     }
   }, [input])
 
@@ -112,7 +122,8 @@ function Form () {
                    render submit only if !== bannedstate && checkinput
                     if checkinput true && bannedstate is true render red button
                 */}
-                {checkInput && <button className='button-31' onClick={handleClick}>submit</button>}
+                {/* {checkInput && <button className='button-31' onClick={handleClick}>submit</button>} */}
+                <Button checkInput={checkInput} handleClick={handleClick} bannedState={bannedState} input={input}/>
               </>
           }
 
