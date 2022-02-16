@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 // import { useAuthState } from 'react-firebase-hooks/auth'
-import { getImageOutput, getTextOutput, postToFirebase } from '../api/api'
+import { getImageOutput, getOutputBlogTextCortext, getTextOutput, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
@@ -63,10 +63,11 @@ function Form () {
     try {
       setLoadingState(true)
       const imgResult = await getImageOutput(imgText)
-      const txtResult = await getTextOutput(txtText)
-      const newInputObj = { ...input, article: txtResult, profileImg: imgResult }
+      // const txtResult = await getTextOutput(txtText)
+      const testResult = await getOutputBlogTextCortext(txtText)
+      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtResult, profileImg: imgResult }, auth)
+      postToFirebase({ ...input, article: testResult, profileImg: imgResult }, auth)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
