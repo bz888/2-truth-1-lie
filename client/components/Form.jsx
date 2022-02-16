@@ -29,10 +29,11 @@ function Form () {
   // Checking if all the inputs are blank, will only render the submit button when the fields have text in them
   // Perhaps use find array method here to search through array of banned words to filter on the user end
   useEffect(() => {
-    // console.log('this is bannedWordsPresent: ', bannedWordsPresent)
-    const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+    // const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+    // console.log(foundBannedWord)
+    const bannedWordsPresent = Object.values(input).map(val => (isBanned(val)))
     const foundBannedWord = bannedWordsPresent.find(ele => ele === true)
-    console.log(foundBannedWord)
+    // console.log(stringCatch)
 
     if (foundBannedWord === true) {
       setBannedState(() => (true))

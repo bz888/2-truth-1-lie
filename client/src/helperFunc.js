@@ -80,12 +80,22 @@ function isBanned (value) {
     'wank',
     'whore'
   ]
-
-  if (bannedWords.some(element => element === value)) {
-    // console.log('this is a banned word')
+  // console.log(value)
+  const splitVal = value.split(' ')
+  console.log(splitVal)
+  const logVal = bannedWords.map(val => splitVal.includes(val))
+  console.log('logVal: ', logVal)
+  if (bannedWords.map(val => splitVal.includes(val)).find(el => el === true)) {
     return true
   } else {
     return false
   }
+
+  // if (bannedWords.some(element => element === value)) {
+  // // console.log('this is a banned word')
+  //   return true
+  // } else {
+  //   return false
+  // }
 }
 module.exports = { isBanned }

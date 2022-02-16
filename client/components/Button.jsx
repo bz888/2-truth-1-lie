@@ -12,20 +12,20 @@ export default function Button ({ checkInput, handleClick, bannedState, input })
   //   }
   // }, [input])
   if (checkInput === false && bannedState === true) {
-    console.log(input)
-    console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
+    // console.log(input)
+    // console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
     return (
       <div className='bannedState'>Please be dont use bad words lol</div>
     )
   } else if (checkInput === true && bannedState === true) {
-    console.log(input)
-    console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
+    // console.log(input)
+    // console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
     return (
       <div className='bannedState'>Please be dont use bad words lol</div>
     )
   } else if (checkInput === true && bannedState === false) {
-    console.log(input)
-    console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
+    // console.log(input)
+    // console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
     return (
       <button className='button-31' onClick={handleClick}>submit</button>
     )
