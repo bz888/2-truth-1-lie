@@ -7,27 +7,27 @@ require('dotenv').config()
 const apiKey = process.env.API_KEY
 const testKey = process.env.TEST_KEY
 
-router.post('/outputtext', (req, res) => {
-  const input = req.body.input
-  request.post('https://api.deepai.org/api/text-generator')
-    .set('api-key', apiKey)
-    .type('form')
-    .send({ text: input })
-    .then(response => {
-      // const bannedCheck = isBanned('repsonse.body.output')
-      // proccess the req.body
-      // if (bannedCheck === true) {
-      //  throw 'oh No youve said bad things ahh'
-      // } else {
-      //   res.json({ output: response.body.output })
-      // }
-      res.json({ output: response.body.output })
-      return null
-    })
-    .catch(err => {
-      res.sendStatus(500).send('POST REQUEST FAILED: ', err.message)
-    })
-})
+// router.post('/outputtext', (req, res) => {
+//   const input = req.body.input
+//   request.post('https://api.deepai.org/api/text-generator')
+//     .set('api-key', apiKey)
+//     .type('form')
+//     .send({ text: input })
+//     .then(response => {
+//       // const bannedCheck = isBanned('repsonse.body.output')
+//       // proccess the req.body
+//       // if (bannedCheck === true) {
+//       //  throw 'oh No youve said bad things ahh'
+//       // } else {
+//       //   res.json({ output: response.body.output })
+//       // }
+//       res.json({ output: response.body.output })
+//       return null
+//     })
+//     .catch(err => {
+//       res.sendStatus(500).send('POST REQUEST FAILED: ', err.message)
+//     })
+// })
 
 router.post('/test', (req, res) => {
   console.log(req.body.input)

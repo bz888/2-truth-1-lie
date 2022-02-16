@@ -10,15 +10,15 @@ import { signOut } from 'firebase/auth'
 
 // deep ai text
 // .retry() after send- whatever is passed is how many times it tries again.
-export function getTextOutput (input) {
-  return request
-    .post('http://localhost:8000/text/outputtext/')
-    .send({ input })
-    .then(res => {
-      console.log('text output api: ', res.body)
-      return res.body.output
-    })
-}
+// export function getTextOutput (input) {
+//   return request
+//     .post('http://localhost:8000/text/outputtext/')
+//     .send({ input })
+//     .then(res => {
+//       console.log('text output api: ', res.body)
+//       return res.body.output
+//     })
+// }
 
 // deep ai image
 export function getImageOutput (val) {
