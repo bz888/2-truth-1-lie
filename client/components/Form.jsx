@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 // import { useAuthState } from 'react-firebase-hooks/auth'
-import { getImageOutput, getTextOutput, postToFirebase } from '../api/api'
+import { getImageOutput, getOutputBlogTextCortext, getTextOutput, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
+import Button from './Button'
 const { isBanned } = require('../src/helperFunc')
 
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
+  const [bannedState, setBannedState] = useState(false)
 
   const auth = getAuth()
   // const [user] = useAuthState(auth)
@@ -21,20 +23,28 @@ function Form () {
   })
   const [loadingState, setLoadingState] = useState(false)
 
-  let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-  bannedWordsPresent = bannedWordsPresent.some(element => element === true)
+  // let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+  // bannedWordsPresent = bannedWordsPresent.some(element => element === true)
   // const checkVal = bannedWordsPresent.find(ele => ele === 'lmao')
-  // Checking if all the inputs are blank, will only render the submit button when the fields have text in them
-  // Perhaps use find array method here to search through array of banned words to filter on the user end
+
   useEffect(() => {
-    console.log('this is bannedWordsPresent: ', bannedWordsPresent)
+    // const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+    // console.log(foundBannedWord)
+    const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
+    const foundBannedWord = bannedWordsPresent.find(ele => ele === true)
+    // console.log(stringCatch)
+
+    if (foundBannedWord === true) {
+      setBannedState(() => (true))
+      setCheckInput(() => (false))
+    } else if (foundBannedWord === undefined) {
+      setBannedState(() => (false))
+    }
+
     if (input.name === '' || input.truth1 === '' || input.truth2 === '' || input.lie === '') {
       return setCheckInput(() => (false))
-    } else if (bannedWordsPresent === true) {
-      // setBannedstate
-      return setCheckInput(() => (false))
     } else {
-      return setCheckInput(() => (true))
+      setCheckInput(() => (true))
     }
   }, [input])
 
@@ -52,10 +62,11 @@ function Form () {
     try {
       setLoadingState(true)
       const imgResult = await getImageOutput(imgText)
-      const txtResult = await getTextOutput(txtText)
-      const newInputObj = { ...input, article: txtResult, profileImg: imgResult }
+      // const txtResult = await getTextOutput(txtText)
+      const testResult = await getOutputBlogTextCortext(txtText)
+      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtResult, profileImg: imgResult }, auth)
+      postToFirebase({ ...input, article: testResult, profileImg: imgResult }, auth)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
@@ -112,7 +123,8 @@ function Form () {
                    render submit only if !== bannedstate && checkinput
                     if checkinput true && bannedstate is true render red button
                 */}
-                {checkInput && <button className='button-31' onClick={handleClick}>submit</button>}
+                {/* {checkInput && <button className='button-31' onClick={handleClick}>submit</button>} */}
+                <Button checkInput={checkInput} handleClick={handleClick} bannedState={bannedState} input={input}/>
               </>
           }
 

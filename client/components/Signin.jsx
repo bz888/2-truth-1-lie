@@ -17,9 +17,9 @@ export default function Signin () {
     password: ''
   })
 
-  useEffect(() => {
-    console.log('check state: ', check)
-  }, [user])
+  // useEffect(() => {
+  //   console.log('check state: ', check)
+  // }, [user])
 
   async function logInwithEmailAndPassword (email, password) {
     try {
