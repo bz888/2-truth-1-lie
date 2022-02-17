@@ -12,13 +12,8 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 
 function ArticleList () {
-  // const latest = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(1))
-  // const [latestArticle] = useCollectionData(latest, { idField: 'id' })
-  // console.log('this is latestArticle', latestArticle)
   const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(5))
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
-  // const latest = userArticles.shift()
-  // console.log('this is latest: ', latest)
   return (
     <>
       <div className='article-container'>
