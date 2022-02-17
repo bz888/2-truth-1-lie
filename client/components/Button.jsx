@@ -15,13 +15,13 @@ export default function Button ({ checkInput, handleClick, bannedState, input })
     // console.log(input)
     // console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
     return (
-      <div className='bannedState'>Please be dont use bad words lol</div>
+      <div className='bannedState'>Some words you have used have been flagged as innapropriate</div>
     )
   } else if (checkInput === true && bannedState === true) {
     // console.log(input)
     // console.log('checkinput: ', checkInput, 'bannedState: ', bannedState)
     return (
-      <div className='bannedState'>Please be dont use bad words lol</div>
+      <div className='bannedState'>Some words you have used have been flagged as innapropriate</div>
     )
   } else if (checkInput === true && bannedState === false) {
     // console.log(input)
