@@ -23,21 +23,25 @@
 }
 
 
-.subArticle0 {
+.subArticle1 {
   grid-area: 1 / 6 / 2 / 9;
   border: 2px solid black;
+  display: inline-block;
  }
-.subArticle1 {
+.subArticle2 {
   grid-area: 2 / 6 / 3 / 9;;
   border: 2px solid black;
-}
-.subArticle2 {
-  grid-area: 3 / 6 / 4 / 9;
-  border: 2px solid black;
+  display: inline-block;
 }
 .subArticle3 {
-  grid-area: 4 / 6 / 5 / 9;;
+  grid-area: 3 / 6 / 4 / 9;
   border: 2px solid black;
+  display: inline-block;
+}
+.subArticle4 {
+  grid-area: 4 / 6 / 5 / 9;
+  border: 2px solid black;
+  display: inline-block;
  }
 .image2 { grid-area: 1 / 4 / 2 / 5; }
 .image3 { grid-area: 2 / 4 / 3 / 5; }

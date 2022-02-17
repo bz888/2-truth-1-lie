@@ -11,9 +11,9 @@ function SubArticle ({ name, article, time, profileImg, colorProfile }) {
     <div className= {`subArticle${colorProfile}`}>
 
       {/* <img style={imgSize} src={profileImg} alt='profile-img'/> */}
-      {/* <h1>{name}</h1>
+      {/* <h1>{name}</h1> */}
       <p>{`${time}`}</p>
-      <p>{article}</p> */}
+      {/* <p>{article}</p> */}
 
     </div>
   )
