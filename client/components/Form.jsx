@@ -76,9 +76,9 @@ function Form () {
 
   function semiRandomGenerator (min, max) {
     const num = Math.random() * (max - min) + min
-    if (num <= 0.3333333) {
+    if (num <= 0.4) {
       return 0
-    } else if (num <= 0.6666666) {
+    } else if (num <= 0.6) {
       return 1
     } else {
       return 2
