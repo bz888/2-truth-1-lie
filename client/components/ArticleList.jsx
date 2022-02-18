@@ -12,10 +12,11 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 
 function ArticleList () {
-  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(5))
+  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(4))
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
   return (
     <>
+      <h1 className='banner'>NEWS TODAY</h1>
       <div className='article-container'>
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <LoadAnim/>}

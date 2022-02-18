@@ -9,11 +9,10 @@ function SubArticle ({ name, article, time, profileImg, colorProfile }) {
   console.log('this is colorProfile', 'subArticle' + colorProfile)
   return (
     <div className= {`subArticle${colorProfile}`}>
-
-      {/* <img style={imgSize} src={profileImg} alt='profile-img'/> */}
+      <img style={imgSize} src={profileImg} alt='profile-img'/>
       {/* <h1>{name}</h1> */}
       <p>{`${time}`}</p>
-      {/* <p>{article}</p> */}
+      <p>{article}</p>
 
     </div>
   )
