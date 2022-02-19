@@ -5,17 +5,20 @@ import {
   addDoc,
   serverTimestamp
 } from 'firebase/firestore'
+import { signOut } from 'firebase/auth'
+// import { TextCortex } from 'textcortex-hemingwai-js'
 
 // deep ai text
-export function getTextOutput (input) {
-  return request
-    .post('http://localhost:8000/text/outputtext/')
-    .send({ input })
-    .then(res => {
-      console.log('text output api: ', res.body)
-      return res.body.output
-    })
-}
+// .retry() after send- whatever is passed is how many times it tries again.
+// export function getTextOutput (input) {
+//   return request
+//     .post('http://localhost:8000/text/outputtext/')
+//     .send({ input })
+//     .then(res => {
+//       console.log('text output api: ', res.body)
+//       return res.body.output
+//     })
+// }
 
 // deep ai image
 export function getImageOutput (val) {
@@ -30,7 +33,7 @@ export function getImageOutput (val) {
 }
 
 // posting to firebase
-export async function postToFirebase (userInfo) {
+export async function postToFirebase (userInfo, auth) {
   console.log('api userInfo: ', userInfo)
   try {
     await addDoc(collection(getFirestore(), 'test_read'), {
@@ -41,8 +44,33 @@ export async function postToFirebase (userInfo) {
       article: userInfo.article,
       profileImg: userInfo.profileImg,
       timestamp: serverTimestamp()
+    }).then(() => {
+      signOut(auth)
+      return null
     })
   } catch (error) {
     console.error('Error writing new message to Firebase Database', error)
   }
 }
+
+// new api TextCortext
+
+export async function getOutputBlogTextCortext (input) {
+  return request
+    .post('http://localhost:8000/text/test/')
+    .send({ input: input })
+    .then(res => {
+      console.log('textCortex output api: ', res.body.ai_results[0])
+      return res.body.ai_results[0].generated_text
+    })
+}
+
+// export async function getOutputBlogTextCortext (input) {
+//   return request
+//     .post('http://localhost:8000/text/test/')
+//     .send({ input })
+//     .then(res => {
+//       console.log('textCortex output api: ', res.ai_results)
+//       return res.ai_results
+//     })
+// }

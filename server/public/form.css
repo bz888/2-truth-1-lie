@@ -74,3 +74,25 @@ body{
 .button-31:focus {
   opacity: .75;
 }
+
+.bannedState {
+  background-color: rgb(105, 42, 42);
+  color: #fff;
+  border-radius: 4px;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: auto;
+  max-width: 14rem;
+  min-height: 44px;
+  min-width: 10px;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  width: 100%;
+}

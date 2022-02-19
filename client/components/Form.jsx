@@ -1,41 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import { getAuth } from 'firebase/auth'
+// import { useAuthState } from 'react-firebase-hooks/auth'
+import { getImageOutput, getOutputBlogTextCortext, getTextOutput, postToFirebase } from '../api/api'
+import LoadAnim from './LoadAnim'
+import { AnimatePresence } from 'framer-motion'
+import Button from './Button'
+const { isBanned } = require('../src/helperFunc')
 
-import { useDispatch, useSelector } from 'react-redux'
-import { generateImage, generateText, postDataDB } from '../actions/text'
-import { getAuth, signOut } from 'firebase/auth'
-import { useAuthState } from 'react-firebase-hooks/auth'
-
-function Form ({ history, children }) {
-  const dispatch = useDispatch()
-
-  const reduxState = useSelector(state => state)
+function Form () {
+  const [checkInput, setCheckInput] = useState(false)
+  const [bannedState, setBannedState] = useState(false)
 
   const auth = getAuth()
-  const [user] = useAuthState(auth)
-
-  useEffect(() => {
-    if (!user) {
-      console.log('user not found')
-      return history.push('/login')
-    }
-  }, [user])
-
-  useEffect(() => {
-    // expect to log out
-    if (reduxState.dbPost === 'success!') {
-      signOut(auth)
-      console.log('logging out')
-      // history.push('/login')
-    }
-    console.log('logout useEffect toggled', reduxState.dbPost)
-  }, [reduxState.dbPost])
-
-  useEffect(() => {
-    if (reduxState.apiOutput !== '' && reduxState.imgOutput !== '') {
-      dbPost()
-    }
-  }, [reduxState.apiOutput, reduxState.imgOutput])
-
+  // const [user] = useAuthState(auth)
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -44,18 +21,32 @@ function Form ({ history, children }) {
     article: '',
     profileImg: ''
   })
-  function dbPost () {
-    const dataObj = { ...input, profileImg: reduxState.imgOutput, article: reduxState.apiOutput }
-    console.log('sending dataObj: ', dataObj)
-    if (reduxState.apiOutput === '' || reduxState.imgOutput === '') {
-      console.log('dbpost dispatch: null hit')
-      return null
-    } else {
-      dispatch(postDataDB(dataObj))
-      console.log(reduxState)
-      console.log('db post dispatch hit')
+  const [loadingState, setLoadingState] = useState(false)
+
+  // let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+  // bannedWordsPresent = bannedWordsPresent.some(element => element === true)
+  // const checkVal = bannedWordsPresent.find(ele => ele === 'lmao')
+
+  useEffect(() => {
+    // const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
+    // console.log(foundBannedWord)
+    const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
+    const foundBannedWord = bannedWordsPresent.find(ele => ele === true)
+    // console.log(stringCatch)
+
+    if (foundBannedWord === true) {
+      setBannedState(() => (true))
+      setCheckInput(() => (false))
+    } else if (foundBannedWord === undefined) {
+      setBannedState(() => (false))
     }
-  }
+
+    if (input.name === '' || input.truth1 === '' || input.truth2 === '' || input.lie === '') {
+      return setCheckInput(() => (false))
+    } else {
+      setCheckInput(() => (true))
+    }
+  }, [input])
 
   function handleChange (e) {
     e.preventDefault()
@@ -65,6 +56,22 @@ function Form ({ history, children }) {
       ...input,
       [name]: value
     })
+  }
+
+  async function apiCallsFunc (imgText, txtText) {
+    try {
+      setLoadingState(true)
+      const imgResult = await getImageOutput(imgText)
+      // const txtResult = await getTextOutput(txtText)
+      const testResult = await getOutputBlogTextCortext(txtText)
+      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
+      console.log('new input', newInputObj)
+      postToFirebase({ ...input, article: testResult, profileImg: imgResult }, auth)
+    } catch (error) {
+      console.error('Error in apiCallsFunc', error)
+    } finally {
+      setLoadingState(false)
+    }
   }
 
   function semiRandomGenerator (min, max) {
@@ -84,9 +91,7 @@ function Form ({ history, children }) {
     const genNum = semiRandomGenerator(0, 2)
 
     console.log('selected input: ', inputArr[genNum])
-
-    dispatch(generateText(inputArr[genNum]))
-    dispatch(generateImage(input.name))
+    apiCallsFunc(input.name, inputArr[genNum])
   }
 
   return (
@@ -95,7 +100,6 @@ function Form ({ history, children }) {
         <h1>2 Truths 1 Lie</h1>
       </div>
       <div className='form-div'>
-        {children}
         <form id='form'>
           <label htmlFor='form' className='form-label'>
             <span className='disclaimer'>
@@ -104,11 +108,26 @@ function Form ({ history, children }) {
           Play at your own risk
             </span>
           </label>
-          <input value={input.name} name='name' onChange={handleChange} placeholder='name'/>
-          <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
-          <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
-          <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-          <button className='button-31' onClick={handleClick}>submit</button>
+
+          {
+            loadingState
+              ? <AnimatePresence>
+                <LoadAnim/>
+              </AnimatePresence>
+              : <>
+                <input value={input.name} name='name' onChange={handleChange} placeholder='name' />
+                <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
+                <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
+                <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
+                {/* add conditonal
+                   render submit only if !== bannedstate && checkinput
+                    if checkinput true && bannedstate is true render red button
+                */}
+                {/* {checkInput && <button className='button-31' onClick={handleClick}>submit</button>} */}
+                <Button checkInput={checkInput} handleClick={handleClick} bannedState={bannedState} input={input}/>
+              </>
+          }
+
         </form>
 
       </div>

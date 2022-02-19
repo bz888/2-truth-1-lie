@@ -5,6 +5,7 @@ import {
   query,
   orderBy,
   limit
+
 } from 'firebase/firestore'
 import Article from './Article'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
@@ -23,7 +24,7 @@ function ArticleList () {
           return (
 
             <Article
-              key={idx + 1}
+              key={dataObj.id}
               name={dataObj.name}
               article={dataObj.article}
               time={dataObj.timestamp}
