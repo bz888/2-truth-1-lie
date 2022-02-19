@@ -12,6 +12,11 @@ server.use(express.json())
 const staticFolder = path.join(__dirname, 'public')
 
 server.use(express.static(staticFolder))
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 
 server.use('/text', route)
 
