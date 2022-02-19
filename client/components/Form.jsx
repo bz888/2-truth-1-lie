@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 // import { useAuthState } from 'react-firebase-hooks/auth'
-import { getImageOutput, getOutputBlogTextCortext, getTextOutput, postToFirebase } from '../api/api'
+import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
