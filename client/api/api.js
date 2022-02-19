@@ -6,19 +6,6 @@ import {
   serverTimestamp
 } from 'firebase/firestore'
 import { signOut } from 'firebase/auth'
-// import { TextCortex } from 'textcortex-hemingwai-js'
-
-// deep ai text
-// .retry() after send- whatever is passed is how many times it tries again.
-// export function getTextOutput (input) {
-//   return request
-//     .post('http://localhost:8000/text/outputtext/')
-//     .send({ input })
-//     .then(res => {
-//       console.log('text output api: ', res.body)
-//       return res.body.output
-//     })
-// }
 
 // deep ai image
 export function getImageOutput (val) {
@@ -54,7 +41,6 @@ export async function postToFirebase (userInfo, auth) {
 }
 
 // new api TextCortext
-
 export async function getOutputBlogTextCortext (input) {
   return request
     .post('http://localhost:8000/text/test/')
@@ -64,13 +50,3 @@ export async function getOutputBlogTextCortext (input) {
       return res.body.ai_results[0].generated_text
     })
 }
-
-// export async function getOutputBlogTextCortext (input) {
-//   return request
-//     .post('http://localhost:8000/text/test/')
-//     .send({ input })
-//     .then(res => {
-//       console.log('textCortex output api: ', res.ai_results)
-//       return res.ai_results
-//     })
-// }
