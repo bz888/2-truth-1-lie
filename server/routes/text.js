@@ -8,7 +8,7 @@ const apiKey = process.env.API_KEY
 const testKey = process.env.TEST_KEY
 
 router.post('/test', (req, res) => {
-  console.log(req.body.input)
+  // console.log(req.body.input)
   const input = req.body.input
   const testAPI = new TextCortex(testKey)
   testAPI.generate({
@@ -18,7 +18,7 @@ router.post('/test', (req, res) => {
     character_count: 400,
     creativity: 0.7
   }).then((response) => {
-    console.log('res: ', response)
+    // console.log('res: ', response)
     res.json(response)
     return null
   })
@@ -29,13 +29,13 @@ router.post('/test', (req, res) => {
 
 router.post('/outputimage', (req, res) => {
   const input = req.body.val
-  console.log('image input: ', req.body)
+  // console.log('image input: ', req.body)
   request.post('https://api.deepai.org/api/text2img')
     .set('api-key', apiKey)
     .type('form')
     .send({ text: input })
     .then(response => {
-      console.log('image output: ', response.body)
+      // console.log('image output: ', response.body)
       res.json(response.body)
       return null
     })

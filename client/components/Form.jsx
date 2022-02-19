@@ -65,8 +65,8 @@ function Form () {
       // const txtResult = await getTextOutput(txtText)
       const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
       const testResult = await getOutputBlogTextCortext(txtText)
-      const newInputObj = { ...input, article: testResult, profileImg: test }
-      console.log('new input', newInputObj)
+      // const newInputObj = { ...input, article: testResult, profileImg: test }
+      // console.log('new input', newInputObj)
       postToFirebase({ ...input, article: testResult, profileImg: test }, auth)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
@@ -91,7 +91,7 @@ function Form () {
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
 
-    console.log('selected input: ', inputArr[genNum])
+    // console.log('selected input: ', inputArr[genNum])
     apiCallsFunc(input.name, inputArr[genNum])
   }
 
