@@ -68,7 +68,7 @@ function Form () {
       const testResult = await getOutputBlogTextCortext(txtText)
       const newInputObj = { ...input, article: testResult, profileImg: test }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtText + testResult, profileImg: imgResult }, auth)
+      postToFirebase({ ...input, article: txtText + testResult, profileImg: test }, auth)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
