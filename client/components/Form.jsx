@@ -60,14 +60,15 @@ function Form () {
 
   async function apiCallsFunc (imgText, txtText) {
     try {
+      console.log('this is txtText: ', txtText)
       setLoadingState(true)
       // const imgResult = await getImageOutput(imgText)
       // const txtResult = await getTextOutput(txtText)
       const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
       const testResult = await getOutputBlogTextCortext(txtText)
-      // const newInputObj = { ...input, article: testResult, profileImg: test }
-      // console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: testResult, profileImg: test }, auth)
+      const newInputObj = { ...input, article: testResult, profileImg: test }
+      console.log('new input', newInputObj)
+      postToFirebase({ ...input, article: txtText + testResult, profileImg: test }, auth)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
@@ -77,9 +78,9 @@ function Form () {
 
   function semiRandomGenerator (min, max) {
     const num = Math.random() * (max - min) + min
-    if (num <= 0.3333333) {
+    if (num <= 0.4) {
       return 0
-    } else if (num <= 0.6666666) {
+    } else if (num <= 0.6) {
       return 1
     } else {
       return 2
