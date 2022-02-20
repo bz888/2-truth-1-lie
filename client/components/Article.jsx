@@ -1,19 +1,21 @@
 import React from 'react'
 
-function Article ({ name, article, timestamp, profileImg, colorProfile }) {
+function Article ({ name, article, time, profileImg, idx }) {
   const imgSize = {
     width: '300px',
     height: '300px',
     display: 'inline-flex'
   }
-  console.log(colorProfile % 2)
+  const splitText = article.split(' ').slice(0, 14).join(' ')
+  const splitTime = String(time).split(' ').slice(0, 5).join(' ')
+
   return (
-    <div className='article-div' style={{ backgroundColor: colorProfile % 2 === 0 ? 'black' : 'white' }}>
+    <div className='article-div'>
       <div>
         <img style={imgSize} src={profileImg} alt='profile-img'/>
-        <h1 style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{name}</h1>
-        <p style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{timestamp}</p>
-        <p style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{article}</p>
+        <h1>{name}</h1>
+        <p>{splitTime}</p>
+        <h2>{splitText}</h2><span><a href=''>...Read More</a></span>
       </div>
     </div>
   )
