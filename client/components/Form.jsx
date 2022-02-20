@@ -23,10 +23,6 @@ function Form () {
   })
   const [loadingState, setLoadingState] = useState(false)
 
-  // let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-  // bannedWordsPresent = bannedWordsPresent.some(element => element === true)
-  // const checkVal = bannedWordsPresent.find(ele => ele === 'lmao')
-
   useEffect(() => {
     // const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
     // console.log(foundBannedWord)

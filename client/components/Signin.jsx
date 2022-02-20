@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth'
 import LoadAnim from './LoadAnim'
 
-export default function Signin () {
+export default function Signin ({ setSignInState }) {
   const auth = getAuth()
 
   const [user, loading] = useAuthState(auth)
@@ -34,6 +34,11 @@ export default function Signin () {
 
   function handleClick (e) {
     logInwithEmailAndPassword(signInVal.email, signInVal.password)
+  }
+
+  function handleRedirect (e) {
+    e.preventDefault()
+    setSignInState(false)
   }
 
   function handleChange (e) {
@@ -69,7 +74,7 @@ export default function Signin () {
           check
             ? <div className='loggedIn-msg'>
               <h1>You logged in!</h1>
-              <button className="enter-form-button" type="reset" onClick={handleClick}>Enter Site</button>
+              <button className="enter-form-button" type="reset" onClick={handleRedirect}>Enter Site</button>
             </div>
             : <form className='signIn-form'>
               <label htmlFor='email'>Email</label>

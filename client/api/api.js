@@ -46,7 +46,7 @@ export async function getOutputBlogTextCortext (input) {
     .post('/api/v1/test/')
     .send({ input: input })
     .then(res => {
-      // console.log('textCortex output api: ', res.body.ai_results[0])
+      console.log('textCortex output api: ', res.body)
       return res.body.ai_results[0].generated_text
     })
 }

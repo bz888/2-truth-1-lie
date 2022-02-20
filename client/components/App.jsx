@@ -6,23 +6,23 @@ import { Route } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Signin from './Signin'
 
+import LoadAnim from './LoadAnim'
 import { getAuth } from 'firebase/auth'
 
 function App () {
   const auth = getAuth()
-  const [user] = useAuthState(auth)
+  const [user, userLoading, userError] = useAuthState(auth)
 
   return (
     <>
+      {userLoading && <LoadAnim/>}
       <Route exact path= '/' render= {() => {
         return user
           ? <Form/>
           : <Signin/>
       }} />
       <Route exact path='/results' render={() => {
-        return user
-          ? <ArticleList/>
-          : <Signin/>
+        return <ArticleList user={user} userError={userError}/>
       }} />
     </>
   )
