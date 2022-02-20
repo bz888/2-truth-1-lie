@@ -60,13 +60,14 @@ function Form () {
 
   async function apiCallsFunc (imgText, txtText) {
     try {
+      console.log('this is txtText: ', txtText)
       setLoadingState(true)
       const imgResult = await getImageOutput(imgText)
       // const txtResult = await getTextOutput(txtText)
       const testResult = await getOutputBlogTextCortext(txtText)
       const newInputObj = { ...input, article: testResult, profileImg: imgResult }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: testResult, profileImg: imgResult }, auth)
+      postToFirebase({ ...input, article: txtText + testResult, profileImg: imgResult }, auth)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {

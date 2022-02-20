@@ -12,7 +12,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 
 function ArticleList () {
-  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(4))
+  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(5))
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
   return (
     <>
@@ -29,7 +29,7 @@ function ArticleList () {
                 article={dataObj.article}
                 time={dataObj.timestamp.toDate()}
                 profileImg={dataObj.profileImg}
-                colorProfile={idx}
+                idx={idx}
               />
             )
           } else {
@@ -40,7 +40,7 @@ function ArticleList () {
                 article={dataObj.article}
                 time={dataObj.timestamp.toDate()}
                 profileImg={dataObj.profileImg}
-                colorProfile={idx}
+                idx={idx}
               />
             )
           }
