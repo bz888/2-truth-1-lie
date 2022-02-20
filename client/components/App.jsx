@@ -20,7 +20,9 @@ function App () {
           : <Signin/>
       }} />
       <Route exact path='/results' render={() => {
-        return <ArticleList/>
+        return user
+          ? <ArticleList/>
+          : <Signin/>
       }} />
     </>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   getFirestore,
   collection,
@@ -8,6 +8,7 @@ import {
 } from 'firebase/firestore'
 import Article from './Article'
 import SubArticle from './SubArticle'
+import Image from './Image'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 
@@ -34,14 +35,19 @@ function ArticleList () {
             )
           } else {
             return (
-              <SubArticle
-                key={dataObj.id}
-                name={dataObj.name}
-                article={dataObj.article}
-                time={dataObj.timestamp.toDate()}
-                profileImg={dataObj.profileImg}
-                idx={idx}
-              />
+              <Fragment key={dataObj.id}>
+                <SubArticle
+                  name={dataObj.name}
+                  article={dataObj.article}
+                  time={dataObj.timestamp.toDate()}
+                  profileImg={dataObj.profileImg}
+                  idx={idx}
+                />
+                <Image
+                  idx={idx}
+                  profileImg={dataObj.profileImg}
+                />
+              </Fragment>
             )
           }
         })}
