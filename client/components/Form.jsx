@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 // import { useAuthState } from 'react-firebase-hooks/auth'
-import { getImageOutput, getOutputBlogTextCortext, getTextOutput, postToFirebase } from '../api/api'
+import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
@@ -62,10 +62,11 @@ function Form () {
     try {
       console.log('this is txtText: ', txtText)
       setLoadingState(true)
-      const imgResult = await getImageOutput(imgText)
+      // const imgResult = await getImageOutput(imgText)
       // const txtResult = await getTextOutput(txtText)
+      const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
       const testResult = await getOutputBlogTextCortext(txtText)
-      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
+      const newInputObj = { ...input, article: testResult, profileImg: test }
       console.log('new input', newInputObj)
       postToFirebase({ ...input, article: txtText + testResult, profileImg: imgResult }, auth)
     } catch (error) {
