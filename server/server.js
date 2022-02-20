@@ -13,7 +13,12 @@ const staticFolder = path.join(__dirname, 'public')
 
 server.use(express.static(staticFolder))
 
-server.use('/text', route)
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
+server.use('/api/v1', route)
 
 // For the client side BrowserRouter - because there is no '#' to distinguish
 // between client and server side routes, this sends back the index.html

@@ -11,7 +11,7 @@ import { signOut } from 'firebase/auth'
 export function getImageOutput (val) {
   console.log('api input image: ', val)
   return request
-    .post('https://two-truth-1-lie-dev.web.app/text/outputimage/')
+    .post('/api/v1/outputimage/')
     .send({ val })
     .then(res => {
       console.log('image ping: ', res.body)
@@ -43,7 +43,7 @@ export async function postToFirebase (userInfo, auth) {
 // new api TextCortext
 export async function getOutputBlogTextCortext (input) {
   return request
-    .post('https://two-truth-1-lie-dev.web.app/text/test/')
+    .post('/api/v1/test/')
     .send({ input: input })
     .then(res => {
       console.log('textCortex output api: ', res.body.ai_results[0])

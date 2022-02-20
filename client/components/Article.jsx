@@ -8,7 +8,6 @@ function Article ({ name, article, time, profileImg, idx }) {
   }
   const splitText = article.split(' ').slice(0, 14).join(' ')
   const splitTime = String(time).split(' ').slice(0, 5).join(' ')
-
   return (
     <div className='article-div'>
       <div>
