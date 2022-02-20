@@ -9,9 +9,9 @@ import { signOut } from 'firebase/auth'
 
 // deep ai image
 export function getImageOutput (val) {
-  console.log('api input image: ', val)
+  // console.log('api input image: ', val)
   return request
-    .post('https://two-truth-1-lie-dev.web.app/text/outputimage/')
+    .post('/api/v1/outputimage/')
     .send({ val })
     .then(res => {
       console.log('image ping: ', res.body)
@@ -21,7 +21,7 @@ export function getImageOutput (val) {
 
 // posting to firebase
 export async function postToFirebase (userInfo, auth) {
-  console.log('api userInfo: ', userInfo)
+  // console.log('api userInfo: ', userInfo)
   try {
     await addDoc(collection(getFirestore(), 'test_read'), {
       name: userInfo.name,
@@ -43,10 +43,10 @@ export async function postToFirebase (userInfo, auth) {
 // new api TextCortext
 export async function getOutputBlogTextCortext (input) {
   return request
-    .post('https://two-truth-1-lie-dev.web.app/text/test/')
+    .post('/api/v1/test/')
     .send({ input: input })
     .then(res => {
-      console.log('textCortex output api: ', res.body.ai_results[0])
+      // console.log('textCortex output api: ', res.body.ai_results[0])
       return res.body.ai_results[0].generated_text
     })
 }

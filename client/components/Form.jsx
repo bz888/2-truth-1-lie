@@ -92,7 +92,7 @@ function Form () {
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
 
-    console.log('selected input: ', inputArr[genNum])
+    // console.log('selected input: ', inputArr[genNum])
     apiCallsFunc(input.name, inputArr[genNum])
   }
 
