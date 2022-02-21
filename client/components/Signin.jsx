@@ -30,12 +30,6 @@ export default function Signin ({ loading, error, user }) {
     })
   }
 
-  // function signOutClick (e) {
-  //   e.preventDefault()
-  //   signOutFunc()
-  //   console.log('signed out')
-  // }
-
   return (
     <div className='signIn-body'>
       {user && user.email}

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { getAuth } from 'firebase/auth'
-// import { useAuthState } from 'react-firebase-hooks/auth'
 import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
@@ -12,7 +10,7 @@ const { isBanned } = require('../src/helperFunc')
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
   const [bannedState, setBannedState] = useState(false)
-  const { signOutFunc, auth, user } = useAuth()
+  const { auth, user } = useAuth()
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -59,19 +57,18 @@ function Form () {
 
   async function apiCallsFunc (imgText, txtText) {
     try {
-      console.log('this is txtText: ', txtText)
+      // console.log('this is txtText: ', txtText)
       setLoadingState(true)
       // const imgResult = await getImageOutput(imgText)
       const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
       const testResult = await getOutputBlogTextCortext(txtText)
-      const newInputObj = { ...input, article: testResult, profileImg: test }
-      console.log('new input', newInputObj)
+      // const newInputObj = { ...input, article: testResult, profileImg: test }
+      // console.log('new input', newInputObj)
       postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: test }, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
       setLoadingState(false)
-      // signOutFunc(auth)
     }
   }
 

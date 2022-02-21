@@ -25,7 +25,7 @@ function ArticleList () {
       {userArticles &&
             <div className='article-container'>
               <Article
-                key={userArticles[0].id}
+                // key={userArticles[0].id}
                 name={userArticles[0].name}
                 article={userArticles[0].article}
                 time={userArticles[0].timestamp.toDate()}
@@ -39,9 +39,8 @@ function ArticleList () {
           {userArticles.map((dataObj, idx) => {
             if (idx !== 0) {
               return (
-                <Fragment>
+                <Fragment key={dataObj.id }>
                   <SubArticle
-                    key={dataObj.id + idx}
                     name={dataObj.name}
                     article={dataObj.article}
                     time={dataObj.timestamp.toDate()}
