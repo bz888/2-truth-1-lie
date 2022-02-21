@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { getAuth } from 'firebase/auth'
+// import { getAuth } from 'firebase/auth'
 // import { useAuthState } from 'react-firebase-hooks/auth'
 import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
+// import { useHistory } from 'react-router-dom'
 const { isBanned } = require('../src/helperFunc')
 
-function Form () {
+function Form ({ user }) {
   const [checkInput, setCheckInput] = useState(false)
   const [bannedState, setBannedState] = useState(false)
+  // const history = useHistory()
+  // useEffect(() => {
+  //   if (!user) {
+  //     history.push('/login')
+  //   }
+  // }, [user])
 
-  const auth = getAuth()
-  // const [user] = useAuthState(auth)
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -24,11 +29,8 @@ function Form () {
   const [loadingState, setLoadingState] = useState(false)
 
   useEffect(() => {
-    // const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-    // console.log(foundBannedWord)
     const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
     const foundBannedWord = bannedWordsPresent.find(ele => ele === true)
-    // console.log(stringCatch)
 
     if (foundBannedWord === true) {
       setBannedState(() => (true))
@@ -87,8 +89,7 @@ function Form () {
     e.preventDefault()
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
-
-    // console.log('selected input: ', inputArr[genNum])
+    console.log(user)
     apiCallsFunc(input.name, inputArr[genNum])
   }
 
@@ -106,7 +107,6 @@ function Form () {
           Play at your own risk
             </span>
           </label>
-
           {
             loadingState
               ? <AnimatePresence>
@@ -117,11 +117,6 @@ function Form () {
                 <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
                 <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
                 <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-                {/* add conditonal
-                   render submit only if !== bannedstate && checkinput
-                    if checkinput true && bannedstate is true render red button
-                */}
-                {/* {checkInput && <button className='button-31' onClick={handleClick}>submit</button>} */}
                 <Button checkInput={checkInput} handleClick={handleClick} bannedState={bannedState} input={input}/>
               </>
           }

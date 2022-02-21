@@ -1,44 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import {
-  getAuth,
-  signInWithEmailAndPassword
-} from 'firebase/auth'
+import React, { useState } from 'react'
 import LoadAnim from './LoadAnim'
+import { useAuth } from '../context/AuthContext'
+// import { signOut } from 'firebase/auth'
+import { useHistory } from 'react-router-dom'
 
-export default function Signin ({ setSignInState }) {
-  const auth = getAuth()
-
-  const [user, loading] = useAuthState(auth)
-  const [check, setCheck] = useState(false)
-
+export default function Signin ({ loading, error, user }) {
   const [signInVal, setSignInVal] = useState({
     email: '',
     password: ''
   })
+  const { signIn, signOutFunc } = useAuth()
+  const history = useHistory()
 
-  // useEffect(() => {
-  //   console.log('check state: ', check)
-  // }, [user])
-
-  async function logInwithEmailAndPassword (email, password) {
+  async function handleClick (e) {
+    e.preventDefault()
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-      setCheck(true)
+      await signIn(signInVal.email, signInVal.password)
+      history.push('/')
     } catch (err) {
       console.error(err)
-      alert('incorrect user or password')
-      setCheck(false)
     }
-  }
-
-  function handleClick (e) {
-    logInwithEmailAndPassword(signInVal.email, signInVal.password)
-  }
-
-  function handleRedirect (e) {
-    e.preventDefault()
-    setSignInState(false)
   }
 
   function handleChange (e) {
@@ -49,12 +30,17 @@ export default function Signin ({ setSignInState }) {
       [name]: value
     })
   }
+
+  function signOutClick (e) {
+    e.preventDefault()
+    signOutFunc()
+    console.log('signed out')
+  }
+
   return (
     <div className='signIn-body'>
-
+      {user && user.email}
       <div className='signIn-div'>
-        {loading && <LoadAnim/>}
-
         <div className="padlock">
           <div className="padlock__hook">
             <div className="padlock__hook-body"></div>
@@ -70,46 +56,42 @@ export default function Signin ({ setSignInState }) {
             </div>
           </div>
         </div>
+        {loading && <LoadAnim/>}
+        {/* {user && <h1>{user.email}</h1>} */}
         {
-          check
-            ? <div className='loggedIn-msg'>
-              <h1>You logged in!</h1>
-              <button className="enter-form-button" type="reset" onClick={handleRedirect}>Enter Site</button>
-            </div>
-            : <form className='signIn-form'>
-              <label htmlFor='email'>Email</label>
+          !user &&
+          <form className='signIn-form'>
+            {/* <label htmlFor='email'>Email</label> */}
+            <input
+              id='inputEmail'
+              value={signInVal.email}
+              name='email'
+              onChange={handleChange}
+              placeholder='Enter your Email'
+              type='email'
+              required="required"/>
 
-              <input
-                id='inputEmail'
-                value={signInVal.email}
-                name='email'
-                onChange={handleChange}
-                placeholder='Enter your Email'
-                type='email'
-                required="required"/>
-
-              <label htmlFor='password'>Password</label>
-              <input
-                title='did you forget your password?'
-                id='inputPass'
-                value={signInVal.password}
-                name='password'
-                onChange={handleChange}
-                placeholder='Enter your password'
-                type='password'
-                required="required"
-              />
-              <input id="login" type="checkbox" onClick={handleClick}/>
-              <label className='login-button' htmlFor='login'>
-                <span>Enter</span>
-                <svg>
-                  <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
-                </svg>
-              </label>
-            </form>
+            <label htmlFor='password'>Password</label>
+            <input
+              title='did you forget your password?'
+              id='inputPass'
+              value={signInVal.password}
+              name='password'
+              onChange={handleChange}
+              placeholder='Enter your password'
+              type='password'
+              required="required"
+            />
+            <input disabled={loading} id="login" type="checkbox" onClick={handleClick}/>
+            <label className='login-button' htmlFor='login'>
+              <span>Enter</span>
+              <svg>
+                <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
+              </svg>
+            </label>
+          </form>
         }
-        <button id='checkState' type='checkbox' checked={true}/>
-
+        <button onClick={signOutClick}>sign out</button>
       </div>
     </div>
   )

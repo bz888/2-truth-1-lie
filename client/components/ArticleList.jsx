@@ -10,8 +10,6 @@ import Article from './Article'
 import SubArticle from './SubArticle'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-// import { getAuth, signOut } from 'firebase/auth'
 import Signin from './Signin'
 
 function ArticleList ({ user, userError }) {
