@@ -5,13 +5,14 @@ import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
-import { signOut } from 'firebase/auth'
+import { useAuth } from '../context/AuthContext'
 // import { useHistory } from 'react-router-dom'
 const { isBanned } = require('../src/helperFunc')
 
-function Form ({ user, auth }) {
+function Form () {
   const [checkInput, setCheckInput] = useState(false)
   const [bannedState, setBannedState] = useState(false)
+  const { signOutFunc, auth, user } = useAuth()
 
   const [input, setInput] = useState({
     name: '',
@@ -61,12 +62,13 @@ function Form ({ user, auth }) {
       const testResult = await getOutputBlogTextCortext(txtText)
       const newInputObj = { ...input, article: testResult, profileImg: test }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtText + testResult, profileImg: test })
+      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: test })
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
+      console.log(user)
       setLoadingState(false)
-      signOut(auth)
+      signOutFunc(auth)
     }
   }
 
@@ -85,7 +87,6 @@ function Form ({ user, auth }) {
     e.preventDefault()
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
-    console.log(user)
     apiCallsFunc(input.name, inputArr[genNum])
   }
 

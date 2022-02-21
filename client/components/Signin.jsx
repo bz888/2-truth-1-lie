@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import LoadAnim from './LoadAnim'
 import { useAuth } from '../context/AuthContext'
-// import { signOut } from 'firebase/auth'
 import { useHistory } from 'react-router-dom'
 
 export default function Signin ({ loading, error, user }) {
@@ -9,7 +8,7 @@ export default function Signin ({ loading, error, user }) {
     email: '',
     password: ''
   })
-  const { signIn, signOutFunc } = useAuth()
+  const { signIn } = useAuth()
   const history = useHistory()
 
   async function handleClick (e) {
@@ -31,11 +30,11 @@ export default function Signin ({ loading, error, user }) {
     })
   }
 
-  function signOutClick (e) {
-    e.preventDefault()
-    signOutFunc()
-    console.log('signed out')
-  }
+  // function signOutClick (e) {
+  //   e.preventDefault()
+  //   signOutFunc()
+  //   console.log('signed out')
+  // }
 
   return (
     <div className='signIn-body'>
@@ -91,7 +90,7 @@ export default function Signin ({ loading, error, user }) {
             </label>
           </form>
         }
-        <button onClick={signOutClick}>sign out</button>
+        {/* <button onClick={signOutClick}>sign out</button> */}
       </div>
     </div>
   )

@@ -33,7 +33,7 @@ export async function postToFirebase (userInfo, auth) {
       timestamp: serverTimestamp()
     }).then(() => {
       // signOut(auth)
-      return 'nice'
+      return null
     })
   } catch (error) {
     console.error('Error writing new message to Firebase Database', error)

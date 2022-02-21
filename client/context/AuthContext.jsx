@@ -11,10 +11,8 @@ export function useAuth () {
 }
 
 export function AuthProvider ({ children }) {
-  const [currentUser, setCurrentUser] = useState()
   const auth = getAuth()
   const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth)
-  // const [user, loading, error] = useAuthState(auth)
 
   async function signIn (email, password) {
     try {
@@ -25,7 +23,7 @@ export function AuthProvider ({ children }) {
     }
   }
 
-  function signOutFunc () {
+  function signOutFunc (auth) {
     signOut(auth)
   }
 
