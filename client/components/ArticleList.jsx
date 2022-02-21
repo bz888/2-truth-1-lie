@@ -18,42 +18,47 @@ function ArticleList () {
   return (
     <>
       <h1 className='banner'>NEWS TODAY</h1>
-      <div className='article-container'>
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
-        {loading && <LoadAnim/>}
-        {userArticles && userArticles.map((dataObj, idx) => {
-          if (idx === 0) {
-            return (
+      {error && <strong>Error: {JSON.stringify(error)}</strong>}
+      {loading && <LoadAnim/>}
+      {userArticles &&
+            <div className='article-container'>
               <Article
-                key={dataObj.id}
-                name={dataObj.name}
-                article={dataObj.article}
-                time={dataObj.timestamp.toDate()}
-                profileImg={dataObj.profileImg}
-                idx={idx}
+                key={userArticles[0].id}
+                name={userArticles[0].name}
+                article={userArticles[0].article}
+                time={userArticles[0].timestamp.toDate()}
+                profileImg={userArticles[0].profileImg}
+                idx={userArticles[0].idx}
               />
-            )
-          } else {
-            return (
-              <Fragment key={dataObj.id}>
-                <SubArticle
-                  name={dataObj.name}
-                  article={dataObj.article}
-                  time={dataObj.timestamp.toDate()}
-                  profileImg={dataObj.profileImg}
-                  idx={idx}
-                />
-                <Image
-                  idx={idx}
-                  profileImg={dataObj.profileImg}
-                />
-              </Fragment>
-            )
-          }
-        })}
-      </div>
-    </>
+            </div>
+      }
+      {userArticles &&
+        <div className='subArticle-container'>
+          {userArticles.map((dataObj, idx) => {
+            if (idx !== 0) {
+              return (
+                <Fragment>
+                  <SubArticle
+                    key={dataObj.id + idx}
+                    name={dataObj.name}
+                    article={dataObj.article}
+                    time={dataObj.timestamp.toDate()}
+                    profileImg={dataObj.profileImg}
+                    idx={idx}
+                  />
+                  <Image
+                    key={dataObj.id + 'image' + idx}
+                    idx={idx}
+                    profileImg={dataObj.profileImg}
+                  />
+                </Fragment>
 
+              )
+            }
+          })}
+        </div>
+      }
+    </>
   )
 }
 
