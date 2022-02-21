@@ -11,14 +11,12 @@
 .article-container{
   height: 100vh;
   width: 50%;
-  /* grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px; */
   z-index: 0;
   position: absolute;
   top: 0;
   left: 0;
+  background-color: black;
+  color: white
 }
 
 .subArticle-container{
@@ -33,6 +31,8 @@
   z-index: 0;
   position: absolute;
   top: 0;
+  background-color: white;
+  color: black
 }
 .article-div{
   height: 100vh;
@@ -103,5 +103,15 @@
 #timestamp {
   font-size: 1.5vh;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: 0%;
+}
+
+#white{
+  color:white;
+  margin: 0%;
+}
+
+#black{
+  color:black;
   margin: 0%;
 }

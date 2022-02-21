@@ -17,7 +17,7 @@ function ArticleList () {
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
   return (
     <>
-      <h1 className='banner'>NEWS TODAY</h1>
+      <span className='banner'><span id='white'>LATEST</span><span>TRUTHS</span></span>
       {error && <strong>Error: {JSON.stringify(error)}</strong>}
       {loading && <LoadAnim/>}
       {userArticles &&
