@@ -91,7 +91,7 @@
 }
 
 #subHeader {
-  font-size: 3vh;
+  font-size: 2.5vh;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin: 0%;
 }
@@ -103,5 +103,5 @@
 #timestamp {
   font-size: 1.5vh;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  margin: 2%;
+  margin: 0%;
 }
