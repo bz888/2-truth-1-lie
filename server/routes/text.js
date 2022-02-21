@@ -8,7 +8,6 @@ const apiKey = process.env.API_KEY
 const testKey = process.env.TEST_KEY
 
 router.post('/test', (req, res) => {
-  // console.log(req.body.input)
   const input = req.body.input
   const testAPI = new TextCortex(testKey)
   testAPI.generate({
@@ -18,7 +17,6 @@ router.post('/test', (req, res) => {
     character_count: 400,
     creativity: 0.7
   }).then((response) => {
-    // console.log('res: ', response)
     res.json(response)
     return null
   })
@@ -29,18 +27,18 @@ router.post('/test', (req, res) => {
 
 router.post('/outputimage', (req, res) => {
   const input = req.body.val
-  // console.log('image input: ', req.body)
   request.post('https://api.deepai.org/api/text2img')
     .set('api-key', apiKey)
     .type('form')
     .send({ text: input })
     .then(response => {
-      // console.log('image output: ', response.body)
+      console.log('image output: ', response.body)
       res.json(response.body)
       return null
     })
     .catch(err => {
-      res.sendStatus(500).send('POST REQUEST FAILED: ', err.message)
+      console.log('err from deepai: ', err)
+      return 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
     })
 })
 

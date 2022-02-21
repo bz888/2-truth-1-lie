@@ -6,14 +6,13 @@ import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
 import { useAuth } from '../context/AuthContext'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 const { isBanned } = require('../src/helperFunc')
 
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
   const [bannedState, setBannedState] = useState(false)
   const { signOutFunc, auth, user } = useAuth()
-
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -23,6 +22,12 @@ function Form () {
     profileImg: ''
   })
   const [loadingState, setLoadingState] = useState(false)
+  const history = useHistory()
+  useEffect(() => {
+    if (!user) {
+      history.push('/login')
+    }
+  }, [user])
 
   useEffect(() => {
     const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
@@ -57,18 +62,16 @@ function Form () {
       console.log('this is txtText: ', txtText)
       setLoadingState(true)
       // const imgResult = await getImageOutput(imgText)
-      // const txtResult = await getTextOutput(txtText)
       const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
       const testResult = await getOutputBlogTextCortext(txtText)
       const newInputObj = { ...input, article: testResult, profileImg: test }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: test })
+      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: test }, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
-      console.log(user)
       setLoadingState(false)
-      signOutFunc(auth)
+      // signOutFunc(auth)
     }
   }
 

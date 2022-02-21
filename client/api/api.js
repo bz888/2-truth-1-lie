@@ -20,7 +20,7 @@ export function getImageOutput (val) {
 }
 
 // posting to firebase
-export async function postToFirebase (userInfo, auth) {
+export async function postToFirebase (userInfo, auth, history) {
   // console.log('api userInfo: ', userInfo)
   try {
     await addDoc(collection(getFirestore(), 'test_read'), {
@@ -32,7 +32,10 @@ export async function postToFirebase (userInfo, auth) {
       profileImg: userInfo.profileImg,
       timestamp: serverTimestamp()
     }).then(() => {
-      // signOut(auth)
+      history.push('/submitted')
+      return null
+    }).then(() => {
+      signOut(auth)
       return null
     })
   } catch (error) {

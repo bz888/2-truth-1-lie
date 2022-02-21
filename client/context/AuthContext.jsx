@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import {
-  getAuth, signInWithEmailAndPassword, signOut
+  getAuth, signOut
 } from 'firebase/auth'
-import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 
 const AuthContext = React.createContext()
 
