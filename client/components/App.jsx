@@ -23,12 +23,12 @@ function App () {
             return user ? <Form/> : <Signin/>
           }}/>
           <Route path= '/login' component={Signin}/>
+          <Route exact path='/results' render={() => {
+            return <ArticleList/>
+          }} />
+          <Route exact path='/submitted' component={Submitted}/>
         </Switch>
       </AuthProvider>
-      <Route exact path='/results' render={() => {
-        return <ArticleList/>
-      }} />
-      <Route exact path='/submitted' component={Submitted}/>
 
     </>
 
