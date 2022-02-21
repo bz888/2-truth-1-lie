@@ -12,8 +12,8 @@ function SubArticle ({ name, article, time, profileImg, idx }) {
     <div className= {`subArticle${idx}`}>
       {/* <img style={imgSize} src={profileImg} alt='profile-img'/> */}
       {/* <h1>{name}</h1> */}
-      <p>{splitTime}</p>
-      <p>{splitText}</p>
+      <p id='timestamp'>{splitTime}</p>
+      <p id='subHeader'>{splitText}</p>
 
     </div>
   )
