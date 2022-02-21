@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Article ({ name, article, time, profileImg, idx }) {
+function Article ({ name, article, time, profileImg }) {
   const imgSize = {
     width: '65vh',
     height: '48vh',
@@ -12,9 +12,9 @@ function Article ({ name, article, time, profileImg, idx }) {
     <div className='article-div'>
       <div>
         <img style={imgSize} src={profileImg} alt='profile-img'/>
-        <h1>{name}</h1>
-        <p>{splitTime}</p>
-        <h2>{splitText}</h2><span>...Read More</span>
+        <h1 id='name'>{name}</h1>
+        <p id='timestamp'>{splitTime}</p>
+        <h2 id= 'subHeader'>{splitText}</h2><span>...Read More</span>
       </div>
     </div>
   )
