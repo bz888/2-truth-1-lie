@@ -1,5 +1,5 @@
 .banner{
-  font-size: 7rem;
+  font-size: 12vh;
   z-index: 1;
   text-align: center;
   font-family: 'Syne', sans-serif;
@@ -23,10 +23,10 @@
 
 .article-div{
   height: 100vh;
-  padding:5.5rem 3rem 3rem 15rem;
+  padding:9.5vh 5vh 11vh 28vh;
   grid-area: 2 / 1 / 11 / 5;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
+  text-align: center;
 }
 .article-div h1 {
   font-size: 4rem;

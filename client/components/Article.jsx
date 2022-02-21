@@ -2,8 +2,8 @@ import React from 'react'
 
 function Article ({ name, article, time, profileImg, idx }) {
   const imgSize = {
-    width: '300px',
-    height: '300px',
+    width: '65vh',
+    height: '48vh',
     display: 'inline-flex'
   }
   const splitText = article.split(' ').slice(0, 14).join(' ')
