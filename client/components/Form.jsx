@@ -5,18 +5,13 @@ import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
+import { signOut } from 'firebase/auth'
 // import { useHistory } from 'react-router-dom'
 const { isBanned } = require('../src/helperFunc')
 
-function Form ({ user }) {
+function Form ({ user, auth }) {
   const [checkInput, setCheckInput] = useState(false)
   const [bannedState, setBannedState] = useState(false)
-  // const history = useHistory()
-  // useEffect(() => {
-  //   if (!user) {
-  //     history.push('/login')
-  //   }
-  // }, [user])
 
   const [input, setInput] = useState({
     name: '',
@@ -66,11 +61,12 @@ function Form ({ user }) {
       const testResult = await getOutputBlogTextCortext(txtText)
       const newInputObj = { ...input, article: testResult, profileImg: test }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtText + testResult, profileImg: test }, auth)
+      postToFirebase({ ...input, article: txtText + testResult, profileImg: test })
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
       setLoadingState(false)
+      signOut(auth)
     }
   }
 

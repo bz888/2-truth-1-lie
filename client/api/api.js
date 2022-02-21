@@ -32,8 +32,8 @@ export async function postToFirebase (userInfo, auth) {
       profileImg: userInfo.profileImg,
       timestamp: serverTimestamp()
     }).then(() => {
-      signOut(auth)
-      return null
+      // signOut(auth)
+      return 'nice'
     })
   } catch (error) {
     console.error('Error writing new message to Firebase Database', error)
