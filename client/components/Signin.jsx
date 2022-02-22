@@ -15,7 +15,7 @@ export default function Signin ({ loading, error, user }) {
     e.preventDefault()
     try {
       await signIn(signInVal.email, signInVal.password)
-      history.push('/')
+      history.goBack()
     } catch (err) {
       console.error(err)
     }

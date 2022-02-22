@@ -25,6 +25,7 @@ export function AuthProvider ({ children }) {
 
   function signOutFunc (auth) {
     signOut(auth)
+    return 'success'
   }
 
   const value = {

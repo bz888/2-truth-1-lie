@@ -16,17 +16,18 @@ function App () {
   return (
     <>
       <AuthProvider>
-        {userLoading && <LoadAnim/>}
-        {userError && <strong>Error: {JSON.stringify(userError)}</strong>}
+        {/* {userLoading && <LoadAnim/>} */}
+        {/* {userError && <strong>Error: {JSON.stringify(userError)}</strong>} */}
         <Switch>
           <Route exact path='/' render={() => {
-            return user ? <Form/> : <Signin/>
+            return <Form/>
           }}/>
           <Route path= '/login' component={Signin}/>
           <Route exact path='/results' render={() => {
             return <ArticleList/>
           }} />
           <Route exact path='/submitted' component={Submitted}/>
+
         </Switch>
       </AuthProvider>
 
