@@ -22,7 +22,8 @@ function Form () {
   const [loadingState, setLoadingState] = useState(false)
   const history = useHistory()
   useEffect(() => {
-    if (!user) {
+    // console.log(user)
+    if (user === undefined) {
       history.push('/login')
     }
   }, [user])
@@ -59,12 +60,12 @@ function Form () {
     try {
       // console.log('this is txtText: ', txtText)
       setLoadingState(true)
-      // const imgResult = await getImageOutput(imgText)
-      const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
+      const imgResult = await getImageOutput(imgText)
+      // const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
       const testResult = await getOutputBlogTextCortext(txtText)
-      // const newInputObj = { ...input, article: testResult, profileImg: test }
-      // console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: test }, auth, history)
+      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
+      console.log('new input', newInputObj)
+      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: imgResult }, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
@@ -88,6 +89,7 @@ function Form () {
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
     apiCallsFunc(input.name, inputArr[genNum])
+    console.log(user)
   }
 
   return (

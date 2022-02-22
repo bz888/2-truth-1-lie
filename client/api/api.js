@@ -17,6 +17,9 @@ export function getImageOutput (val) {
       console.log('image ping: ', res.body)
       return res.body.output_url
     })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 // posting to firebase

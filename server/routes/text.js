@@ -21,7 +21,7 @@ router.post('/test', (req, res) => {
     return null
   })
     .catch(err => {
-      console.log('err from textCortex: ', err)
+      console.error('err from textCortex: ', err)
     })
 })
 
@@ -37,8 +37,9 @@ router.post('/outputimage', (req, res) => {
       return null
     })
     .catch(err => {
-      console.log('err from deepai: ', err)
-      return 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
+      console.error('err from deepai: ', err)
+      const placeHolder = { output_url: 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg' }
+      res.json(placeHolder)
     })
 })
 

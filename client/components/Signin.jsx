@@ -1,20 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoadAnim from './LoadAnim'
 import { useAuth } from '../context/AuthContext'
 import { useHistory } from 'react-router-dom'
 
-export default function Signin ({ loading, error, user }) {
+export default function Signin ({ loading }) {
   const [signInVal, setSignInVal] = useState({
     email: '',
     password: ''
   })
-  const { signIn } = useAuth()
+  const { signIn, user } = useAuth()
   const history = useHistory()
+  // useEffect(() => {
+  //   if (user !== undefined) {
+  //     history.push('/')
+  //   }
+  // }, [user])
 
   async function handleClick (e) {
     e.preventDefault()
     try {
       await signIn(signInVal.email, signInVal.password)
+      console.log(user)
       history.goBack()
     } catch (err) {
       console.error(err)
@@ -32,7 +38,6 @@ export default function Signin ({ loading, error, user }) {
 
   return (
     <div className='signIn-body'>
-      {user && user.email}
       <div className='signIn-div'>
         <div className="padlock">
           <div className="padlock__hook">
@@ -50,11 +55,10 @@ export default function Signin ({ loading, error, user }) {
           </div>
         </div>
         {loading && <LoadAnim/>}
-        {/* {user && <h1>{user.email}</h1>} */}
+
         {
           !user &&
           <form className='signIn-form'>
-            {/* <label htmlFor='email'>Email</label> */}
             <input
               id='inputEmail'
               value={signInVal.email}
@@ -84,7 +88,6 @@ export default function Signin ({ loading, error, user }) {
             </label>
           </form>
         }
-        {/* <button onClick={signOutClick}>sign out</button> */}
       </div>
     </div>
   )
