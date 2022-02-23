@@ -10,8 +10,8 @@ import { getAuth } from 'firebase/auth'
 import { AuthProvider } from '../context/AuthContext'
 
 function App () {
-  const auth = getAuth()
-  const [user, userLoading, userError] = useAuthState(auth)
+  // const auth = getAuth()
+  // const [user, userLoading, userError] = useAuthState(auth)
 
   return (
     <>

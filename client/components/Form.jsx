@@ -5,7 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
 import { useAuth } from '../context/AuthContext'
 import { useHistory } from 'react-router-dom'
-const { isBanned } = require('../src/helperFunc')
+const { isBanned, concatArticle } = require('../src/helperFunc')
 
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
@@ -61,11 +61,14 @@ function Form () {
       // console.log('this is txtText: ', txtText)
       setLoadingState(true)
       const imgResult = await getImageOutput(imgText)
-      // const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
+
       const testResult = await getOutputBlogTextCortext(txtText)
-      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
+
+      const inputCheck = await concatArticle(txtText, imgText)
+      console.log('inputCheck: ', inputCheck)
+      const newInputObj = { ...input, article: imgText + ' ' + inputCheck + ' ' + testResult, profileImg: imgResult }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: imgResult }, auth, history)
+      postToFirebase(newInputObj, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {

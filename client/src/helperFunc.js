@@ -90,12 +90,24 @@ function isBanned (value) {
     'wank',
     'whore'
   ]
-
   const splitVal = value.split(' ')
   if (bannedWords.map(val => splitVal.includes(val)).find(el => el === true)) {
     return true
   } else {
     return false
+  }
+}
+
+function concatArticle (inputTxt, name) {
+  const firstVal = inputTxt.split(' ')
+  console.log('firstVal: ', firstVal)
+  if (firstVal[0].toLowerCase() === name.toLowerCase()) {
+    firstVal.shift()
+    const newArr = firstVal.join(' ')
+    console.log('newArr', newArr)
+    return newArr
+  } else {
+    return inputTxt
   }
 }
 
@@ -110,5 +122,6 @@ function splitText (text, wordCount) {
 module.exports = {
   isBanned,
   splitTime,
-  splitText
+  splitText,
+  concatArticle
 }
