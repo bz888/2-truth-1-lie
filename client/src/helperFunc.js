@@ -111,4 +111,17 @@ function concatArticle (inputTxt, name) {
   }
 }
 
-module.exports = { isBanned, concatArticle }
+function splitTime (time) {
+  return String(time).split(' ').slice(0, 5).join(' ')
+}
+
+function splitText (text, wordCount) {
+  return text.split(' ').slice(0, wordCount).join(' ')
+}
+
+module.exports = {
+  isBanned,
+  splitTime,
+  splitText,
+  concatArticle
+}

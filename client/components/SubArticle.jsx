@@ -1,13 +1,14 @@
 import React from 'react'
+import { splitText, splitTime } from '../src/helperFunc'
 
 function SubArticle ({ name, article, time, idx }) {
-  const splitText = article.split(' ').slice(0, 14).join(' ')
-  const splitTime = String(time).split(' ').slice(0, 5).join(' ')
+  const splitArticle = splitText(article, 35)
+  const splitTimestamp = splitTime(time)
   return (
     <div className= {`subArticle${idx}`}>
       {/* <h1>{name}</h1> */}
-      <p id='timestamp'>{splitTime}</p>
-      <p id='subHeader'>{splitText}</p>
+      <p id='timestamp'>{splitTimestamp}</p>
+      <p id='subHeader'>{splitArticle}</p><span>... Read More</span>
 
     </div>
   )

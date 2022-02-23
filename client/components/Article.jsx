@@ -1,4 +1,5 @@
 import React from 'react'
+import { splitText, splitTime } from '../src/helperFunc'
 
 function Article ({ name, article, time, profileImg }) {
   const imgSize = {
@@ -6,15 +7,16 @@ function Article ({ name, article, time, profileImg }) {
     height: '48vh',
     display: 'inline-flex'
   }
-  const splitText = article.split(' ').slice(0, 14).join(' ')
-  const splitTime = String(time).split(' ').slice(0, 5).join(' ')
+  const splitArticle = splitText(article, 70)
+  const splitTimestamp = splitTime(time)
+
   return (
     <div className='article-div'>
       <div>
         <img style={imgSize} src={profileImg} alt='profile-img'/>
         <h1 id='name'>{name}</h1>
-        <p id='timestamp'>{splitTime}</p>
-        <h2 id= 'subHeader'>{splitText}</h2><span>...Read More</span>
+        <p id='timestamp'>{splitTimestamp}</p>
+        <p id= 'subHeader'>{splitArticle}</p><span>... Read More</span>
       </div>
     </div>
   )
