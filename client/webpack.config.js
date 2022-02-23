@@ -6,7 +6,7 @@ module.exports = (env) => {
   return {
     plugins: [
       new Dotenv({
-        path: './.env',
+        path: '../.env',
         safe: true
       })
     ],
@@ -30,6 +30,6 @@ module.exports = (env) => {
         fs: false
       }
     },
-    devtool: 'source-map'
+    devtool: 'none'
   }
 }
