@@ -8,7 +8,7 @@ function SubArticle ({ name, article, time, idx }) {
     <div className= {`subArticle${idx}`}>
       {/* <h1>{name}</h1> */}
       <p id='timestamp'>{splitTimestamp}</p>
-      <p id='subHeader'>{splitArticle}</p><span>...Read More</span>
+      <p id='subHeader'>{splitArticle}</p><span>... Read More</span>
 
     </div>
   )

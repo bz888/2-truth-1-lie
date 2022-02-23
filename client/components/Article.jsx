@@ -16,7 +16,7 @@ function Article ({ name, article, time, profileImg }) {
         <img style={imgSize} src={profileImg} alt='profile-img'/>
         <h1 id='name'>{name}</h1>
         <p id='timestamp'>{splitTimestamp}</p>
-        <p id= 'subHeader'>{splitArticle}</p><span>...Read More</span>
+        <p id= 'subHeader'>{splitArticle}</p><span>... Read More</span>
       </div>
     </div>
   )

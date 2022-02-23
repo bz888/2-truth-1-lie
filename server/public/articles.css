@@ -3,6 +3,7 @@
   z-index: 1;
   text-align: center;
   font-family: 'Syne', sans-serif;
+  font-weight: 800;
   position: absolute;
   margin: 0;
   width: 100%;
@@ -17,7 +18,8 @@
   left: 0;
   background-color: black;
   color: white;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
 }
 
 .subArticle-container{
@@ -34,36 +36,36 @@
   top: 0;
   background-color: white;
   color: black;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
 }
 .article-div{
   height: 100vh;
   padding:9.5vh 5vh 11vh 22vh;
   grid-area: 2 / 1 / 11 / 5;
-  font-family: 'Oswald', sans-serif;
-  text-align: center;
+  text-align: left;
 }
 .article-div h1 {
-  font-size: 4vh;
-  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+  font-size: 5.5vh;
+  font-family: 'Anton', sans-serif;
+  margin: 0%;
 }
 .article-div p {
   font-size: 1vh;
-  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
 }
 
 .subArticle1 {
   grid-area: 5 / 3 / 2/ 9;
-  padding: 5.5vh 22vh 0vh 3vh;
+  padding: 6vh 22vh 0vh 3vh;
  }
 
 .subArticle2 {
   grid-area: 8 / 3 / 5/ 9;
-  padding: 5.5vh 22vh 0vh 3vh;
+  padding: 6vh 22vh 0vh 3vh;
 }
 .subArticle3 {
   grid-area: 11 / 3 / 8/ 9;
-  padding: 5.5vh 22vh 0vh 3vh;
+  padding: 6vh 22vh 0vh 3vh;
 }
 /* .subArticle4 {
   grid-area: 10 / 3 / 8/ 9;
@@ -98,13 +100,13 @@
 }
 
 #name {
-  margin: 6%
+  margin: 3%
 }
 
 #timestamp {
   font-size: 2vh;
-  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
-  margin: 0%;
+  font-family: 'Anton', sans-serif;
+  margin: 0% 0% 1% 0%;
 }
 
 #white{
