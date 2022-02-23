@@ -1,6 +1,6 @@
 {
   "name": "2-truth-1-lie",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "art-project-darryl",
   "repository": "https://github.com/bz888/2-truth-1-lie",
   "main": "server/index.js",

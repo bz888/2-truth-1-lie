@@ -1,11 +1,11 @@
 const config = {
-  apiKey: 'AIzaSyC6QVqzLwzpMRvXuQjXMdq3kptUg0bBn9U',
-  authDomain: 'two-truth-1-lie-dev.firebaseapp.com',
-  projectId: 'two-truth-1-lie-dev',
-  storageBucket: 'two-truth-1-lie-dev.appspot.com',
-  messagingSenderId: '37145454012',
-  appId: '1:37145454012:web:6bc2d609d3c861537077b9',
-  measurementId: 'G-3JJTBKMZ6D'
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASURE_ID
 }
 
 export function getFirebaseConfig () {
