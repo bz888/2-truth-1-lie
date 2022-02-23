@@ -1,12 +1,23 @@
-.banner{
-  font-size: 13vh;
-  z-index: 1;
+.submitted-div {
+  width: 100vw;
+  height: 100vh;
+  padding: 12vh;
   text-align: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+}
+
+.banner{
+  font-size: 12.5vh;
+  z-index: 1;
   font-family: 'Syne', sans-serif;
   font-weight: 800;
   position: absolute;
-  margin: 0;
   width: 100%;
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
 }
 
 .article-container{
@@ -25,7 +36,7 @@
 .subArticle-container{
   height: 100vh;
   width: 50%;
-  left: 100vh;
+  left: 50vw;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(10, 1fr);
@@ -51,21 +62,24 @@
   margin: 0%;
 }
 .article-div p {
-  font-size: 1vh;
+  font-size: 1.5vh;
 }
 
 .subArticle1 {
   grid-area: 5 / 3 / 2/ 9;
-  padding: 6vh 22vh 0vh 3vh;
+  padding: 6vh 22vh 0vh 6vh;
+  overflow: hidden;
  }
 
 .subArticle2 {
   grid-area: 8 / 3 / 5/ 9;
-  padding: 6vh 22vh 0vh 3vh;
+  padding: 6vh 22vh 0vh 6vh;
+  overflow: hidden;
 }
 .subArticle3 {
   grid-area: 11 / 3 / 8/ 9;
-  padding: 6vh 22vh 0vh 3vh;
+  padding: 6vh 22vh 0vh 6vh;
+  overflow: hidden;
 }
 /* .subArticle4 {
   grid-area: 10 / 3 / 8/ 9;
@@ -99,8 +113,13 @@
   margin: 0%;
 }
 
+#subArticle {
+  font-size: 2vh;
+  margin: 0%;
+}
+
 #name {
-  margin: 3%
+  margin: 3% 0%
 }
 
 #timestamp {
@@ -110,8 +129,7 @@
 }
 
 #white{
-  color:white;
-  margin: 0%;
+  color: white;
 }
 
 #black{

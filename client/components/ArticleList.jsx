@@ -44,8 +44,12 @@ function ArticleList () {
       {loading && <LoadAnim/>}
       {userArticles &&
       <>
-        <span className='banner'><span id='white'>LATEST &nbsp;&nbsp;</span><span>&nbsp;&nbsp;TRUTHS</span></span>
+        {/* <div className='banner'>
+
+          <div>TRUTHS</div>
+        </div> */}
         <div className='article-container'>
+          <div className='banner' id='white'>LATEST</div>
           <Article
             // key={userArticles[0].id}
             name={userArticles[0].name}
@@ -59,6 +63,7 @@ function ArticleList () {
       }
       {userArticles &&
         <div className='subArticle-container'>
+          <div className='banner'>TRUTHS</div>
           {userArticles.map((dataObj, idx) => {
             if (idx !== 0) {
               return (
