@@ -5,10 +5,7 @@ module.exports = (env) => {
   // target: 'node',
   return {
     plugins: [
-      new Dotenv({
-        // path: './.env',
-        systemvars: true
-      })
+      new Dotenv()
     ],
     entry: path.join(__dirname, './index.js'),
     output: {
@@ -29,6 +26,7 @@ module.exports = (env) => {
       fallback: {
         fs: false
       }
-    }
+    },
+    devtool: 'source-map'
   }
 }
