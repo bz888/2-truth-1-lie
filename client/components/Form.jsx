@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { getAuth } from 'firebase/auth'
-// import { useAuthState } from 'react-firebase-hooks/auth'
 import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
+import { useAuth } from '../context/AuthContext'
+import { useHistory } from 'react-router-dom'
 const { isBanned } = require('../src/helperFunc')
 
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
   const [bannedState, setBannedState] = useState(false)
-
-  const auth = getAuth()
-  // const [user] = useAuthState(auth)
+  const { auth, user } = useAuth()
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -22,17 +20,17 @@ function Form () {
     profileImg: ''
   })
   const [loadingState, setLoadingState] = useState(false)
-
-  // let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-  // bannedWordsPresent = bannedWordsPresent.some(element => element === true)
-  // const checkVal = bannedWordsPresent.find(ele => ele === 'lmao')
+  const history = useHistory()
+  useEffect(() => {
+    // console.log(user)
+    if (user === undefined) {
+      history.push('/login')
+    }
+  }, [user])
 
   useEffect(() => {
-    // const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-    // console.log(foundBannedWord)
     const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
     const foundBannedWord = bannedWordsPresent.find(ele => ele === true)
-    // console.log(stringCatch)
 
     if (foundBannedWord === true) {
       setBannedState(() => (true))
@@ -60,15 +58,14 @@ function Form () {
 
   async function apiCallsFunc (imgText, txtText) {
     try {
-      console.log('this is txtText: ', txtText)
+      // console.log('this is txtText: ', txtText)
       setLoadingState(true)
-      // const imgResult = await getImageOutput(imgText)
-      // const txtResult = await getTextOutput(txtText)
-      const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
+      const imgResult = await getImageOutput(imgText)
+      // const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
       const testResult = await getOutputBlogTextCortext(txtText)
-      const newInputObj = { ...input, article: testResult, profileImg: test }
+      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
       console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: test }, auth)
+      postToFirebase({ ...input, article: txtText + ' ' + testResult, profileImg: imgResult }, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
@@ -91,9 +88,8 @@ function Form () {
     e.preventDefault()
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
-
-    console.log('selected input: ', inputArr[genNum])
     apiCallsFunc(input.name, inputArr[genNum])
+    console.log(user)
   }
 
   return (
@@ -110,7 +106,6 @@ function Form () {
           Play at your own risk
             </span>
           </label>
-
           {
             loadingState
               ? <AnimatePresence>
@@ -121,11 +116,6 @@ function Form () {
                 <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
                 <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
                 <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-                {/* add conditonal
-                   render submit only if !== bannedstate && checkinput
-                    if checkinput true && bannedstate is true render red button
-                */}
-                {/* {checkInput && <button className='button-31' onClick={handleClick}>submit</button>} */}
                 <Button checkInput={checkInput} handleClick={handleClick} bannedState={bannedState} input={input}/>
               </>
           }
