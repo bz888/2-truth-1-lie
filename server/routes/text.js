@@ -50,12 +50,6 @@ router.post('/validatehuman', (req, res) => {
   request.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`, {
     method: 'POST'
   })
-    // .send(
-    //   {
-    //     response: token,
-    //     secret: secretKey
-    //   }
-    // )
     .then(reResponse => {
       console.log('validateHuman response call:: ', reResponse.body)
       res.json(reResponse.body)
