@@ -5,6 +5,7 @@
   },
   "hosting": {
     "public": "./server/public",
+    "destination": "/index.html",
     "ignore": [
       "firebase.json",
       "**/.*",
