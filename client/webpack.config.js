@@ -5,7 +5,9 @@ module.exports = (env) => {
   // target: 'node',
   return {
     plugins: [
-      new Dotenv()
+      new Dotenv({
+        path: path.resolve(__dirname, '../.env')
+      })
     ],
     entry: path.join(__dirname, './index.js'),
     output: {
