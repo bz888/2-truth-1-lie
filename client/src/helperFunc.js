@@ -90,22 +90,25 @@ function isBanned (value) {
     'wank',
     'whore'
   ]
-  // console.log(value)
   const splitVal = value.split(' ')
-  // console.log(splitVal)
-  // const logVal = bannedWords.map(val => splitVal.includes(val))
-  // console.log('logVal: ', logVal)
   if (bannedWords.map(val => splitVal.includes(val)).find(el => el === true)) {
     return true
   } else {
     return false
   }
-
-  // if (bannedWords.some(element => element === value)) {
-  // // console.log('this is a banned word')
-  //   return true
-  // } else {
-  //   return false
-  // }
 }
-module.exports = { isBanned }
+
+function concatArticle (inputTxt, name) {
+  const firstVal = inputTxt.split(' ')
+  console.log('firstVal: ', firstVal)
+  if (firstVal[0].toLowerCase() === name.toLowerCase()) {
+    firstVal.shift()
+    const newArr = firstVal.join(' ')
+    console.log('newArr', newArr)
+    return newArr
+  } else {
+    return inputTxt
+  }
+}
+
+module.exports = { isBanned, concatArticle }
