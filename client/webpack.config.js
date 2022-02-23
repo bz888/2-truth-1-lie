@@ -6,7 +6,7 @@ module.exports = (env) => {
   return {
     plugins: [
       new Dotenv({
-        path: '../.env',
+        path: path.join(__dirname, '../.env'),
         safe: true
       })
     ],
