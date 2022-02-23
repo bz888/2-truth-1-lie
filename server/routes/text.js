@@ -5,7 +5,6 @@ const router = express.Router()
 require('dotenv').config()
 
 const apiKey = process.env.API_KEY
-
 const testKey = process.env.TEST_KEY
 
 router.post('/test', (req, res) => {
