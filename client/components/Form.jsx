@@ -61,7 +61,7 @@ function Form () {
       // console.log('this is txtText: ', txtText)
       setLoadingState(true)
       const imgResult = await getImageOutput(imgText)
-      // const test = 'https://media.wired.co.uk/photos/606d9c691e0ddb19555fb809/16:9/w_2992,h_1683,c_limit/dog-unsolicited.jpg'
+
       const testResult = await getOutputBlogTextCortext(txtText)
 
       const inputCheck = await concatArticle(txtText, imgText)
