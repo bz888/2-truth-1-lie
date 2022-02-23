@@ -6,8 +6,8 @@ module.exports = (env) => {
   return {
     plugins: [
       new Dotenv({
-        path: path.join(__dirname, '../.env'),
-        safe: true
+        // path: './.env',
+        systemvars: true
       })
     ],
     entry: path.join(__dirname, './index.js'),
@@ -29,7 +29,6 @@ module.exports = (env) => {
       fallback: {
         fs: false
       }
-    },
-    devtool: 'none'
+    }
   }
 }
