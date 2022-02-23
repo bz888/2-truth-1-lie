@@ -16,8 +16,8 @@ import { useAuth } from '../context/AuthContext'
 // import Signin from './Signin'
 
 function ArticleList () {
+  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(4))
   const history = useHistory()
-  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(5))
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
   const { signOutFunc, auth, user } = useAuth()
   async function handleClick (e) {
@@ -44,7 +44,7 @@ function ArticleList () {
       {loading && <LoadAnim/>}
       {userArticles &&
       <>
-        <h1 className='banner'>NEWS TODAY</h1>
+        <span className='banner'><span id='white'>LATEST &nbsp;&nbsp;</span><span>&nbsp;&nbsp;TRUTHS</span></span>
         <div className='article-container'>
           <Article
             // key={userArticles[0].id}
