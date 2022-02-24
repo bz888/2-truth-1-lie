@@ -29,7 +29,6 @@ body{
   grid-gap: 4vh;
   justify-items: center;
   margin-top: 2vh;
-  box-sizing: border-box;
   /* position: relative; */
 }
 #form input{
@@ -38,6 +37,7 @@ body{
   height: 3rem;
   font-size: 1rem;
   text-align: center;
+  border-width: 1px;
 }
 .form-title{
   margin-top: 12%;

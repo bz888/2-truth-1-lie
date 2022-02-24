@@ -104,7 +104,7 @@ function Form () {
         <form id='form'>
           <label htmlFor='form' className='form-label'>
             <div className='disclaimer'>
-          Article generator may contain explicit language and controversial material
+              Article generator may contain explicit language and controversial material.
             </div>
           </label>
           {
