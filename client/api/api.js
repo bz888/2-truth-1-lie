@@ -56,3 +56,14 @@ export async function getOutputBlogTextCortext (input) {
       return res.body.ai_results[0].generated_text
     })
 }
+
+// reCAPTCHA response
+export async function validateHuman (token) {
+  return request
+    .post('/api/v1/validatehuman')
+    .send({ response: token })
+    .then(res => {
+      console.log('reCaptcha: ', res.body.success)
+      return res.body.success
+    })
+}

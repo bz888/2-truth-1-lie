@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React, { createContext, useContext } from 'react'
 import {
   getAuth, signOut
 } from 'firebase/auth'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 
-const AuthContext = React.createContext()
+const AuthContext = createContext()
 
 export function useAuth () {
   return useContext(AuthContext)

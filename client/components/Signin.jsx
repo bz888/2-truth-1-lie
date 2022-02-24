@@ -1,30 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import LoadAnim from './LoadAnim'
 import { useAuth } from '../context/AuthContext'
 import { useHistory } from 'react-router-dom'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { validateHuman } from '../api/api'
 
 export default function Signin ({ loading }) {
+  const [validHuman, setValidHuman] = useState()
   const [signInVal, setSignInVal] = useState({
-    email: '',
+    email: process.env.LOGIN_KEY,
     password: ''
   })
-  const { signIn, user } = useAuth()
+  const { signIn, user, error } = useAuth()
   const history = useHistory()
-  useEffect(() => {
-    if (user !== undefined) {
-      history.push('/')
-    }
-  }, [user])
+  // const reRef = useRef()
 
   async function handleClick (e) {
     e.preventDefault()
     try {
       await signIn(signInVal.email, signInVal.password)
-      console.log(user)
+
+      // console.log(user)
       history.goBack()
     } catch (err) {
       console.error(err)
     }
+  }
+  async function onChange (val) {
+    const validateVal = await validateHuman(val)
+    console.log('reCaptcha: ', validateVal)
+    setValidHuman(validateVal)
   }
 
   function handleChange (e) {
@@ -55,18 +60,18 @@ export default function Signin ({ loading }) {
           </div>
         </div>
         {loading && <LoadAnim/>}
-
+        {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {
           !user &&
           <form className='signIn-form'>
-            <input
+            {/* <input
               id='inputEmail'
               value={signInVal.email}
               name='email'
               onChange={handleChange}
               placeholder='Enter your Email'
               type='email'
-              required="required"/>
+              required="required"/> */}
 
             <label htmlFor='password'>Password</label>
             <input
@@ -79,13 +84,23 @@ export default function Signin ({ loading }) {
               type='password'
               required="required"
             />
-            <input disabled={loading} id="login" type="checkbox" onClick={handleClick}/>
-            <label className='login-button' htmlFor='login'>
-              <span>Enter</span>
-              <svg>
-                <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
-              </svg>
-            </label>
+            {validHuman &&
+            <>
+              <input disabled={loading} id="login" type="checkbox" onClick={handleClick}/>
+              <label className='login-button' htmlFor='login'>
+                <span>Enter</span>
+                <svg>
+                  <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
+                </svg>
+              </label>
+            </>
+            }
+            <ReCAPTCHA
+              // ref={reRef}
+              sitekey={process.env.RECAPTCHA_KEY}
+              onChange={onChange}
+              // size='normal'
+            />
           </form>
         }
       </div>
