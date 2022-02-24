@@ -10,11 +10,11 @@ export default function Signin ({ loading }) {
   })
   const { signIn, user } = useAuth()
   const history = useHistory()
-  // useEffect(() => {
-  //   if (user !== undefined) {
-  //     history.push('/')
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if (user !== undefined) {
+      history.push('/')
+    }
+  }, [user])
 
   async function handleClick (e) {
     e.preventDefault()
