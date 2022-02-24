@@ -14,7 +14,6 @@ export default function Signin ({ loading }) {
   const { signIn, user, error } = useAuth()
   const history = useHistory()
   // const reRef = useRef()
-  console.log(process.env.LOGIN_KEY)
 
   async function handleClick (e) {
     e.preventDefault()

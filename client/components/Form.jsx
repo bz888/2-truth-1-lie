@@ -21,12 +21,12 @@ function Form () {
   })
   const [loadingState, setLoadingState] = useState(false)
   const history = useHistory()
-  useEffect(() => {
-    // console.log(user)
-    if (user === undefined) {
-      history.push('/login')
-    }
-  }, [user])
+  // useEffect(() => {
+  //   // console.log(user)
+  //   if (user === undefined) {
+  //     history.push('/login')
+  //   }
+  // }, [user])
 
   useEffect(() => {
     const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
@@ -98,16 +98,14 @@ function Form () {
   return (
     <>
       <div className='form-title'>
-        <h1>2 Truths 1 Lie</h1>
+        <h1>2 TRUTHS 1 LIE</h1>
       </div>
       <div className='form-div'>
         <form id='form'>
           <label htmlFor='form' className='form-label'>
-            <span className='disclaimer'>
-          Disclaimer: Article generator may contain explicit language and controversial material.
-              <br></br>
-          Play at your own risk
-            </span>
+            <div className='disclaimer'>
+              Article generator may contain explicit language and controversial material.
+            </div>
           </label>
           {
             loadingState
