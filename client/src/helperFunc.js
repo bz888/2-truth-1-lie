@@ -107,7 +107,7 @@ function concatArticle (inputTxt, name) {
     console.log('newArr', newArr)
     return newArr
   } else {
-    return inputTxt
+    return name + ' ' + inputTxt
   }
 }
 

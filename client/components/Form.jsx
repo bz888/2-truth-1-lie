@@ -56,17 +56,17 @@ function Form () {
     })
   }
 
-  async function apiCallsFunc (imgText, txtText) {
+  async function apiCallsFunc (name, selectedText) {
     try {
-      // console.log('this is txtText: ', txtText)
+      // console.log('this is selectedText: ', selectedText)
       setLoadingState(true)
-      const imgResult = await getImageOutput(imgText)
+      const imgResult = await getImageOutput(selectedText)
 
-      const testResult = await getOutputBlogTextCortext(txtText)
+      const testResult = await getOutputBlogTextCortext(name + ' ' + selectedText)
 
-      const inputCheck = await concatArticle(txtText, imgText)
+      const inputCheck = await concatArticle(selectedText, name)
       console.log('inputCheck: ', inputCheck)
-      const newInputObj = { ...input, article: imgText + ' ' + inputCheck + ' ' + testResult, profileImg: imgResult }
+      const newInputObj = { ...input, article: inputCheck + ' ' + testResult, profileImg: imgResult }
       console.log('new input', newInputObj)
       postToFirebase(newInputObj, auth, history)
     } catch (error) {
