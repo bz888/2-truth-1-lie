@@ -98,7 +98,7 @@ export default function Signin ({ loading }) {
             }
             <ReCAPTCHA
               // ref={reRef}
-              sitekey='6Lc9tZceAAAAAOtP6LgstLdu6Kx0H_GVhBEsBW1b'
+              sitekey={process.env.RECAPTCHA_KEY}
               onChange={onChange}
               // size='normal'
             />
