@@ -62,7 +62,7 @@ function Form () {
       const textCortexOutput = await getOutputBlogTextCortext(name + ' ' + selectedText)
       const inputCheck = await concatArticle(selectedText, name)
       const newInputObj = { ...input, article: inputCheck + ' ' + textCortexOutput, profileImg: imgResult }
-      console.log('new input', newInputObj)
+      // console.log('new input', newInputObj)
       postToFirebase(newInputObj, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
