@@ -13,20 +13,19 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 import LoadAnim from './LoadAnim'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-// import Signin from './Signin'
 
 function ArticleList () {
   const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(4))
   const history = useHistory()
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
-  const { signOutFunc, auth, user } = useAuth()
+  const { signOutFunc, auth } = useAuth()
   async function handleClick (e) {
     e.preventDefault()
 
     try {
-      const val = await signOutFunc(auth)
-      console.log(val)
-      console.log(user)
+      await signOutFunc(auth)
+      // console.log(val)
+      // console.log(user)
     } catch {
       alert('failed to signout something went wrong')
     } finally {
