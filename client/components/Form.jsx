@@ -21,12 +21,12 @@ function Form () {
   })
   const [loadingState, setLoadingState] = useState(false)
   const history = useHistory()
-  // useEffect(() => {
-  //   // console.log(user)
-  //   if (user === undefined) {
-  //     history.push('/login')
-  //   }
-  // }, [user])
+  useEffect(() => {
+    // console.log(user)
+    if (user === undefined) {
+      history.push('/login')
+    }
+  }, [user])
 
   useEffect(() => {
     const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
