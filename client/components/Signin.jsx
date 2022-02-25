@@ -84,23 +84,23 @@ export default function Signin ({ loading }) {
               type='password'
               required="required"
             />
-            {validHuman &&
-            <>
-              <input disabled={loading} id="login" type="checkbox" onClick={handleClick}/>
-              <label className='login-button' htmlFor='login'>
-                <span>Enter</span>
-                <svg>
-                  <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
-                </svg>
-              </label>
-            </>
-            }
             <ReCAPTCHA
               // ref={reRef}
               sitekey={process.env.RECAPTCHA_KEY}
               onChange={onChange}
               // size='normal'
             />
+            {validHuman &&
+              <>
+                <input disabled={loading} id="login" type="checkbox" onClick={handleClick}/>
+                <label className='login-button' htmlFor='login'>
+                  <span>Enter</span>
+                  <svg>
+                    <path d="M10,17V14H3V10H10V7L15,12L10,17M7,2H17A2,2 0 0,1 19,4V20A2,2 0 0,1 17,22H7A2,2 0 0,1 5,20V16H7V20H17V4H7V8H5V4A2,2 0 0,1 7,2Z"></path>
+                  </svg>
+                </label>
+              </>
+            }
           </form>
         }
       </div>

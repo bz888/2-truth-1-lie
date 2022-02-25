@@ -86,7 +86,7 @@ body{
 }
 
 .bannedState {
-  background-color: rgb(105, 42, 42);
+  background-color: rgba(204, 52, 52, 0.658);
   color: #fff;
   border-radius: 4px;
   display: inline-block;
