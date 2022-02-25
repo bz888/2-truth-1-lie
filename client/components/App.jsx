@@ -6,6 +6,7 @@ import Signin from './Signin'
 import Submitted from './Submitted'
 import { Route, Switch } from 'react-router-dom'
 import { AuthProvider } from '../context/AuthContext'
+// import LoadAnim from './LoadAnim'
 
 function App () {
   return (
@@ -20,6 +21,7 @@ function App () {
             return <ArticleList/>
           }} />
           <Route exact path='/submitted' component={Submitted}/>
+          {/* <Route exact path='/testload' component={LoadAnim}/> */}
 
         </Switch>
       </AuthProvider>

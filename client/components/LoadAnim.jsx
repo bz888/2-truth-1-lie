@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 
 function LoadAnim () {
   const loadContainer = {
-    width: '15vw',
-    height: '15vh',
+    width: '150px',
+    height: '150px',
     maxWidth: '150px',
     maxHeight: '150px',
     display: 'flex',
@@ -16,8 +16,8 @@ function LoadAnim () {
     display: 'block',
     width: '20%',
     height: '20%',
-    maxWidth: '50px',
-    maxHeight: '50px',
+    // maxWidth: '50px',
+    // maxHeight: '50px',
     backgroundColor: 'black',
     borderRadius: '50%'
   }
