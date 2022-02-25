@@ -1,5 +1,5 @@
 import React from 'react'
-import placeHoldingImg from '../img/aida.png'
+import placeHoldingImg from '../img/aida-placeholder.jpg'
 
 function Image ({ idx, profileImg }) {
   function errorHandle (e) {

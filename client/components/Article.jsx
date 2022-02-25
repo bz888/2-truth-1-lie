@@ -1,6 +1,6 @@
 import React from 'react'
 import { splitText, splitTime } from '../src/helperFunc'
-import placeHoldingImg from '../img/aida.png'
+import placeHoldingImg from '../img/aida-placeholder.jpg'
 
 function Article ({ name, article, time, profileImg }) {
   const imgSize = {
