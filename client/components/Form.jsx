@@ -22,7 +22,6 @@ function Form () {
   const [loadingState, setLoadingState] = useState(false)
   const history = useHistory()
   useEffect(() => {
-    // console.log(user)
     if (user === undefined) {
       history.push('/login')
     }
@@ -58,16 +57,12 @@ function Form () {
 
   async function apiCallsFunc (name, selectedText) {
     try {
-      // console.log('this is selectedText: ', selectedText)
       setLoadingState(true)
       const imgResult = await getImageOutput(selectedText)
-
-      const testResult = await getOutputBlogTextCortext(name + ' ' + selectedText)
-
+      const textCortexOutput = await getOutputBlogTextCortext(name + ' ' + selectedText)
       const inputCheck = await concatArticle(selectedText, name)
-      console.log('inputCheck: ', inputCheck)
-      const newInputObj = { ...input, article: inputCheck + ' ' + testResult, profileImg: imgResult }
-      console.log('new input', newInputObj)
+      const newInputObj = { ...input, article: inputCheck + ' ' + textCortexOutput, profileImg: imgResult }
+      // console.log('new input', newInputObj)
       postToFirebase(newInputObj, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
