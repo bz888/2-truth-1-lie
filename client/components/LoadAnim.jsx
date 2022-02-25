@@ -9,7 +9,7 @@ function LoadAnim () {
     maxHeight: '150px',
     display: 'flex',
     justifyContent: 'space-around',
-    marginTop: '25vh',
+    margin: '25vh 45vw',
     gridColumnGap: '1.5vw'
   }
   const loadCircle = {
