@@ -10,7 +10,7 @@ function LoadAnim () {
     display: 'flex',
     justifyContent: 'space-around',
     margin: '25vh 45vw',
-    gridColumnGap: '1.5vw'
+    gridColumnGap: '1vw'
   }
   const loadCircle = {
     display: 'block',
