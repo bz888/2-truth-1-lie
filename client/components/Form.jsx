@@ -97,17 +97,17 @@ function Form () {
       </div>
       <div className='form-div'>
         <form id='form'>
-          <label htmlFor='form' className='form-label'>
-            <div className='disclaimer'>
-              Article generator may contain explicit language and controversial material.
-            </div>
-          </label>
           {
             loadingState
               ? <AnimatePresence>
                 <LoadAnim/>
               </AnimatePresence>
               : <>
+                <label htmlFor='form' className='form-label'>
+                  <div className='disclaimer'>
+                    Article generator may contain explicit language and controversial material.
+                  </div>
+                </label>
                 <input value={input.name} name='name' onChange={handleChange} placeholder='name' />
                 <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
                 <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
