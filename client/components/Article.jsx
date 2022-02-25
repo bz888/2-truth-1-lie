@@ -1,19 +1,28 @@
 import React from 'react'
+import { splitText, splitTime } from '../src/helperFunc'
+import placeHoldingImg from '../img/aida.png'
 
-function Article ({ name, article, timestamp, profileImg, colorProfile }) {
+function Article ({ name, article, time, profileImg }) {
   const imgSize = {
-    width: '300px',
-    height: '300px',
+    width: '65vh',
+    height: '48vh',
     display: 'inline-flex'
   }
-  console.log(colorProfile % 2)
+  const splitArticle = splitText(article, 70)
+  const splitTimestamp = splitTime(time)
+
+  function errorHandle (e) {
+    console.log(e.target.src)
+    e.target.src = placeHoldingImg
+  }
+
   return (
-    <div className='article-div' style={{ backgroundColor: colorProfile % 2 === 0 ? 'black' : 'white' }}>
+    <div className='article-div'>
       <div>
-        <img style={imgSize} src={profileImg} alt='profile-img'/>
-        <h1 style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{name}</h1>
-        <p style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{timestamp}</p>
-        <p style={{ color: colorProfile % 2 === 0 ? 'white' : 'black' }}>{article}</p>
+        <img style={imgSize} src={profileImg} alt='profile-img' onError={errorHandle}/>
+        <h1 id='name'>{name}</h1>
+        <p id='timestamp'>{splitTimestamp}</p>
+        <p id= 'subHeader'>{splitArticle}</p><span>... Read More</span>
       </div>
     </div>
   )

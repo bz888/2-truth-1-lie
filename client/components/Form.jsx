@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { getAuth } from 'firebase/auth'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-import { getImageOutput, getOutputBlogTextCortext, getTextOutput, postToFirebase } from '../api/api'
+import { getImageOutput, getOutputBlogTextCortext, postToFirebase } from '../api/api'
 import LoadAnim from './LoadAnim'
 import { AnimatePresence } from 'framer-motion'
 import Button from './Button'
-const { isBanned } = require('../src/helperFunc')
+import { useAuth } from '../context/AuthContext'
+import { useHistory } from 'react-router-dom'
+const { isBanned, concatArticle } = require('../src/helperFunc')
 
 function Form () {
   const [checkInput, setCheckInput] = useState(false)
   const [bannedState, setBannedState] = useState(false)
-
-  const auth = getAuth()
-  // const [user] = useAuthState(auth)
+  const { auth, user } = useAuth()
   const [input, setInput] = useState({
     name: '',
     truth1: '',
@@ -22,17 +20,16 @@ function Form () {
     profileImg: ''
   })
   const [loadingState, setLoadingState] = useState(false)
-
-  // let bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-  // bannedWordsPresent = bannedWordsPresent.some(element => element === true)
-  // const checkVal = bannedWordsPresent.find(ele => ele === 'lmao')
+  const history = useHistory()
+  useEffect(() => {
+    if (user === undefined) {
+      history.push('/login')
+    }
+  }, [user])
 
   useEffect(() => {
-    // const bannedWordsPresent = Object.keys(input).map((key) => (isBanned(input[key])))
-    // console.log(foundBannedWord)
     const bannedWordsPresent = Object.keys(input).map(key => (isBanned(input[key])))
     const foundBannedWord = bannedWordsPresent.find(ele => ele === true)
-    // console.log(stringCatch)
 
     if (foundBannedWord === true) {
       setBannedState(() => (true))
@@ -58,15 +55,15 @@ function Form () {
     })
   }
 
-  async function apiCallsFunc (imgText, txtText) {
+  async function apiCallsFunc (name, selectedText) {
     try {
       setLoadingState(true)
-      const imgResult = await getImageOutput(imgText)
-      // const txtResult = await getTextOutput(txtText)
-      const testResult = await getOutputBlogTextCortext(txtText)
-      const newInputObj = { ...input, article: testResult, profileImg: imgResult }
-      console.log('new input', newInputObj)
-      postToFirebase({ ...input, article: testResult, profileImg: imgResult }, auth)
+      const imgResult = await getImageOutput(selectedText)
+      const textCortexOutput = await getOutputBlogTextCortext(name + ' ' + selectedText)
+      const inputCheck = await concatArticle(selectedText, name)
+      const newInputObj = { ...input, article: inputCheck + ' ' + textCortexOutput, profileImg: imgResult }
+      // console.log('new input', newInputObj)
+      postToFirebase(newInputObj, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
     } finally {
@@ -76,9 +73,9 @@ function Form () {
 
   function semiRandomGenerator (min, max) {
     const num = Math.random() * (max - min) + min
-    if (num <= 0.3333333) {
+    if (num <= 0.4) {
       return 0
-    } else if (num <= 0.6666666) {
+    } else if (num <= 0.6) {
       return 1
     } else {
       return 2
@@ -89,41 +86,32 @@ function Form () {
     e.preventDefault()
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
-
-    console.log('selected input: ', inputArr[genNum])
     apiCallsFunc(input.name, inputArr[genNum])
+    console.log(user)
   }
 
   return (
     <>
       <div className='form-title'>
-        <h1>2 Truths 1 Lie</h1>
+        <h1>2 TRUTHS 1 LIE</h1>
       </div>
       <div className='form-div'>
         <form id='form'>
-          <label htmlFor='form' className='form-label'>
-            <span className='disclaimer'>
-          Disclaimer: Article generator may contain explicit language and controversial material.
-              <br></br>
-          Play at your own risk
-            </span>
-          </label>
-
           {
             loadingState
               ? <AnimatePresence>
                 <LoadAnim/>
               </AnimatePresence>
               : <>
+                <label htmlFor='form' className='form-label'>
+                  <div className='disclaimer'>
+                    Article generator may contain explicit language and controversial material.
+                  </div>
+                </label>
                 <input value={input.name} name='name' onChange={handleChange} placeholder='name' />
                 <input value={input.truth1} name='truth1' onChange={handleChange} placeholder='first truth' />
                 <input value={input.truth2} name='truth2' onChange={handleChange} placeholder='second truth' />
                 <input value={input.lie} name='lie' onChange={handleChange} placeholder='lie'/>
-                {/* add conditonal
-                   render submit only if !== bannedstate && checkinput
-                    if checkinput true && bannedstate is true render red button
-                */}
-                {/* {checkInput && <button className='button-31' onClick={handleClick}>submit</button>} */}
                 <Button checkInput={checkInput} handleClick={handleClick} bannedState={bannedState} input={input}/>
               </>
           }

@@ -3,18 +3,23 @@ import { motion } from 'framer-motion'
 
 function LoadAnim () {
   const loadContainer = {
-    width: '2rem',
-    height: '2rem',
+    width: '15vw',
+    height: '15vh',
+    maxWidth: '150px',
+    maxHeight: '150px',
     display: 'flex',
     justifyContent: 'space-around',
-    margin: 'auto'
+    margin: '25vh 45vw',
+    gridColumnGap: '1.5vw'
   }
   const loadCircle = {
     display: 'block',
-    width: '0.5rem',
-    height: '0.5rem',
+    width: '5vw',
+    height: '5vw',
+    maxWidth: '50px',
+    maxHeight: '50px',
     backgroundColor: 'black',
-    borderRadius: '0.25rem'
+    borderRadius: '50%'
   }
 
   const loadingContainerVariants = {
@@ -51,6 +56,7 @@ function LoadAnim () {
       variants={loadingContainerVariants}
       initial='start'
       animate='end'
+      id= 'loadAnim'
     >
       <motion.span
         style={loadCircle}

@@ -1,19 +1,19 @@
 const path = require('path')
-
 const express = require('express')
-
-// express server
 const server = express()
 
-//
 const route = require('./routes/text')
 
 server.use(express.json())
-const staticFolder = path.join(__dirname, 'public')
+server.use(express.static(path.join(__dirname, 'public')))
 
-server.use(express.static(staticFolder))
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 
-server.use('/text', route)
+server.use('/api/v1', route)
 
 // For the client side BrowserRouter - because there is no '#' to distinguish
 // between client and server side routes, this sends back the index.html

@@ -6,35 +6,25 @@ import {
   serverTimestamp
 } from 'firebase/firestore'
 import { signOut } from 'firebase/auth'
-// import { TextCortex } from 'textcortex-hemingwai-js'
-
-// deep ai text
-// .retry() after send- whatever is passed is how many times it tries again.
-// export function getTextOutput (input) {
-//   return request
-//     .post('http://localhost:8000/text/outputtext/')
-//     .send({ input })
-//     .then(res => {
-//       console.log('text output api: ', res.body)
-//       return res.body.output
-//     })
-// }
 
 // deep ai image
 export function getImageOutput (val) {
-  console.log('api input image: ', val)
+  // console.log('api input image: ', val)
   return request
-    .post('http://localhost:8000/text/outputimage/')
+    .post('/api/v1/outputimage/')
     .send({ val })
     .then(res => {
       console.log('image ping: ', res.body)
       return res.body.output_url
     })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 // posting to firebase
-export async function postToFirebase (userInfo, auth) {
-  console.log('api userInfo: ', userInfo)
+export async function postToFirebase (userInfo, auth, history) {
+  // console.log('api userInfo: ', userInfo)
   try {
     await addDoc(collection(getFirestore(), 'test_read'), {
       name: userInfo.name,
@@ -45,6 +35,9 @@ export async function postToFirebase (userInfo, auth) {
       profileImg: userInfo.profileImg,
       timestamp: serverTimestamp()
     }).then(() => {
+      history.push('/submitted')
+      return null
+    }).then(() => {
       signOut(auth)
       return null
     })
@@ -54,23 +47,23 @@ export async function postToFirebase (userInfo, auth) {
 }
 
 // new api TextCortext
-
 export async function getOutputBlogTextCortext (input) {
   return request
-    .post('http://localhost:8000/text/test/')
+    .post('/api/v1/test/')
     .send({ input: input })
     .then(res => {
-      console.log('textCortex output api: ', res.body.ai_results[0])
+      console.log('textCortex output api: ', res.body)
       return res.body.ai_results[0].generated_text
     })
 }
 
-// export async function getOutputBlogTextCortext (input) {
-//   return request
-//     .post('http://localhost:8000/text/test/')
-//     .send({ input })
-//     .then(res => {
-//       console.log('textCortex output api: ', res.ai_results)
-//       return res.ai_results
-//     })
-// }
+// reCAPTCHA response
+export async function validateHuman (token) {
+  return request
+    .post('/api/v1/validatehuman')
+    .send({ response: token })
+    .then(res => {
+      console.log('reCaptcha: ', res.body.success)
+      return res.body.success
+    })
+}

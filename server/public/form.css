@@ -1,31 +1,47 @@
+body{
+  font-family: 'Syne', sans-serif;
+  font-weight: 400;
+  height: 95vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+}
+
 .form-div{
   width: 100vw;
-  height: 100vh;
-  /* background: rgb(24, 24, 24); */
-  position: absolute;
-  /* right: 0px; */
-  padding-right: 1rem;
+  /* position: absolute; */
+  height: 80vh;
 }
-body{
-  overflow-x: hidden;
+.form-title {
+  margin-top: 5vh;
+}
+.form-title h1{
+  text-align: center;
+  font-family: 'Anton', sans-serif;
+  font-size: 10vh;
+  margin: 0 auto;
+}
+.disclaimer{
+  position: relative;
+  width: 25vh;
+  font-size: 3vh;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
 }
 .form-label{
   /* display: flex; */
   position: relative;
   width: 14rem;
+  text-align: center;
 }
-.disclaimer{
-  position: relative;
-  width: 14rem;
-  font-size: 1rem;
-  line-height: 2.5rem;
-}
+
 #form{
   display: grid;
   grid-template-columns: auto;
-  grid-gap: 2rem 3rem;
+  grid-gap: 4vh;
   justify-items: center;
-  margin-top: 2rem;
+  margin-top: 2vh;
   /* position: relative; */
 }
 #form input{
@@ -34,14 +50,8 @@ body{
   height: 3rem;
   font-size: 1rem;
   text-align: center;
+  border-width: 1px;
 }
-.form-title{
-  margin: auto;
-  width: 15rem;
-  height: 10rem;
-  font-size: 2rem;
-}
-
 
 /* CSS */
 .button-31 {
@@ -61,7 +71,7 @@ body{
   min-height: 44px;
   min-width: 10px;
   outline: none;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 9px 20px 8px;
   position: relative;
   text-align: center;
@@ -76,7 +86,7 @@ body{
 }
 
 .bannedState {
-  background-color: rgb(105, 42, 42);
+  background-color: rgba(204, 52, 52, 0.658);
   color: #fff;
   border-radius: 4px;
   display: inline-block;
@@ -88,7 +98,7 @@ body{
   max-width: 14rem;
   min-height: 44px;
   min-width: 10px;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 9px 20px 8px;
   position: relative;
   text-align: center;

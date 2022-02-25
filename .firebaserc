@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "friendlychat-d1d16"
+    "default": "two-truth-1-lie-dev",
+    "testing": "friendlychat-d1d16"
   },
   "targets": {}
 }
