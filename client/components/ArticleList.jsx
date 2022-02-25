@@ -24,8 +24,6 @@ function ArticleList () {
 
     try {
       await signOutFunc(auth)
-      // console.log(val)
-      // console.log(user)
     } catch {
       alert('failed to signout something went wrong')
     } finally {

@@ -3,7 +3,7 @@ import placeHoldingImg from '../img/aida.png'
 
 function Image ({ idx, profileImg }) {
   function errorHandle (e) {
-    console.log(e.target.src)
+    // console.log(e.target.src)
     e.currentTarget.src = placeHoldingImg
   }
 

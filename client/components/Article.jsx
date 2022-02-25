@@ -12,7 +12,7 @@ function Article ({ name, article, time, profileImg }) {
   const splitTimestamp = splitTime(time)
 
   function errorHandle (e) {
-    console.log(e.target.src)
+    // console.log(e.target.src)
     e.target.src = placeHoldingImg
   }
 

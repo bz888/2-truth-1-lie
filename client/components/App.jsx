@@ -11,8 +11,6 @@ function App () {
   return (
     <>
       <AuthProvider>
-        {/* {userLoading && <LoadAnim/>} */}
-        {/* {userError && <strong>Error: {JSON.stringify(userError)}</strong>} */}
         <Switch>
           <Route exact path='/' render={() => {
             return <Form/>

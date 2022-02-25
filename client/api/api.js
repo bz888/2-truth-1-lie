@@ -9,12 +9,10 @@ import { signOut } from 'firebase/auth'
 
 // deep ai image
 export function getImageOutput (val) {
-  // console.log('api input image: ', val)
   return request
     .post('/api/v1/outputimage/')
     .send({ val })
     .then(res => {
-      console.log('image ping: ', res.body)
       return res.body.output_url
     })
     .catch((err) => {
@@ -24,7 +22,6 @@ export function getImageOutput (val) {
 
 // posting to firebase
 export async function postToFirebase (userInfo, auth, history) {
-  // console.log('api userInfo: ', userInfo)
   try {
     await addDoc(collection(getFirestore(), 'test_read'), {
       name: userInfo.name,
@@ -52,7 +49,6 @@ export async function getOutputBlogTextCortext (input) {
     .post('/api/v1/test/')
     .send({ input: input })
     .then(res => {
-      console.log('textCortex output api: ', res.body)
       return res.body.ai_results[0].generated_text
     })
 }
@@ -63,7 +59,6 @@ export async function validateHuman (token) {
     .post('/api/v1/validatehuman')
     .send({ response: token })
     .then(res => {
-      console.log('reCaptcha: ', res.body.success)
       return res.body.success
     })
 }
