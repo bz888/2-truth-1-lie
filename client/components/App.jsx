@@ -16,7 +16,7 @@ function App () {
             return <Form/>
           }}/>
           <Route path= '/login' component={Signin}/>
-          <Route exact path='/results' render={() => {
+          <Route exact path='/53e61336bb49ec978968786b07dea50b' render={() => {
             return <ArticleList/>
           }} />
           <Route exact path='/submitted' component={Submitted}/>
