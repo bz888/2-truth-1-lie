@@ -5,12 +5,12 @@ const router = express.Router()
 require('dotenv').config()
 
 const apiKey = process.env.API_KEY
-const testKey = process.env.TEST_KEY
+const textCortexKey = process.env.TEST_KEY
 
 router.post('/test', (req, res) => {
   const input = req.body.input
-  const testAPI = new TextCortex(testKey)
-  testAPI.generate({
+  const cortexApi = new TextCortex(textCortexKey)
+  cortexApi.generate({
     prompt: input,
     parameters: '',
     source_language: 'en',
