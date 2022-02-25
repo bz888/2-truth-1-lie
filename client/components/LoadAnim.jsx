@@ -14,8 +14,8 @@ function LoadAnim () {
   }
   const loadCircle = {
     display: 'block',
-    width: '5vw',
-    height: '5vw',
+    width: '20%',
+    height: '20%',
     maxWidth: '50px',
     maxHeight: '50px',
     backgroundColor: 'black',

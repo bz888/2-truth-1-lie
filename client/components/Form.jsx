@@ -62,7 +62,7 @@ function Form () {
       const textCortexOutput = await getOutputBlogTextCortext(name + ' ' + selectedText)
       const inputCheck = await concatArticle(selectedText, name)
       const newInputObj = { ...input, article: inputCheck + ' ' + textCortexOutput, profileImg: imgResult }
-      // console.log('new input', newInputObj)
+      console.log('new input', newInputObj)
       postToFirebase(newInputObj, auth, history)
     } catch (error) {
       console.error('Error in apiCallsFunc', error)
@@ -87,7 +87,7 @@ function Form () {
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
     apiCallsFunc(input.name, inputArr[genNum])
-    console.log(user)
+    // console.log(user)
   }
 
   return (
