@@ -60,7 +60,7 @@ export default function Signin ({ loading }) {
           </div>
         </div>
         {loading && <LoadAnim/>}
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
+        {error && <strong>The password you entered was incorrect</strong>}
         {
           !user &&
           <form className='signIn-form'>
