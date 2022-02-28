@@ -14,17 +14,18 @@ import LoadAnim from './LoadAnim'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
-function ArticleList () {
+function ArticleList ({ setLoginState }) {
   const tempRef = query(collection(getFirestore(), 'db_prod'), orderBy('timestamp', 'desc'), limit(4))
   const history = useHistory()
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
   const { signOutFunc, auth, user } = useAuth()
 
-  // useEffect(() => {
-  //   if (user === undefined) {
-  //     history.push('/')
-  //   }
-  // }, [])
+  useEffect(() => {
+    setLoginState('admin')
+    if (user === undefined) {
+      history.push('/')
+    }
+  }, [])
 
   async function handleClick (e) {
     e.preventDefault()

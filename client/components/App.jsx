@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ArticleList from './ArticleList'
 import Form from './Form'
 // import LoadAnim from './LoadAnim'
@@ -10,6 +10,7 @@ import { Route, Switch } from 'react-router-dom'
 // import LoadAnim from './LoadAnim'
 
 function App () {
+  const [loginState, setLoginState] = useState()
   return (
     <>
       {/* <AuthProvider> */}
@@ -17,9 +18,11 @@ function App () {
         <Route exact path='/submit' render={() => {
           return <Form/>
         }}/>
-        <Route exact path= '/' component={Signin}/>
+        <Route exact path= '/'render={() => {
+          return <Signin loginState={loginState}/>
+        }}/>
         <Route exact path='/53e61336bb49ec978968786b07dea50b' render={() => {
-          return <ArticleList/>
+          return <ArticleList setLoginState={setLoginState}/>
         }} />
         <Route exact path='/submitted' component={Submitted}/>
 

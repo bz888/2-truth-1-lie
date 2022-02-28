@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import LoadAnim from './LoadAnim'
+// import LoadAnim from './LoadAnim'
 import { useAuth } from '../context/AuthContext'
 import { useHistory } from 'react-router-dom'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { validateHuman } from '../api/api'
 
-export default function Signin ({ loading }) {
+export default function Signin ({ loginState }) {
   const [validHuman, setValidHuman] = useState()
   const [signInVal, setSignInVal] = useState({
     email: process.env.LOGIN_KEY,
     password: ''
   })
-  const { signIn, user, error } = useAuth()
+  const { signIn, user, error, loading } = useAuth()
   const history = useHistory()
   // const reRef = useRef()
 
@@ -19,8 +19,11 @@ export default function Signin ({ loading }) {
     e.preventDefault()
     try {
       await signIn(signInVal.email, signInVal.password)
-
-      history.push('/submit')
+      if (loginState === 'admin') {
+        history.push('/53e61336bb49ec978968786b07dea50b')
+      } else {
+        history.push('submit')
+      }
     } catch (err) {
       console.error(err)
     }
@@ -57,7 +60,7 @@ export default function Signin ({ loading }) {
             </div>
           </div>
         </div>
-        {loading && <LoadAnim/>}
+        {/* {loading && <LoadAnim/>} */}
         {error && <strong>The password you entered was incorrect</strong>}
         {
           !user &&

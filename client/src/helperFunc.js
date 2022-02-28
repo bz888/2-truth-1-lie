@@ -99,15 +99,15 @@ function isBanned (value) {
 }
 
 function concatArticle (inputTxt, name) {
-  const firstVal = inputTxt.split(' ')
-  // console.log('firstVal: ', firstVal)
+  const processString = inputTxt.charAt(0).toLowerCase() + inputTxt.slice(1)
+  const firstVal = processString.split(' ')
+  // console.log(processString)
+  console.log('firstVal: ', firstVal)
   if (firstVal[0].toLowerCase() === name.toLowerCase()) {
-    firstVal.shift()
-    const newArr = firstVal.join(' ')
-    // console.log('newArr', newArr)
-    return newArr
+    return inputTxt
   } else {
-    return name + ' ' + inputTxt
+    console.log('esle return : ', name + ' ' + processString)
+    return name + ' ' + processString
   }
 }
 
