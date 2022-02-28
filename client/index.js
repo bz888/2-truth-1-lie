@@ -6,14 +6,18 @@ import App from './components/App'
 import { initializeApp } from 'firebase/app'
 import { getFirebaseConfig } from './src/firebase-config'
 
+import { AuthProvider } from './context/AuthContext'
+
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
-    <Router>
-      <App />
-    </Router>,
+    <AuthProvider>
+      <Router>
+        <App />
+      </Router>
+    </AuthProvider>,
     document.getElementById('app')
   )
 })

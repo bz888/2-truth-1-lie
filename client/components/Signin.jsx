@@ -20,7 +20,7 @@ export default function Signin ({ loading }) {
     try {
       await signIn(signInVal.email, signInVal.password)
 
-      history.goBack()
+      history.push('/submit')
     } catch (err) {
       console.error(err)
     }

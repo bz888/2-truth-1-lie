@@ -23,7 +23,7 @@ function Form () {
   const history = useHistory()
   useEffect(() => {
     if (user === undefined) {
-      history.push('/login')
+      history.push('/')
     }
   }, [user])
 
