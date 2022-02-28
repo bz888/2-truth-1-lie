@@ -3,10 +3,6 @@ import { motion } from 'framer-motion'
 
 function LoadAnim () {
   const loadContainer = {
-    width: '150px',
-    height: '150px',
-    maxWidth: '150px',
-    maxHeight: '150px',
     display: 'flex',
     justifyContent: 'center',
     margin: '25vh 25vw',
@@ -19,7 +15,6 @@ function LoadAnim () {
     backgroundColor: 'black',
     borderRadius: '50%'
   }
-
   const loadingContainerVariants = {
     start: {
       transition: {
