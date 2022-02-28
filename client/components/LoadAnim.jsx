@@ -8,16 +8,14 @@ function LoadAnim () {
     maxWidth: '150px',
     maxHeight: '150px',
     display: 'flex',
-    justifyContent: 'space-around',
-    margin: '25vh 45vw',
-    gridColumnGap: '1vw'
+    justifyContent: 'center',
+    margin: '25vh 25vw',
+    gridColumnGap: '10px'
   }
   const loadCircle = {
     display: 'block',
-    width: '20%',
-    height: '20%',
-    // maxWidth: '50px',
-    // maxHeight: '50px',
+    width: '15px',
+    height: '15px',
     backgroundColor: 'black',
     borderRadius: '50%'
   }
