@@ -20,7 +20,6 @@ export default function Signin ({ loading }) {
     try {
       await signIn(signInVal.email, signInVal.password)
 
-      // console.log(user)
       history.goBack()
     } catch (err) {
       console.error(err)
@@ -28,7 +27,6 @@ export default function Signin ({ loading }) {
   }
   async function onChange (val) {
     const validateVal = await validateHuman(val)
-    console.log('reCaptcha: ', validateVal)
     setValidHuman(validateVal)
   }
 

@@ -32,7 +32,6 @@ router.post('/outputimage', (req, res) => {
     .type('form')
     .send({ text: input })
     .then(response => {
-      console.log('image output: ', response.body)
       res.json(response.body)
       return null
     })
@@ -45,13 +44,11 @@ router.post('/outputimage', (req, res) => {
 
 router.post('/validatehuman', (req, res) => {
   const secretKey = process.env.RECAPTCHA_SECRET
-  console.log('text.js line 48 valid human: ', req.body.response)
   const token = req.body.response
   request.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`, {
     method: 'POST'
   })
     .then(reResponse => {
-      console.log('validateHuman response call:: ', reResponse.body)
       res.json(reResponse.body)
       return null
     })

@@ -100,11 +100,11 @@ function isBanned (value) {
 
 function concatArticle (inputTxt, name) {
   const firstVal = inputTxt.split(' ')
-  console.log('firstVal: ', firstVal)
+  // console.log('firstVal: ', firstVal)
   if (firstVal[0].toLowerCase() === name.toLowerCase()) {
     firstVal.shift()
     const newArr = firstVal.join(' ')
-    console.log('newArr', newArr)
+    // console.log('newArr', newArr)
     return newArr
   } else {
     return name + ' ' + inputTxt
