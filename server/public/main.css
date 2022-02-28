@@ -15,10 +15,13 @@
   --padlock-size: 300;
   --border-radius: 6;
 }
-
 body{
   padding:0;
   margin: 0;
+}
+
+strong {
+  color: rgb(255 153 153);
 }
 .signIn-body {
   align-items: center;
