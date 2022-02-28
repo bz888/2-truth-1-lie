@@ -20,11 +20,11 @@ function ArticleList () {
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
   const { signOutFunc, auth, user } = useAuth()
 
-  // useEffect(() => {
-  //   if (user === undefined) {
-  //     history.push('/')
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (user === undefined) {
+      history.push('/')
+    }
+  }, [])
 
   async function handleClick (e) {
     e.preventDefault()
