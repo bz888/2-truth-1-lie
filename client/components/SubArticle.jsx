@@ -2,7 +2,7 @@ import React from 'react'
 import { splitText, splitTime } from '../src/helperFunc'
 
 function SubArticle ({ name, article, time, idx }) {
-  const splitArticle = splitText(article, 35)
+  const splitArticle = splitText(article, 60)
   const splitTimestamp = splitTime(time)
   return (
     <div className= {`subArticle${idx}`}>

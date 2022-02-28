@@ -20,7 +20,7 @@ export default function Signin ({ loading }) {
     try {
       await signIn(signInVal.email, signInVal.password)
 
-      history.goBack()
+      history.push('/submit')
     } catch (err) {
       console.error(err)
     }
@@ -58,7 +58,7 @@ export default function Signin ({ loading }) {
           </div>
         </div>
         {loading && <LoadAnim/>}
-        {error && <strong>Error: {JSON.stringify(error)}</strong>}
+        {error && <strong>The password you entered was incorrect</strong>}
         {
           !user &&
           <form className='signIn-form'>
