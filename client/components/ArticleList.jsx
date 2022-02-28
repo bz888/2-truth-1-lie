@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import {
   getFirestore,
   collection,
@@ -15,21 +15,26 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 function ArticleList () {
-  const tempRef = query(collection(getFirestore(), 'test_read'), orderBy('timestamp', 'desc'), limit(4))
+  const tempRef = query(collection(getFirestore(), 'db_prod'), orderBy('timestamp', 'desc'), limit(4))
   const history = useHistory()
   const [userArticles, loading, error] = useCollectionData(tempRef, { idField: 'id' })
-  const { signOutFunc, auth } = useAuth()
+  const { signOutFunc, auth, user } = useAuth()
+
+  // useEffect(() => {
+  //   if (user === undefined) {
+  //     history.push('/')
+  //   }
+  // }, [])
+
   async function handleClick (e) {
     e.preventDefault()
 
     try {
       await signOutFunc(auth)
-      // console.log(val)
-      // console.log(user)
     } catch {
       alert('failed to signout something went wrong')
     } finally {
-      history.push('/login')
+      history.push('/')
     }
   }
   return (

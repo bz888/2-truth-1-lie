@@ -5,26 +5,26 @@ import Form from './Form'
 import Signin from './Signin'
 import Submitted from './Submitted'
 import { Route, Switch } from 'react-router-dom'
-import { AuthProvider } from '../context/AuthContext'
+
+// import { AuthProvider } from '../context/AuthContext'
+// import LoadAnim from './LoadAnim'
 
 function App () {
   return (
     <>
-      <AuthProvider>
-        {/* {userLoading && <LoadAnim/>} */}
-        {/* {userError && <strong>Error: {JSON.stringify(userError)}</strong>} */}
-        <Switch>
-          <Route exact path='/' render={() => {
-            return <Form/>
-          }}/>
-          <Route path= '/login' component={Signin}/>
-          <Route exact path='/results' render={() => {
-            return <ArticleList/>
-          }} />
-          <Route exact path='/submitted' component={Submitted}/>
+      {/* <AuthProvider> */}
+      <Switch>
+        <Route exact path='/submit' render={() => {
+          return <Form/>
+        }}/>
+        <Route exact path= '/' component={Signin}/>
+        <Route exact path='/53e61336bb49ec978968786b07dea50b' render={() => {
+          return <ArticleList/>
+        }} />
+        <Route exact path='/submitted' component={Submitted}/>
 
-        </Switch>
-      </AuthProvider>
+      </Switch>
+      {/* </AuthProvider> */}
 
     </>
 

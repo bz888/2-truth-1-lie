@@ -23,7 +23,7 @@ function Form () {
   const history = useHistory()
   useEffect(() => {
     if (user === undefined) {
-      history.push('/login')
+      history.push('/')
     }
   }, [user])
 
@@ -87,7 +87,7 @@ function Form () {
     const inputArr = [input.truth1, input.truth2, input.lie]
     const genNum = semiRandomGenerator(0, 2)
     apiCallsFunc(input.name, inputArr[genNum])
-    console.log(user)
+    // console.log(user)
   }
 
   return (

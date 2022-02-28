@@ -1,11 +1,11 @@
 const config = {
-  apiKey: 'AIzaSyC6QVqzLwzpMRvXuQjXMdq3kptUg0bBn9U',
-  authDomain: 'two-truth-1-lie-dev.firebaseapp.com',
-  projectId: 'two-truth-1-lie-dev',
-  storageBucket: 'two-truth-1-lie-dev.appspot.com',
-  messagingSenderId: '37145454012',
-  appId: '1:37145454012:web:6bc2d609d3c861537077b9',
-  measurementId: 'G-3JJTBKMZ6D'
+  apiKey: 'AIzaSyAkjEhMWYONgoO6RRcf7AJO7_7LNcgCByU',
+  authDomain: 'truth-1-lie-prod.firebaseapp.com',
+  projectId: 'truth-1-lie-prod',
+  storageBucket: 'truth-1-lie-prod.appspot.com',
+  messagingSenderId: '957435355400',
+  appId: '1:957435355400:web:dc95005c554bd85b9b0cbd',
+  measurementId: 'G-NJXEJ5YVFT'
 }
 
 export function getFirebaseConfig () {

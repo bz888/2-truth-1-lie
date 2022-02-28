@@ -15,7 +15,6 @@ function LoadAnim () {
     backgroundColor: 'black',
     borderRadius: '50%'
   }
-
   const loadingContainerVariants = {
     start: {
       transition: {
