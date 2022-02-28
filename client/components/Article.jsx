@@ -8,7 +8,7 @@ function Article ({ name, article, time, profileImg }) {
     height: '48vh',
     display: 'inline-flex'
   }
-  const splitArticle = splitText(article, 90)
+  const splitArticle = splitText(article, 85)
   const splitTimestamp = splitTime(time)
 
   function errorHandle (e) {
