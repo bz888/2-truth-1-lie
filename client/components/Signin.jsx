@@ -22,7 +22,7 @@ export default function Signin ({ loginState }) {
       if (loginState === 'admin') {
         history.push('/53e61336bb49ec978968786b07dea50b')
       } else {
-        history.push('submit')
+        history.push('landing')
       }
     } catch (err) {
       console.error(err)

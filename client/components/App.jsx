@@ -5,6 +5,7 @@ import Form from './Form'
 import Signin from './Signin'
 import Submitted from './Submitted'
 import { Route, Switch } from 'react-router-dom'
+import Landing from './Landing'
 
 // import { AuthProvider } from '../context/AuthContext'
 // import LoadAnim from './LoadAnim'
@@ -20,6 +21,9 @@ function App () {
         }}/>
         <Route exact path= '/'render={() => {
           return <Signin loginState={loginState}/>
+        }}/>
+        <Route exact path= '/landing' render={() => {
+          return <Landing/>
         }}/>
         <Route exact path='/53e61336bb49ec978968786b07dea50b' render={() => {
           return <ArticleList setLoginState={setLoginState}/>
