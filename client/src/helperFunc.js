@@ -102,11 +102,11 @@ function concatArticle (inputTxt, name) {
   const processString = inputTxt.charAt(0).toLowerCase() + inputTxt.slice(1)
   const firstVal = processString.split(' ')
   // console.log(processString)
-  console.log('firstVal: ', firstVal)
+  // console.log('firstVal: ', firstVal)
   if (firstVal[0].toLowerCase() === name.toLowerCase()) {
     return inputTxt
   } else {
-    console.log('esle return : ', name + ' ' + processString)
+    // console.log('esle return : ', name + ' ' + processString)
     return name + ' ' + processString
   }
 }
