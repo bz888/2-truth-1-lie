@@ -19,7 +19,14 @@ body{
   padding:0;
   margin: 0;
 }
-
+.landing-div {
+  text-align: center;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+.landing-div p {
+  font-size: 1.25rem;
+}
 strong {
   color: rgb(255 153 153);
 }
