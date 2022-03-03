@@ -10,7 +10,7 @@ module.exports = (env) => {
       //   path: path.resolve(__dirname, '../.env')
       // })
       new DefinePlugin({
-        'process.env.LOGIN_KEY': JSON.stringify('2truths.1lie.projectemail@seanbendarrylcollab.com'),
+        'process.env.LOGIN_KEY': JSON.stringify('bz888dev@gmail.com'),
         'process.env.RECAPTCHA_KEY': JSON.stringify('6Lc9tZceAAAAAOtP6LgstLdu6Kx0H_GVhBEsBW1b')
       })
     ],
