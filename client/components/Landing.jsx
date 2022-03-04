@@ -23,9 +23,17 @@ function Landing () {
         <p>
           Once submitted, AIDA will generate an article and image based on your answers.
         </p>
+        <p>For the best results, start your prompts as though they are following on from your name.
+          <br/>
+          For example:
+          <br/>
+          <br/>
+          Name: John
+          <br/>
+          <br/>
+          Truth: owns three cats ... etc etc
+        </p>
         <p>Have fun!</p>
-        <br/>
-        <br/>
         <button className='button-31' onClick={handleClick}>Continue</button>
       </div>
     </>
