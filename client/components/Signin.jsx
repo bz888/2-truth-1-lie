@@ -17,15 +17,17 @@ export default function Signin ({ loginState }) {
 
   async function handleClick (e) {
     e.preventDefault()
-    try {
-      await signIn(signInVal.email, signInVal.password)
-      if (loginState === 'admin') {
-        history.push('/53e61336bb49ec978968786b07dea50b')
-      } else {
-        history.push('landing')
+    if (!error) {
+      try {
+        await signIn(signInVal.email, signInVal.password)
+        if (loginState === 'admin') {
+          history.push('/53e61336bb49ec978968786b07dea50b')
+        } else {
+          history.push('/landing')
+        }
+      } catch (err) {
+        console.error(err)
       }
-    } catch (err) {
-      console.error(err)
     }
   }
   async function onChange (val) {

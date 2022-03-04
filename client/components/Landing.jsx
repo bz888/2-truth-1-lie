@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 function Landing () {
   const history = useHistory()
-
+  const { user } = useAuth()
+  useEffect(() => {
+    if (user === undefined) {
+      history.push('/')
+    }
+  }, [user])
   function handleClick () {
-    return history.push('submit')
+    return history.push('/submit')
   }
   return (
     <>
