@@ -5,8 +5,9 @@ import placeHoldingImg from '../img/aida-placeholder.jpg'
 function Article ({ name, article, time, profileImg }) {
   const imgSize = {
     width: '65vh',
-    height: '48vh',
-    display: 'inline-flex'
+    height: 'auto',
+    display: 'block',
+    margin: '0 auto'
   }
   const splitArticle = splitText(article, 85)
   const splitTimestamp = splitTime(time)

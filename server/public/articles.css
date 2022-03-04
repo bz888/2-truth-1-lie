@@ -22,8 +22,7 @@
 
 .article-container{
   height: 100vh;
-  width: 50%;
-  z-index: 0;
+  width: 49%;
   position: absolute;
   top: 0;
   left: 0;
@@ -34,9 +33,9 @@
 }
 
 .subArticle-container{
-  height: 100vh;
+  height: 99.25vh;
   width: 50%;
-  left: 50vw;
+  left: 49vw;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(10, 1fr);
