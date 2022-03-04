@@ -4,8 +4,8 @@ import placeHoldingImg from '../img/aida-placeholder.jpg'
 
 function Article ({ name, article, time, profileImg }) {
   const imgSize = {
-    width: '65vh',
-    height: 'auto',
+    width: 'auto',
+    height: '48vh',
     display: 'block',
     margin: '0 auto'
   }
