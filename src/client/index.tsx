@@ -1,15 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
-
 import App from './components/App'
-import { initializeApp } from 'firebase/app'
-import { getFirebaseConfig } from './src/firebase-config'
-
+// import firebase from 'firebase'
+import { initializeApp } from '@firebase/app'
+import { getFirebaseConfig } from './firebase-init/firebase-config'
 import { AuthProvider } from './context/AuthContext'
-
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
+// import firebase from 'firebase/firestore'
 
 document.addEventListener('DOMContentLoaded', () => {
   render(

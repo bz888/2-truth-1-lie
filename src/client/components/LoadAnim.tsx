@@ -36,12 +36,6 @@ function LoadAnim () {
       y: '100%'
     }
   }
-  const loadingCircleTransition = {
-    duration: 0.4,
-    repeat: Infinity,
-    repeatType: 'reverse',
-    ease: 'easeInOut'
-  }
 
   return (
     <motion.div
@@ -54,17 +48,32 @@ function LoadAnim () {
       <motion.span
         style={loadCircle}
         variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
+        transition={{
+          duration: 0.4,
+          repeat: Infinity,
+          repeatType: 'reverse',
+          ease: 'easeInOut'
+        }}
       />
       <motion.span
         style={loadCircle}
         variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
+        transition={{
+          duration: 0.4,
+          repeat: Infinity,
+          repeatType: 'reverse',
+          ease: 'easeInOut'
+        }}
       />
       <motion.span
         style={loadCircle}
         variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
+        transition={{
+          duration: 0.4,
+          repeat: Infinity,
+          repeatType: 'reverse',
+          ease: 'easeInOut'
+        }}
       />
     </motion.div>
   )

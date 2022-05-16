@@ -5,10 +5,11 @@ import {
   addDoc,
   serverTimestamp
 } from 'firebase/firestore'
-import { signOut } from 'firebase/auth'
+import { Auth, signOut } from 'firebase/auth'
+import { NavigateFunction } from 'react-router-dom'
 
 // deep ai image
-export function getImageOutput (val) {
+export function getImageOutput (val: string) {
   return request
     .post('/api/v1/outputimage/')
     .send({ val })
@@ -20,8 +21,16 @@ export function getImageOutput (val) {
     })
 }
 
+interface userInfoType {
+  name: string,
+  truth1: string,
+  truth2: string,
+  lie: string,
+  article: string,
+  profileImg: string,
+}
 // posting to firebase
-export async function postToFirebase (userInfo, auth, history) {
+export async function postToFirebase (userInfo: userInfoType, auth: Auth, navigate: NavigateFunction) {
   try {
     await addDoc(collection(getFirestore(), 'db_prod'), {
       name: userInfo.name,
@@ -32,7 +41,7 @@ export async function postToFirebase (userInfo, auth, history) {
       profileImg: userInfo.profileImg,
       timestamp: serverTimestamp()
     }).then(() => {
-      history.push('/submitted')
+      navigate('/submitted')
       return null
     }).then(() => {
       signOut(auth)
@@ -44,7 +53,7 @@ export async function postToFirebase (userInfo, auth, history) {
 }
 
 // new api TextCortext
-export async function getOutputBlogTextCortext (input) {
+export async function getOutputBlogTextCortext (input: string) {
   return request
     .post('/api/v1/test/')
     .send({ input: input })
@@ -54,7 +63,7 @@ export async function getOutputBlogTextCortext (input) {
 }
 
 // reCAPTCHA response
-export async function validateHuman (token) {
+export async function validateHuman (token: string) {
   return request
     .post('/api/v1/validatehuman')
     .send({ response: token })

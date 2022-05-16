@@ -1,10 +1,10 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 function Landing () {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   function handleClick () {
-    return history.push('submit')
+    return navigate('submit')
   }
   return (
     <>

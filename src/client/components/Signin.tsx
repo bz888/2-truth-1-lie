@@ -1,39 +1,48 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
 // import LoadAnim from './LoadAnim'
 import { useAuth } from '../context/AuthContext'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { validateHuman } from '../api/api'
 
-export default function Signin ({ loginState }) {
+interface signInState {
+  email: string
+  password: string
+}
+
+interface signInProp {
+  loginState: string
+}
+
+export default function Signin ({ loginState }: signInProp) {
   const [validHuman, setValidHuman] = useState()
-  const [signInVal, setSignInVal] = useState({
-    email: process.env.LOGIN_KEY,
+  const [signInVal, setSignInVal] = useState<signInState>({
+    email: '',
     password: ''
   })
   const { signIn, user, error, loading } = useAuth()
-  const history = useHistory()
+  const navigate = useNavigate()
   // const reRef = useRef()
 
-  async function handleClick (e) {
+  async function handleClick (e: SyntheticEvent) {
     e.preventDefault()
     try {
       await signIn(signInVal.email, signInVal.password)
       if (loginState === 'admin') {
-        history.push('/53e61336bb49ec978968786b07dea50b')
+        navigate('/53e61336bb49ec978968786b07dea50b')
       } else {
-        history.push('landing')
+        navigate('landing')
       }
     } catch (err) {
       console.error(err)
     }
   }
-  async function onChange (val) {
+  async function onChange (val: string) {
     const validateVal = await validateHuman(val)
     setValidHuman(validateVal)
   }
 
-  function handleChange (e) {
+  function handleChange (e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value
     const name = e.target.name
     setSignInVal({
@@ -83,12 +92,12 @@ export default function Signin ({ loginState }) {
               onChange={handleChange}
               placeholder='Enter your password'
               type='password'
-              required="required"
+              // required="required"
             />
             <ReCAPTCHA
               // ref={reRef}
               sitekey={process.env.RECAPTCHA_KEY}
-              onChange={onChange}
+              onChange={validHuman}
               // size='normal'
             />
             {validHuman &&

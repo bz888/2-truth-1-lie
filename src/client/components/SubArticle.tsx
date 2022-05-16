@@ -1,7 +1,13 @@
 import React from 'react'
-import { splitText, splitTime } from '../src/helperFunc'
+import { splitText, splitTime } from '../firebase-init/helperFunc'
 
-function SubArticle ({ name, article, time, idx }) {
+interface SubArticleType {
+  article: string
+  time: string
+  idx: number
+}
+
+function SubArticle ({ article, time, idx } : SubArticleType) {
   const splitArticle = splitText(article, 45)
   const splitTimestamp = splitTime(time)
   return (

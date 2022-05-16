@@ -1,4 +1,4 @@
-function isBanned (value) {
+export function isBanned (value: string) {
   const bannedWords = [
     'anal',
     'abuse',
@@ -98,7 +98,7 @@ function isBanned (value) {
   }
 }
 
-function concatArticle (inputTxt, name) {
+export function concatArticle (inputTxt: string, name: string) {
   const processString = inputTxt.charAt(0).toLowerCase() + inputTxt.slice(1)
   const firstVal = processString.split(' ')
   // console.log(processString)
@@ -111,17 +111,10 @@ function concatArticle (inputTxt, name) {
   }
 }
 
-function splitTime (time) {
+export function splitTime (time: string): string {
   return String(time).split(' ').slice(0, 5).join(' ')
 }
 
-function splitText (text, wordCount) {
+export function splitText (text: string, wordCount: number): string {
   return text.split(' ').slice(0, wordCount).join(' ')
-}
-
-module.exports = {
-  isBanned,
-  splitTime,
-  splitText,
-  concatArticle
 }

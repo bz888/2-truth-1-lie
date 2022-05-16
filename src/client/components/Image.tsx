@@ -1,0 +1,17 @@
+// import React, { ChangeEventHandler } from 'react'
+// // import placeHoldingImg from '../img/aida-placeholder.jpg'
+
+// function Image ({ idx, profileImg }) {
+//   function errorHandle (e: ChangeEventHandler<ImageData>) {
+//     // console.log(e.target.src)
+//     e.currentTarget.src = placeHoldingImg
+//   }
+
+//   return (
+//     <div className= {`image${idx}`}>
+//       <img src={profileImg} id='image' alt='profile-img' onError={errorHandle}/>
+//     </div>
+//   )
+// }
+
+// export default Image

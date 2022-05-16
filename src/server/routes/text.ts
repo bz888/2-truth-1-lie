@@ -1,13 +1,14 @@
-const { TextCortex } = require('textcortex-hemingwai-js')
-const express = require('express')
-const request = require('superagent')
-const router = express.Router()
-require('dotenv').config()
+import { TextCortex } from 'textcortex-hemingwai-js'
+import express, { Request, Response, Router } from 'express'
+import request from 'superagent'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const apiKey = process.env.API_KEY
-const textCortexKey = process.env.TEST_KEY
+export const router: Router = express.Router()
+const apiKey:string | undefined = process.env.API_KEY
+const textCortexKey:string | undefined = process.env.TEST_KEY
 
-router.post('/test', (req, res) => {
+router.post('/test', (req: Request, res: Response) => {
   const input = req.body.input
   const cortexApi = new TextCortex(textCortexKey)
   cortexApi.generate({
@@ -42,19 +43,17 @@ router.post('/outputimage', (req, res) => {
     })
 })
 
-router.post('/validatehuman', (req, res) => {
-  const secretKey = process.env.RECAPTCHA_SECRET
-  const token = req.body.response
-  request.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`, {
-    method: 'POST'
-  })
-    .then(reResponse => {
-      res.json(reResponse.body)
-      return null
-    })
-    .catch(err => {
-      console.error('recaptcha error from google', err)
-    })
-})
-
-module.exports = router
+// router.post('/validatehuman', (req, res) => {
+//   const secretKey = process.env.RECAPTCHA_SECRET
+//   const token = req.body.response
+//   request.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`, {
+//     method: 'POST'
+//   })
+//     .then(reResponse => {
+//       res.json(reResponse.body)
+//       return null
+//     })
+//     .catch(err => {
+//       console.error('recaptcha error from google', err)
+//     })
+// })
