@@ -5,6 +5,7 @@ import express, { Request, Response, Express } from 'express'
 import path from 'path'
 import { router } from './routes/text'
 import dotenv from 'dotenv'
+import { initializeApp } from '@firebase/app'
 
 // call express
 const server: Express = express() // define our app using express

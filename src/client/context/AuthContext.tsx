@@ -1,7 +1,8 @@
-import React, { createContext, ReactNode, useContext } from 'react'
+import React, { createContext, ReactNode, useContext, useEffect } from 'react'
 import { Auth, AuthError, getAuth, signOut, UserCredential } from 'firebase/auth'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
-// import { FirebaseApp } from '@firebase/app'
+import { initializeApp } from '@firebase/app'
+import { getFirebaseConfig } from '../firebase-init/firebase-config'
 
 interface ContextProps {
     auth: Auth;

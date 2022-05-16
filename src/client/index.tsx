@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import App from './components/App'
 // import firebase from 'firebase'
+import { AuthProvider } from './context/AuthContext'
+// import { getFirestore } from 'firebase/firestore'
+// import firebase from 'firebase/firestore'
+
 import { initializeApp } from '@firebase/app'
 import { getFirebaseConfig } from './firebase-init/firebase-config'
-import { AuthProvider } from './context/AuthContext'
-// import firebase from 'firebase/firestore'
 
 document.addEventListener('DOMContentLoaded', () => {
   render(
@@ -19,5 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   )
 })
 
+// const firebaseAppConfig = getFirebaseConfig()
 const firebaseAppConfig = getFirebaseConfig()
 initializeApp(firebaseAppConfig)
