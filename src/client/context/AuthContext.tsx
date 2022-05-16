@@ -16,6 +16,7 @@ interface ContextProps {
 interface childProps {
   children: ReactNode
 }
+
 const AuthContext = createContext<ContextProps>({} as ContextProps)
 
 export function useAuth () {

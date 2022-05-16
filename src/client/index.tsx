@@ -10,17 +10,18 @@ import { AuthProvider } from './context/AuthContext'
 import { initializeApp } from '@firebase/app'
 import { getFirebaseConfig } from './firebase-init/firebase-config'
 
+initializeApp(getFirebaseConfig())
+
 document.addEventListener('DOMContentLoaded', () => {
   render(
-    <AuthProvider>
+    // <AuthProvider>
       <Router>
         <App />
-      </Router>
-    </AuthProvider>,
-    document.getElementById('app')
+      </Router>,
+      // {/* </AuthProvider>, */}
+      document.getElementById('app')
   )
 })
 
 // const firebaseAppConfig = getFirebaseConfig()
-const firebaseAppConfig = getFirebaseConfig()
-initializeApp(firebaseAppConfig)
+// initializeApp(firebaseAppConfig)
